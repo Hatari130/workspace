@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hatari's AI Workspace — 预览</title>
-<script>document.documentElement.classList.add("js-typing");</script>
+<script>
+document.documentElement.classList.add("js-typing");
+if (/[?&]type=force\b/.test(location.search)) document.documentElement.classList.add("force-motion");
+</script>
 <style>
 /* ============================================================
    Tokens — 与 Next.js 项目 app/globals.css 一致
@@ -56,7 +59,7 @@ ul{list-style:none;margin:0;padding:0}
 .mark i{width:9px;height:9px;border-radius:99px;background:var(--ink)}
 .mark span{font-family:var(--ff-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.15em}
 .hdr-nav{display:flex;align-items:center;gap:28px}
-.hdr-nav a,.hdr-nav span{font-size:.85rem;letter-spacing:-.01em;color:var(--ink-2);transition:color .3s}
+.hdr-nav a,.hdr-nav span{font-size:.85rem;letter-spacing:0;color:var(--ink-2);transition:color .3s}
 .hdr-nav a:hover{color:var(--ink)}
 .hdr-nav span{opacity:.55;cursor:default}
 .hdr-right{display:flex;align-items:center;gap:24px}
@@ -81,19 +84,20 @@ ul{list-style:none;margin:0;padding:0}
   padding:32px 24px 80px;align-items:center;
 }
 @media (min-width:1024px){
-  .split{grid-template-columns:35fr 65fr;gap:40px;padding:28px 0 96px 40px}
+  .split{grid-template-columns:minmax(0,35fr) minmax(0,65fr);gap:40px;padding:28px 0 96px 40px}
 }
 
 /* ---------------- left column ---------------- */
 .intro{max-width:430px}
 .intro h1{
   margin:0;font-family:var(--ff-display);
-  font-size:clamp(2.6rem,4.4vw,3.9rem);font-weight:600;
-  line-height:1.02;letter-spacing:-.045em;
+  font-size:2.6rem;font-weight:600;
+  line-height:1.02;letter-spacing:0;
 }
+@media (min-width:1024px){.intro h1{font-size:3.9rem}}
 .lede{
   margin:24px 0 0;max-width:24ch;font-family:var(--ff-mono);
-  font-size:1.02rem;line-height:1.65;letter-spacing:-.01em;color:var(--ink-2);
+  font-size:1.02rem;line-height:1.65;letter-spacing:0;color:var(--ink-2);
 }
 .intro-zh{margin:28px 0 0;font-size:.9rem;line-height:1.95;color:color-mix(in oklab,var(--ink-2) 90%,transparent)}
 
@@ -132,7 +136,7 @@ ul{list-style:none;margin:0;padding:0}
 }
 .js-typing .ui-stage{opacity:0;filter:blur(6px)}
 .js-typing .ui-stage-header{translate:0 -8px}
-.js-typing .ui-stage-workspace{translate:18px 10px}
+.js-typing .ui-stage-workspace{translate:0 10px}
 .ui-stage.in{opacity:1;translate:0 0;filter:blur(0)}
 
 @media (scripting: none){
@@ -143,7 +147,8 @@ ul{list-style:none;margin:0;padding:0}
   .ui-stage{opacity:1!important;translate:0 0!important;filter:none!important}
 }
 @media (prefers-reduced-motion:reduce){
-  .hero-caret,.term-body .caret{display:none}
+  html:not(.force-motion) .hero-caret,
+  html:not(.force-motion) .term-body .caret{display:none}
 }
 
 .rule-head{display:flex;align-items:center;gap:16px;margin-top:44px}
@@ -154,7 +159,7 @@ ul{list-style:none;margin:0;padding:0}
 .rule-head i{flex:1;height:1px;background:var(--line)}
 
 .explore{margin-top:20px;display:flex;flex-direction:column;gap:12px}
-.explore li{display:flex;align-items:center;gap:12px;font-size:.875rem;letter-spacing:-.01em;color:color-mix(in oklab,var(--ink) 85%,transparent)}
+.explore li{display:flex;align-items:center;gap:12px;font-size:.875rem;letter-spacing:0;color:color-mix(in oklab,var(--ink) 85%,transparent)}
 .explore b{
   width:13px;height:13px;border-radius:99px;display:grid;place-items:center;
   border:1px solid color-mix(in oklab,var(--ink) 18%,transparent);
@@ -168,25 +173,25 @@ ul{list-style:none;margin:0;padding:0}
   box-shadow:0 1px 2px rgba(24,22,20,.03);
 }
 .build-hd{display:flex;align-items:center;gap:8px}
-.build-hd h2{margin:0;font-size:.8rem;font-weight:500;letter-spacing:-.01em;color:color-mix(in oklab,var(--ink) 85%,transparent)}
+.build-hd h2{margin:0;font-size:.8rem;font-weight:500;letter-spacing:0;color:color-mix(in oklab,var(--ink) 85%,transparent)}
 .build ul{margin-top:16px;display:flex;flex-direction:column;gap:14px}
 .build li{display:flex;align-items:center;gap:10px}
 .sq{
   width:22px;height:22px;flex:0 0 auto;border-radius:6px;display:grid;place-items:center;
   background:var(--ink);color:rgba(255,255,255,.9);
 }
-.build .nm{flex:1;min-width:0;font-size:.8rem;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:color-mix(in oklab,var(--ink) 85%,transparent)}
+.build .nm{flex:1;min-width:0;font-size:.8rem;letter-spacing:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:color-mix(in oklab,var(--ink) 85%,transparent)}
 .meter{width:96px;flex:0 0 auto}
 .meter em{display:block;text-align:right;font-family:var(--ff-mono);font-size:.62rem;font-style:normal;font-variant-numeric:tabular-nums;color:var(--ink-3);margin-bottom:4px}
 .meter span{display:block;height:2px;border-radius:99px;background:color-mix(in oklab,var(--ink) 10%,transparent)}
 .meter span i{display:block;height:100%;width:0;border-radius:99px;background:color-mix(in oklab,var(--ink) 70%,transparent);transition:width 1.1s cubic-bezier(.16,1,.3,1) .35s}
 
-.sig{margin:40px 0 0;font-family:var(--ff-mono);font-size:.76rem;letter-spacing:-.01em;color:var(--ink-3)}
+.sig{margin:40px 0 0;font-family:var(--ff-mono);font-size:.76rem;letter-spacing:0;color:var(--ink-3)}
 .cta{margin-top:16px;display:flex;align-items:center;gap:12px}
 .btn{
   display:inline-flex;align-items:center;gap:8px;
   padding:12px 20px;border-radius:99px;background:var(--ink);color:var(--paper);
-  font-size:.82rem;font-weight:500;letter-spacing:-.01em;transition:transform .3s;
+  font-size:.82rem;font-weight:500;letter-spacing:0;transition:transform .3s;
 }
 .btn:hover{transform:translateY(-2px)}
 .btn svg{transition:transform .3s}
@@ -250,19 +255,20 @@ ul{list-style:none;margin:0;padding:0}
 }
 .mbar-l,.mbar-r{display:flex;align-items:center;gap:14px}
 .mbar-r{gap:12px}
-.mbar b{font-weight:500;letter-spacing:-.01em}
+.mbar b{font-weight:500;letter-spacing:0}
 .mbar .dim{opacity:.72}
 #clock{font-variant-numeric:tabular-nums}
 
 /* desktop icons */
-.icons{position:absolute;left:30px;top:52px;z-index:10;display:flex;flex-direction:column;gap:15px}
+.icons{position:absolute;inset:32px 0 74px;z-index:10;pointer-events:none}
 .di{
-  width:76px;display:flex;flex-direction:column;align-items:center;gap:6px;
-  padding:4px;border-radius:12px;transition:translate .28s cubic-bezier(.16,1,.3,1);
-  opacity:0;animation:diIn .5s cubic-bezier(.16,1,.3,1) both;
+  position:absolute;width:76px;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:4px;border-radius:12px;pointer-events:auto;touch-action:none;user-select:none;
+  transition:translate .28s cubic-bezier(.16,1,.3,1),filter .28s ease;
 }
 @keyframes diIn{from{opacity:0;translate:-10px 0}to{opacity:1;translate:0 0}}
-.di:hover{translate:0 -4px}
+.di:hover{translate:0 -4px;z-index:20}
+.di.dragging{translate:0 0;filter:drop-shadow(0 12px 12px rgba(28,24,20,.22));cursor:grabbing;z-index:40}
 .di .art{position:relative;width:58px;height:52px;display:grid;place-items:center;border-radius:13px}
 .di.glass .art{
   border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.22);
@@ -271,10 +277,11 @@ ul{list-style:none;margin:0;padding:0}
 }
 .di.glass .art svg{color:rgba(255,255,255,.9);filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
 .di .tab{position:absolute;left:11px;top:5px;width:19px;height:14px;border-radius:5px 5px 0 0;background:#d3c3a6}
-.di .body{position:absolute;left:0;right:0;top:11px;bottom:2px;border-radius:10px;background:linear-gradient(to bottom,#f4ecdf,#dbcdb5);box-shadow:0 6px 14px rgba(40,34,26,.3)}
+.di .body{position:absolute;left:0;right:0;top:11px;bottom:2px;border-radius:10px;background:linear-gradient(to bottom,#f4ecdf,#dbcdb5);box-shadow:0 6px 14px rgba(40,34,26,.3);transform-origin:bottom;transition:transform .32s cubic-bezier(.16,1,.3,1)}
+.di[data-id="projects"]:hover .body,.di[data-id="projects"]:focus-visible .body{transform:perspective(120px) rotateX(-13deg) translateY(2px)}
 .di .crease{position:absolute;left:7px;right:7px;bottom:7px;height:1px;background:rgba(0,0,0,.07)}
 .di .lbl{
-  font-family:var(--ff-mono);font-size:10.5px;line-height:1;letter-spacing:-.01em;
+  font-family:var(--ff-mono);font-size:10.5px;line-height:1;letter-spacing:0;
   color:rgba(255,255,255,.95);padding:3px 6px;border-radius:5px;
   text-shadow:0 1px 2px rgba(0,0,0,.5);transition:background .25s;
 }
@@ -282,8 +289,51 @@ ul{list-style:none;margin:0;padding:0}
 .di.on .lbl{background:rgba(0,0,0,.35);text-shadow:none}
 .di.on .art{box-shadow:0 0 0 2px rgba(255,255,255,.6)}
 
-/* finder window */
-.winwrap{position:absolute;left:244px;top:104px;z-index:30;width:420px}
+/* app previews */
+.icon-popover{
+  position:absolute;left:82px;top:3px;width:220px;padding:12px 13px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.38);background:rgba(27,26,24,.78);color:#f5f2eb;
+  box-shadow:0 16px 34px -18px rgba(16,14,12,.75);
+  backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25);
+  text-align:left;opacity:0;translate:-6px 0;pointer-events:none;
+  transition:opacity .22s ease,translate .3s cubic-bezier(.16,1,.3,1);
+}
+.di.popover-left .icon-popover{left:auto;right:82px;translate:6px 0}
+.di:hover .icon-popover,.di:focus-visible .icon-popover{opacity:1;translate:0 0}
+.icon-popover strong{display:block;font-size:11.5px;font-weight:600;letter-spacing:0}
+.icon-popover .pop-meta{display:block;margin-top:3px;font-family:var(--ff-mono);font-size:9.5px;line-height:1.45;color:rgba(245,242,235,.62)}
+.icon-popover .pop-rule{display:block;height:1px;margin:9px 0;background:rgba(255,255,255,.11)}
+.icon-popover .pop-line{display:flex;align-items:flex-start;gap:7px;margin-top:6px;font-size:9.5px;line-height:1.35;color:rgba(245,242,235,.82)}
+.icon-popover .pop-line b{display:block;font-weight:500;color:#fff}
+.icon-popover .pop-line em{display:block;font-family:var(--ff-mono);font-size:8.5px;font-style:normal;color:rgba(245,242,235,.55)}
+.live-dot{width:6px;height:6px;flex:0 0 auto;margin-top:3px;border-radius:99px;background:#83c790;box-shadow:0 0 0 0 rgba(131,199,144,.5);animation:livePulse 2.2s ease-out infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(131,199,144,.45)}55%,100%{box-shadow:0 0 0 5px rgba(131,199,144,0)}}
+
+/* workspace boot */
+.workspace-boot{
+  position:absolute;left:50%;top:47%;z-index:45;translate:-50% -50%;
+  min-width:224px;text-align:center;color:rgba(255,255,255,.92);pointer-events:none;
+  transition:opacity .75s cubic-bezier(.16,1,.3,1),translate .75s cubic-bezier(.16,1,.3,1);
+}
+.workspace-boot .boot-mark{position:relative;display:block;width:24px;height:24px;margin:0 auto 12px;border:1px solid rgba(255,255,255,.34);border-radius:99px}
+.workspace-boot .boot-mark::after{content:"";position:absolute;inset:4px;border-top:1.5px solid #fff;border-radius:99px;animation:bootSpin 1.2s linear infinite}
+.workspace-boot b{display:block;font-family:var(--ff-mono);font-size:11px;font-weight:400;letter-spacing:.02em;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+.workspace-boot span{display:block;margin-top:7px;font-family:var(--ff-mono);font-size:9px;color:rgba(255,255,255,.56)}
+@keyframes bootSpin{to{rotate:360deg}}
+.screen.os-booting .di,.screen.os-booting .window-layer,.screen.os-booting .termwrap,.screen.os-booting .dockwrap{opacity:0}
+.screen.boot-complete .workspace-boot{opacity:0;translate:-50% calc(-50% - 8px)}
+.screen.os-live .di{opacity:0;animation:diIn .52s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--boot-delay,0s)}
+.screen.os-live .dock{animation:dockIn .7s cubic-bezier(.16,1,.3,1) both}
+.screen.os-live .term{animation:termIn .6s cubic-bezier(.16,1,.3,1) .65s both}
+.screen.os-live .window-layer{opacity:1;transition:opacity .45s ease}
+.sync-status{display:flex;align-items:center;gap:6px;padding:3px 7px;border-radius:99px;background:rgba(0,0,0,.12);transition:background .25s}
+.sync-status:hover{background:rgba(0,0,0,.22)}
+.sync-status i{width:5px;height:5px;border-radius:99px;background:#91d29b;box-shadow:0 0 0 0 rgba(145,210,155,.45);animation:livePulse 2.4s ease-out infinite}
+.sync-status span{font-size:10px}
+
+/* application windows */
+.window-layer{position:absolute;inset:0;z-index:30;pointer-events:none;transition:opacity .45s ease}
+.winwrap{position:absolute;width:420px;pointer-events:auto;touch-action:none}
 .win{
   border-radius:16px;overflow:hidden;
   border:1px solid rgba(255,255,255,.55);
@@ -294,23 +344,32 @@ ul{list-style:none;margin:0;padding:0}
   animation:winIn .42s cubic-bezier(.16,1,.3,1) both;
 }
 .win.out{animation:winOut .26s cubic-bezier(.4,0,1,1) both}
+.winwrap.minimizing{animation:winMin .28s cubic-bezier(.4,0,1,1) both}
+.winwrap.restoring{animation:winRestore .36s cubic-bezier(.16,1,.3,1) both}
+@keyframes winMin{to{opacity:0;scale:.68;translate:120px 210px}}
+@keyframes winRestore{from{opacity:0;scale:.76;translate:90px 160px}to{opacity:1;scale:1;translate:0 0}}
 @keyframes winIn{from{opacity:0;scale:.93;translate:0 10px}to{opacity:1;scale:1;translate:0 0}}
 @keyframes winOut{to{opacity:0;scale:.95;translate:0 6px}}
-.win-hd{position:relative;height:42px;display:flex;align-items:center;padding:0 14px;border-bottom:1px solid rgba(0,0,0,.06)}
+.win-hd{position:relative;height:42px;display:flex;align-items:center;padding:0 14px;border-bottom:1px solid rgba(0,0,0,.06);cursor:grab;user-select:none}
+.win-hd:active{cursor:grabbing}
 .lights{display:flex;align-items:center;gap:7px}
 .lights span,.lights button{width:11px;height:11px;border-radius:99px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 .lights .r{background:#ec6a5e;transition:transform .2s}
 .lights .r:hover{transform:scale(1.12)}
-.lights .y{background:#f4bf4f}
-.lights .g{background:#61c454}
-.win-hd h2{position:absolute;left:0;right:0;margin:0;text-align:center;font-size:12.5px;font-weight:500;letter-spacing:-.01em;color:rgba(28,26,23,.8);pointer-events:none}
+.lights .y{background:#f4bf4f;transition:transform .2s}
+.lights .g{background:#61c454;transition:transform .2s}
+.lights button:hover{transform:scale(1.12)}
+.win-hd h2{position:absolute;left:0;right:0;margin:0;text-align:center;font-size:12.5px;font-weight:500;letter-spacing:0;color:rgba(28,26,23,.8);pointer-events:none}
+.winwrap.maximized{left:18px!important;right:18px!important;top:42px!important;bottom:74px!important;width:auto!important}
+.winwrap.maximized .win{height:100%;display:flex;flex-direction:column}
+.winwrap.maximized .win-body{min-height:0;flex:1;overflow:auto}
 .rows li+li{border-top:1px solid rgba(0,0,0,.055)}
 .row{display:flex;align-items:center;gap:14px;padding:12px 16px;transition:background .2s;opacity:0;animation:rowIn .36s cubic-bezier(.16,1,.3,1) both}
 @keyframes rowIn{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}
 .row:hover{background:rgba(255,255,255,.55)}
 .row .ic{width:34px;height:34px;flex:0 0 auto;border-radius:9px;display:grid;place-items:center;background:#1c1a17;color:rgba(255,255,255,.9);box-shadow:0 2px 5px rgba(24,22,20,.28)}
 .row .txt{flex:1;min-width:0}
-.row .txt b{display:block;font-size:13.5px;font-weight:500;line-height:1.2;letter-spacing:-.01em;color:#1c1a17;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .txt b{display:block;font-size:13.5px;font-weight:500;line-height:1.2;letter-spacing:0;color:#1c1a17;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row .txt span{display:block;margin-top:3px;font-size:11.5px;line-height:1.2;color:#5d594f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row .dt{flex:0 0 auto;font-family:var(--ff-mono);font-size:10.5px;font-variant-numeric:tabular-nums;color:#8d887d}
 .row .ch{flex:0 0 auto;color:#8d887d;transition:translate .3s,color .3s}
@@ -324,6 +383,70 @@ ul{list-style:none;margin:0;padding:0}
 .win-empty p{margin:0;font-size:13px;line-height:1.65;color:#1c1a17}
 .win-empty p+p{margin-top:6px;font-size:12px;color:#5d594f}
 .win-empty a{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:12px;font-weight:500;color:#1c1a17}
+
+/* agents app */
+.agent-app{padding:12px;background:rgba(246,247,244,.62)}
+.agent-summary{display:flex;align-items:center;justify-content:space-between;padding:2px 3px 11px}
+.agent-summary p{margin:0;font-size:11px;color:#5d594f}
+.agent-summary b{display:flex;align-items:center;gap:7px;font-family:var(--ff-mono);font-size:9.5px;font-weight:500;color:#46704d}
+.agent-list{display:flex;flex-direction:column;gap:7px}
+.agent-card{
+  position:relative;display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;
+  min-height:58px;padding:10px 11px;overflow:hidden;border:1px solid rgba(31,34,29,.07);
+  border-radius:8px;background:rgba(255,255,255,.67);
+}
+.agent-avatar{position:relative;width:32px;height:32px;display:grid;place-items:center;border-radius:8px;background:#20231f;color:#f5f6f2}
+.agent-avatar svg{width:16px;height:16px}
+.agent-avatar i{position:absolute;right:-2px;bottom:-2px;width:8px;height:8px;border:2px solid #fff;border-radius:99px;background:#78bc84}
+.agent-copy{min-width:0}
+.agent-copy b{display:block;font-size:11.5px;font-weight:600;color:#22231f}
+.agent-copy span{display:block;margin-top:3px;overflow:hidden;font-family:var(--ff-mono);font-size:8.5px;color:#77786f;text-overflow:ellipsis;white-space:nowrap}
+.agent-rate{font-family:var(--ff-mono);font-size:8.5px;color:#999a92}
+.agent-flow{position:absolute;left:54px;right:12px;bottom:0;height:1px;overflow:hidden;background:rgba(87,112,91,.1)}
+.agent-flow::after{content:"";position:absolute;top:0;left:-28%;width:28%;height:1px;background:linear-gradient(90deg,transparent,#78a980,transparent);animation:dataFlow 2.8s ease-in-out infinite}
+.agent-card:nth-child(2) .agent-flow::after{animation-delay:.7s}.agent-card:nth-child(3) .agent-flow::after{animation-delay:1.25s}
+@keyframes dataFlow{0%{left:-28%}70%,100%{left:105%}}
+.agent-log{margin-top:9px;padding:9px 11px;border-radius:7px;background:#232520;color:#dfe4da;font-family:var(--ff-mono);font-size:8.5px;line-height:1.55}
+.agent-log span{color:#82b98b}
+
+/* thinking app */
+.notes-app{display:grid;grid-template-columns:138px minmax(0,1fr);min-height:250px;background:rgba(255,255,255,.34)}
+.notes-list{padding:8px;border-right:1px solid rgba(0,0,0,.065);background:rgba(242,239,233,.63)}
+.note-item{display:block;width:100%;padding:9px 8px;border-radius:7px;text-align:left;transition:background .2s}
+.note-item:hover,.note-item.active{background:rgba(255,255,255,.8)}
+.note-item b{display:block;overflow:hidden;font-size:9.5px;font-weight:600;color:#2b2925;text-overflow:ellipsis;white-space:nowrap}
+.note-item span{display:block;margin-top:4px;font-family:var(--ff-mono);font-size:7.5px;color:#918b80}
+.note-paper{padding:20px 21px;background:rgba(255,255,255,.55)}
+.note-paper time{font-family:var(--ff-mono);font-size:8px;color:#9a958c}
+.note-paper h3{margin:12px 0 0;font-size:17px;font-weight:600;line-height:1.22;color:#24231f}
+.note-paper p{margin:13px 0 0;font-size:10.5px;line-height:1.72;color:#5f5a51}
+.note-paper a{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:9.5px;font-weight:600;color:#2d2b27}
+
+/* code app */
+.code-app{display:grid;grid-template-columns:94px minmax(0,1fr);min-height:260px;background:#1d1f1c;color:#d7dbd3}
+.code-side{padding:13px 10px;border-right:1px solid rgba(255,255,255,.065);background:#181a18}
+.code-side b{display:block;margin-bottom:11px;font-family:var(--ff-mono);font-size:7.5px;font-weight:500;text-transform:uppercase;color:#777d75}
+.code-file{display:flex;align-items:center;gap:5px;margin-top:8px;font-family:var(--ff-mono);font-size:7.5px;color:#9ba099}
+.code-file i{width:5px;height:5px;border-radius:1px;background:#7ea186}
+.code-main{min-width:0}
+.code-tabs{height:30px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.06);font-family:var(--ff-mono);font-size:8px;color:#a9aea7}
+.code-tabs span{height:30px;padding:10px 12px 0;border-right:1px solid rgba(255,255,255,.05);background:#20231f}
+.code-lines{counter-reset:line;padding:14px 12px;font-family:var(--ff-mono);font-size:8.5px;line-height:1.8}
+.code-lines p{margin:0;white-space:pre;color:#c3c8c0}
+.code-lines p::before{counter-increment:line;content:counter(line);display:inline-block;width:20px;margin-right:10px;color:#555b54;text-align:right}
+.code-lines .kw{color:#b7a8d7}.code-lines .fn{color:#8eb4ca}.code-lines .str{color:#b7c494}.code-lines .cm{color:#6f756d}
+.commit-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border-top:1px solid rgba(255,255,255,.07);background:#171917;font-family:var(--ff-mono);font-size:7.5px;color:#90958d}
+.commit-strip b{font-weight:500;color:#b9c4b7}
+.commit-strip a{color:#d8ddd5}
+
+/* inspiration app */
+.inspiration-app{padding:12px;background:rgba(248,246,241,.7)}
+.inspiration-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.inspiration-tile{position:relative;aspect-ratio:1;overflow:hidden;border-radius:7px;background:#d9d3c9}
+.inspiration-tile:nth-child(2){background:#a9b5b1}.inspiration-tile:nth-child(3){background:#cac1b6}
+.inspiration-tile:nth-child(4){background:#7c7c74}.inspiration-tile:nth-child(5){background:#d6d9d1}.inspiration-tile:nth-child(6){background:#b8aba0}
+.inspiration-tile::before{content:"";position:absolute;left:-15%;right:-15%;bottom:-20%;height:65%;background:rgba(255,255,255,.32);clip-path:polygon(0 100%,24% 32%,44% 72%,67% 9%,100% 100%)}
+.inspiration-caption{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-family:var(--ff-mono);font-size:8.5px;color:#767168}
 
 /* terminal */
 .termwrap{position:absolute;left:584px;top:444px;z-index:20;width:296px}
@@ -379,7 +502,7 @@ ul{list-style:none;margin:0;padding:0}
 .mrow{display:flex;align-items:center;gap:14px;padding:16px 0}
 .mrow .ic{width:36px;height:36px;flex:0 0 auto;border-radius:10px;display:grid;place-items:center;background:var(--ink);color:rgba(255,255,255,.9)}
 .mrow .txt{flex:1;min-width:0}
-.mrow .txt b{display:block;font-size:.875rem;font-weight:500;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mrow .txt b{display:block;font-size:.875rem;font-weight:500;letter-spacing:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mrow .txt span{display:block;margin-top:4px;font-size:.76rem;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mrow .dt{font-family:var(--ff-mono);font-size:.65rem;font-variant-numeric:tabular-nums;color:var(--ink-3)}
 .mrow .ch{color:var(--ink-3)}
@@ -397,11 +520,11 @@ ul{list-style:none;margin:0;padding:0}
    Reduced motion — 动效只承载氛围，不承载信息
    ============================================================ */
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{
+  html:not(.force-motion) *,html:not(.force-motion) *::before,html:not(.force-motion) *::after{
     animation-duration:.01ms!important;animation-iteration-count:1!important;
     transition-duration:.01ms!important;
   }
-  .plx{translate:none!important}
+  html:not(.force-motion) .plx{translate:none!important}
 }
 </style>
 </head>
@@ -456,7 +579,7 @@ ul{list-style:none;margin:0;padding:0}
       <div class="scaler" id="scaler">
         <div class="machine" id="machine">
           <div class="bezel">
-            <div class="screen">
+            <div class="screen os-booting" id="desktop-screen">
 
               <div class="wall plx" id="l-wall">
                 <svg viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -494,6 +617,9 @@ ul{list-style:none;margin:0;padding:0}
                   <b>Hatari&rsquo;s Mac</b><span class="dim">Finder</span>
                 </div>
                 <div class="mbar-r">
+                  <button class="sync-status" id="agent-status" type="button" aria-label="Open Agents">
+                    <i aria-hidden="true"></i><span>3 agents online</span>
+                  </button>
                   <span class="dim">Shanghai</span>
                   <span id="clock">12:36 PM</span>
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.85"><path d="M4.5 9.4a11 11 0 0 1 15 0"/><path d="M7.6 12.6a6.6 6.6 0 0 1 8.8 0"/><path d="M10.6 15.8a2.4 2.4 0 0 1 2.8 0"/><circle cx="12" cy="18.4" r=".9" fill="currentColor" stroke="none"/></svg>
@@ -501,8 +627,14 @@ ul{list-style:none;margin:0;padding:0}
                 </div>
               </div>
 
+              <div class="workspace-boot" id="workspace-boot" role="status" aria-live="polite">
+                <i class="boot-mark" aria-hidden="true"></i>
+                <b id="boot-label">Restoring workspace...</b>
+                <span id="boot-detail">Loading local session</span>
+              </div>
+
               <div class="icons plx" id="l-icons"></div>
-              <div class="winwrap plx" id="l-win"></div>
+              <div class="window-layer plx" id="l-win"></div>
               <div class="termwrap plx" id="l-term">
                 <div class="termshift">
                   <div class="term"><div class="term-body" id="term-body"></div></div>
@@ -546,18 +678,18 @@ ul{list-style:none;margin:0;padding:0}
    数据 —— 对应 Next.js 项目的 lib/data.ts
    ============================================================ */
 var projects = [
-  {slug:"viral-hunter",     name:"Viral Hunter",     summary:"AI 驱动的爆款内容洞察系统", date:"2024.04", glyph:"signal"},
-  {slug:"agent-workspace",  name:"Agent Workspace",  summary:"多 Agent 协作与管理平台",   date:"2024.03", glyph:"bars"},
-  {slug:"ai-content-studio",name:"AI Content Studio",summary:"AI 内容生产工作流",         date:"2024.02", glyph:"layers"},
-  {slug:"urban-ai",         name:"Urban AI",         summary:"城市数据与空间智能探索",     date:"2023.12", glyph:"map"}
+  {slug:"viral-hunter",     name:"Viral Hunter",     summary:"AI 驱动的爆款内容洞察系统", date:"LIVE",    glyph:"signal"},
+  {slug:"agent-workspace",  name:"Agent Workspace",  summary:"多 Agent 协作与管理平台",   date:"80%",     glyph:"bars"},
+  {slug:"ai-content-studio",name:"AI Content Studio",summary:"AI 内容生产工作流",         date:"65%",     glyph:"layers"},
+  {slug:"urban-ai",         name:"Urban AI",         summary:"城市数据与空间智能探索",     date:"RESEARCH",glyph:"map"}
 ];
 
 var desktopItems = [
-  {id:"projects",    label:"Projects",    glyph:"folder", opens:"projects", note:"4 items"},
-  {id:"agents",      label:"Agents",      glyph:"agent",  opens:null,       note:"在建中"},
-  {id:"thinking",    label:"Thinking",    glyph:"note",   opens:null,       note:"12 notes"},
-  {id:"code",        label:"Code",        glyph:"code",   opens:null,       note:"实验仓库"},
-  {id:"inspiration", label:"Inspiration", glyph:"image",  opens:null,       note:"灵感收集"}
+  {id:"projects",    label:"Projects",    glyph:"folder", opens:"projects",    note:"4 projects", x:22, y:18},
+  {id:"agents",      label:"Agents",      glyph:"agent",  opens:"agents",      note:"3 online",   x:22, y:103},
+  {id:"thinking",    label:"Thinking",    glyph:"note",   opens:"thinking",    note:"12 notes",   x:22, y:188},
+  {id:"code",        label:"Code",        glyph:"code",   opens:"code",        note:"2h ago",     x:22, y:273},
+  {id:"inspiration", label:"Inspiration", glyph:"image",  opens:"inspiration", note:"6 saved",    x:22, y:358}
 ];
 
 var exploring = ["AI Agents","LLM Workflows","Human-AI Collaboration","Product × Code"];
@@ -613,7 +745,22 @@ var TILES = {
 function tile(id){ return '<svg viewBox="0 0 48 48">'+TILES[id]+'</svg>'; }
 
 var $ = function(id){ return document.getElementById(id); };
-var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var forceMotion = document.documentElement.classList.contains("force-motion");
+var reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches && !forceMotion);
+var ICON_STORAGE_KEY = "hatari.desktop.icons.v1";
+var SESSION_STORAGE_KEY = "hatari.desktop.session.v1";
+
+function readLocal(key, fallback){
+  try{
+    var value = window.localStorage.getItem(key);
+    return value === null ? fallback : JSON.parse(value);
+  }catch(err){ return fallback; }
+}
+function writeLocal(key, value){
+  try{ window.localStorage.setItem(key, JSON.stringify(value)); }catch(err){}
+}
+
+var iconPositions = readLocal(ICON_STORAGE_KEY, {});
 
 /* ============================================================
    渲染
@@ -621,7 +768,7 @@ var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: re
 $("nav").innerHTML =
   '<a href="projects.html">Projects</a>'+
   '<a href="thinking.html">Thinking</a>'+
-  '<span aria-disabled="true">Stack</span>'+
+  '<a href="stack.html">Stack</a>'+
   '<span aria-disabled="true">About</span>';
 
 $("explore").innerHTML = exploring
@@ -637,24 +784,50 @@ $("build").innerHTML = building.map(function(b){
          '<span class="meter"><em>'+b.progress+'%</em><span><i data-w="'+b.progress+'"></i></span></span></li>';
 }).join("");
 
+function iconPreview(item){
+  if (item.id === "projects") {
+    return '<span class="icon-popover"><strong>Projects</strong><span class="pop-meta">4 projects · 2 building · 1 live</span>'+
+      '<span class="pop-rule"></span><span class="pop-line"><i class="live-dot"></i><span><b>Agent Workspace</b><em>building · 80%</em></span></span></span>';
+  }
+  if (item.id === "agents") {
+    return '<span class="icon-popover"><strong>Agents</strong><span class="pop-meta">3 online</span><span class="pop-rule"></span>'+
+      '<span class="pop-line"><i class="live-dot"></i><span><b>Research Agent</b><em>Searching papers...</em></span></span>'+
+      '<span class="pop-line"><i class="live-dot"></i><span><b>Creator Agent</b><em>Generating scripts...</em></span></span>'+
+      '<span class="pop-line"><i class="live-dot"></i><span><b>Analyst Agent</b><em>Processing data...</em></span></span></span>';
+  }
+  if (item.id === "thinking") {
+    return '<span class="icon-popover"><strong>Latest thought</strong><span class="pop-meta">Notes · today</span>'+
+      '<span class="pop-rule"></span><span class="pop-line"><span><b>&ldquo;Why Agent needs Harness?&rdquo;</b><em>5 min read</em></span></span></span>';
+  }
+  if (item.id === "code") {
+    return '<span class="icon-popover"><strong>Latest activity</strong><span class="pop-meta">main · 2 hours ago</span>'+
+      '<span class="pop-rule"></span><span class="pop-line"><span><b>feat:</b><em>improve agent workflow</em></span></span></span>';
+  }
+  return '<span class="icon-popover"><strong>Inspiration</strong><span class="pop-meta">6 references saved today</span>'+
+    '<span class="pop-rule"></span><span class="pop-line"><span><b>Quiet interfaces</b><em>AI products that feel human</em></span></span></span>';
+}
+
 $("l-icons").innerHTML = desktopItems.map(function(it,i){
+  var saved = iconPositions[it.id] || {};
+  var x = Number.isFinite(saved.x) ? saved.x : it.x;
+  var y = Number.isFinite(saved.y) ? saved.y : it.y;
   var art = it.glyph === "folder"
     ? '<span class="art"><span class="tab"></span><span class="body"></span><span class="crease"></span></span>'
     : '<span class="art"><span style="width:24px;height:24px;display:block">'+glyph(it.glyph)+'</span></span>';
   return '<button class="di'+(it.glyph==="folder"?"":" glass")+'" data-id="'+it.id+
-         '" style="animation-delay:'+(0.5+i*0.07)+'s" aria-label="打开 '+it.label+'">'+
-         art+'<span class="lbl">'+it.label+'</span></button>';
+         '" style="left:'+x+'px;top:'+y+'px;--boot-delay:'+(0.18+i*0.09)+'s" aria-label="打开 '+it.label+'">'+
+         art+'<span class="lbl">'+it.label+'</span>'+iconPreview(it)+'</button>';
 }).join("");
 
 $("mlist").innerHTML = projects.map(function(p){
-  return '<li><a class="mrow" href="projects.html"><span class="ic"><span style="width:18px;height:18px;display:block">'+glyph(p.glyph)+
+  return '<li><a class="mrow" href="project.html?project='+p.slug+'"><span class="ic"><span style="width:18px;height:18px;display:block">'+glyph(p.glyph)+
          '</span></span><span class="txt"><b>'+p.name+'</b><span>'+p.summary+'</span></span>'+
          '<span class="dt">'+p.date+'</span>'+chev+'</a></li>';
 }).join("");
 
 $("l-dock").innerHTML = dockApps.map(function(a){
-  return '<button class="dapp" aria-label="'+a.label+'">'+tile(a.id)+
-         '<span class="tip">'+a.label+'</span>'+(a.id==="finder"||a.id==="claude"?'<span class="run"></span>':"")+'</button>';
+  return '<button class="dapp" data-app="'+a.id+'" aria-label="'+a.label+'">'+tile(a.id)+
+         '<span class="tip">'+a.label+'</span><span class="run" hidden></span></button>';
 }).join("") + '<span class="dsep"></span><button class="dapp trash" aria-label="Trash">'+tile("trash")+'<span class="tip">Trash</span></button>';
 
 $("socials").innerHTML =
@@ -885,68 +1058,384 @@ $("socials").innerHTML =
 })();
 
 /* ============================================================
-   Finder 窗口：点击图标打开 / 关闭
+   Lightweight Desktop OS: apps, windows, drag and persistence
    ============================================================ */
-var openId = "projects";
+var WINDOW_DEFAULTS = {
+  projects:    {x:244,y:104,w:420},
+  agents:      {x:424,y:112,w:398},
+  thinking:    {x:292,y:138,w:430},
+  code:        {x:356,y:190,w:440},
+  inspiration: {x:330,y:154,w:410}
+};
+var DOCK_TO_APP = {
+  finder:"projects", claude:"agents", chatgpt:"agents",
+  obsidian:"thinking", vscode:"code", figma:"inspiration"
+};
+var NOTE_DATA = [
+  {title:"Why Agent needs Harness?", date:"Today · 5 min", body:"A capable model is only the beginning. The harness decides what it can see, remember, retry and safely change.", href:"thinking.html#agent-harness"},
+  {title:"From workflow to agent", date:"Jul 24 · 4 min", body:"The interesting shift happens when a fixed sequence becomes a system that can inspect its own progress and choose the next useful action.", href:"thinking.html#workflow-to-agent"},
+  {title:"Quiet interfaces", date:"Jul 18 · 3 min", body:"The best AI products do not perform intelligence. They reduce the distance between a person’s intention and a finished result.", href:"thinking.html#quiet-interface"}
+];
+var AGENT_ACTIVITY = {
+  research:["Searching papers...","Comparing sources...","Building evidence map..."],
+  creator:["Generating scripts...","Refining story arc...","Drafting variations..."],
+  analyst:["Processing data...","Checking anomalies...","Updating metrics..."]
+};
+var openWindows = {};
+var zTop = 40;
 
-function windowHTML(item){
-  var inner;
-  if (item.opens === "projects") {
-    inner = '<ul class="rows">'+projects.map(function(p,i){
-      return '<li><a class="row" href="projects.html" style="animation-delay:'+(0.14+i*0.055)+'s">'+
+function desktopItem(id){
+  for (var i=0;i<desktopItems.length;i++) if (desktopItems[i].id === id) return desktopItems[i];
+  return null;
+}
+
+function appBody(item){
+  if (item.id === "projects") {
+    return '<ul class="rows">'+projects.map(function(p,i){
+      return '<li><a class="row" href="project.html?project='+p.slug+'" style="animation-delay:'+(0.14+i*0.055)+'s">'+
              '<span class="ic"><span style="width:17px;height:17px;display:block">'+glyph(p.glyph)+'</span></span>'+
              '<span class="txt"><b>'+p.name+'</b><span>'+p.summary+'</span></span>'+
              '<span class="dt">'+p.date+'</span>'+chev+'</a></li>';
     }).join("")+'</ul>'+
     '<div class="win-ft"><a href="projects.html">Open project folder'+arrow+'</a></div>';
-  } else {
-    var target = item.id === "thinking" ? "thinking.html" : "projects.html";
-    var targetLabel = item.id === "thinking" ? "Thinking" : "Projects";
-    inner = '<div class="win-empty"><p>'+item.label+' 还在整理中。</p>'+
-            '<p>这个文件夹目前只有一条记录：'+item.note+'。想先看看别的吗？</p>'+
-            '<a href="'+target+'">去看 '+targetLabel+arrow+'</a></div>';
   }
-  return '<section class="win" role="dialog" aria-label="'+item.label+' 窗口">'+
-         '<header class="win-hd"><span class="lights">'+
-         '<button class="r" id="win-close" aria-label="关闭窗口"></button>'+
-         '<span class="y" aria-hidden="true"></span><span class="g" aria-hidden="true"></span>'+
-         '</span><h2>'+item.label+'</h2></header>'+inner+'</section>';
+  if (item.id === "agents") {
+    var agents = [
+      {id:"research",name:"Research Agent",activity:"Searching papers...",rate:"12 sources"},
+      {id:"creator",name:"Creator Agent",activity:"Generating scripts...",rate:"3 drafts"},
+      {id:"analyst",name:"Analyst Agent",activity:"Processing data...",rate:"84%"}
+    ];
+    return '<div class="agent-app"><div class="agent-summary"><p>Active workspace</p><b><i class="live-dot"></i>3 online</b></div>'+
+      '<div class="agent-list">'+agents.map(function(agent){
+        return '<div class="agent-card"><span class="agent-avatar">'+glyph("agent")+'<i></i></span>'+
+          '<span class="agent-copy"><b>'+agent.name+'</b><span data-agent="'+agent.id+'">'+agent.activity+'</span></span>'+
+          '<span class="agent-rate">'+agent.rate+'</span><i class="agent-flow"></i></div>';
+      }).join("")+'</div><div class="agent-log"><span>●</span> orchestration healthy &nbsp;·&nbsp; 18 tasks completed today</div></div>'+
+      '<div class="win-ft"><a href="projects.html#agent-workspace">View Agent Workspace'+arrow+'</a></div>';
+  }
+  if (item.id === "thinking") {
+    return '<div class="notes-app"><aside class="notes-list">'+NOTE_DATA.map(function(note,i){
+      return '<button class="note-item'+(i===0?" active":"")+'" type="button" data-note="'+i+'"><b>'+note.title+'</b><span>'+note.date+'</span></button>';
+    }).join("")+'</aside><article class="note-paper"><time>'+NOTE_DATA[0].date+'</time><h3>'+NOTE_DATA[0].title+
+      '</h3><p>'+NOTE_DATA[0].body+'</p><a href="'+NOTE_DATA[0].href+'">Read note'+arrow+'</a></article></div>'+
+      '<div class="win-ft"><a href="thinking.html">Open all thoughts'+arrow+'</a></div>';
+  }
+  if (item.id === "code") {
+    return '<div class="code-app"><aside class="code-side"><b>Explorer</b>'+
+      '<span class="code-file"><i></i>agents.ts</span><span class="code-file"><i></i>harness.ts</span>'+
+      '<span class="code-file"><i></i>memory.ts</span><span class="code-file"><i></i>tools.ts</span></aside>'+
+      '<section class="code-main"><div class="code-tabs"><span>harness.ts</span></div><div class="code-lines">'+
+      '<p><span class="kw">export</span> <span class="kw">async function</span> <span class="fn">runAgent</span>(task) {</p>'+
+      '<p>  <span class="kw">const</span> context = <span class="kw">await</span> memory.load(task);</p>'+
+      '<p>  <span class="kw">const</span> result = <span class="kw">await</span> agent.run({</p>'+
+      '<p>    task, context, tools: <span class="str">trustedTools</span></p>'+
+      '<p>  });</p><p>  <span class="kw">return</span> evaluator.check(result);</p><p>}</p>'+
+      '<p><span class="cm">// calm systems, useful outcomes</span></p></div>'+
+      '<div class="commit-strip"><b>feat: improve agent workflow</b><span>2 hours ago</span><a href="stack.html">Open Stack →</a></div></section></div>';
+  }
+  return '<div class="inspiration-app"><div class="inspiration-grid">'+
+    '<span class="inspiration-tile"></span><span class="inspiration-tile"></span><span class="inspiration-tile"></span>'+
+    '<span class="inspiration-tile"></span><span class="inspiration-tile"></span><span class="inspiration-tile"></span>'+
+    '</div><div class="inspiration-caption"><span>Quiet systems / spatial interfaces</span><span>6 saved</span></div></div>';
 }
 
-function renderWindow(){
-  var wrap = $("l-win");
-  var item = null;
-  for (var i=0;i<desktopItems.length;i++) if (desktopItems[i].id === openId) item = desktopItems[i];
+function windowHTML(item){
+  return '<section class="win" role="dialog" aria-label="'+item.label+' window">'+
+    '<header class="win-hd"><span class="lights">'+
+    '<button class="r" type="button" data-action="close" aria-label="Close '+item.label+'"></button>'+
+    '<button class="y" type="button" data-action="minimize" aria-label="Minimize '+item.label+'"></button>'+
+    '<button class="g" type="button" data-action="maximize" aria-label="Maximize '+item.label+'"></button>'+
+    '</span><h2>'+item.label+'</h2></header><div class="win-body">'+appBody(item)+'</div></section>';
+}
 
-  var dis = document.querySelectorAll(".di");
-  for (var j=0;j<dis.length;j++)
-    dis[j].className = dis[j].className.replace(" on","") + (dis[j].getAttribute("data-id")===openId ? " on" : "");
+function syncDesktopState(){
+  var icons = document.querySelectorAll(".di");
+  for (var i=0;i<icons.length;i++){
+    icons[i].classList.toggle("on", !!openWindows[icons[i].getAttribute("data-id")]);
+  }
+  var dockButtons = document.querySelectorAll(".dapp[data-app]");
+  for (var j=0;j<dockButtons.length;j++){
+    var appId = DOCK_TO_APP[dockButtons[j].getAttribute("data-app")];
+    var run = dockButtons[j].querySelector(".run");
+    if (run) run.hidden = !openWindows[appId];
+  }
+}
 
-  if (!item) { wrap.innerHTML = ""; return; }
+function saveSession(){
+  var state = Object.keys(openWindows).map(function(id){
+    var wrap = openWindows[id];
+    var d = WINDOW_DEFAULTS[id];
+    var x = parseFloat(wrap.style.left);
+    var y = parseFloat(wrap.style.top);
+    var w = parseFloat(wrap.style.width);
+    return {
+      id:id,
+      x:Number.isFinite(x) ? x : d.x,
+      y:Number.isFinite(y) ? y : d.y,
+      w:Number.isFinite(w) ? w : d.w,
+      minimized:wrap.getAttribute("data-minimized") === "true",
+      maximized:wrap.classList.contains("maximized")
+    };
+  });
+  writeLocal(SESSION_STORAGE_KEY, state);
+}
+
+function focusWindow(wrap){
+  if (!wrap || wrap.hidden) return;
+  wrap.style.zIndex = ++zTop;
+}
+
+function updateNote(wrap, index){
+  var note = NOTE_DATA[index] || NOTE_DATA[0];
+  var paper = wrap.querySelector(".note-paper");
+  if (!paper) return;
+  var buttons = wrap.querySelectorAll(".note-item");
+  for (var i=0;i<buttons.length;i++) buttons[i].classList.toggle("active", Number(buttons[i].getAttribute("data-note")) === index);
+  paper.innerHTML = '<time>'+note.date+'</time><h3>'+note.title+'</h3><p>'+note.body+'</p><a href="'+note.href+'">Read note'+arrow+'</a>';
+}
+
+function makeWindowInteractive(wrap){
+  var id = wrap.getAttribute("data-window");
+  var header = wrap.querySelector(".win-hd");
+  wrap.addEventListener("pointerdown", function(){ focusWindow(wrap); });
+  wrap.addEventListener("click", function(e){
+    var control = e.target.closest ? e.target.closest("[data-action]") : null;
+    if (control) {
+      var action = control.getAttribute("data-action");
+      if (action === "close") closeWindow(id);
+      if (action === "minimize") minimizeWindow(id);
+      if (action === "maximize") toggleMaximize(id);
+      return;
+    }
+    var noteButton = e.target.closest ? e.target.closest(".note-item") : null;
+    if (noteButton) updateNote(wrap, Number(noteButton.getAttribute("data-note")));
+  });
+  header.addEventListener("dblclick", function(e){
+    if (!(e.target.closest && e.target.closest(".lights"))) toggleMaximize(id);
+  });
+  header.addEventListener("pointerdown", function(e){
+    if (e.button !== 0 || wrap.classList.contains("maximized") || (e.target.closest && e.target.closest(".lights"))) return;
+    e.preventDefault();
+    focusWindow(wrap);
+    var screen = $("desktop-screen");
+    var screenRect = screen.getBoundingClientRect();
+    var scale = screen.offsetWidth / screenRect.width;
+    var startX = e.clientX, startY = e.clientY;
+    var startLeft = parseFloat(wrap.style.left) || 0;
+    var startTop = parseFloat(wrap.style.top) || 42;
+    header.setPointerCapture(e.pointerId);
+    function drag(ev){
+      var left = startLeft + (ev.clientX - startX) * scale;
+      var top = startTop + (ev.clientY - startY) * scale;
+      left = Math.max(0, Math.min(left, screen.clientWidth - wrap.offsetWidth));
+      top = Math.max(32, Math.min(top, screen.clientHeight - 100));
+      wrap.style.left = Math.round(left) + "px";
+      wrap.style.top = Math.round(top) + "px";
+    }
+    function drop(ev){
+      header.removeEventListener("pointermove", drag);
+      header.removeEventListener("pointerup", drop);
+      header.removeEventListener("pointercancel", drop);
+      try{ header.releasePointerCapture(ev.pointerId); }catch(err){}
+      saveSession();
+    }
+    header.addEventListener("pointermove", drag);
+    header.addEventListener("pointerup", drop);
+    header.addEventListener("pointercancel", drop);
+  });
+}
+
+function openWindow(id, options){
+  options = options || {};
+  var existing = openWindows[id];
+  if (existing) {
+    if (existing.hidden || existing.getAttribute("data-minimized") === "true") restoreWindow(id);
+    focusWindow(existing);
+    return existing;
+  }
+  var item = desktopItem(id);
+  if (!item) return null;
+  var d = WINDOW_DEFAULTS[id];
+  var state = options.state || {};
+  var wrap = document.createElement("div");
+  wrap.className = "winwrap";
+  wrap.setAttribute("data-window", id);
+  wrap.style.left = (Number.isFinite(state.x) ? state.x : d.x) + "px";
+  wrap.style.top = (Number.isFinite(state.y) ? state.y : d.y) + "px";
+  wrap.style.width = (Number.isFinite(state.w) ? state.w : d.w) + "px";
   wrap.innerHTML = windowHTML(item);
-  $("win-close").addEventListener("click", function(){ closeWindow(); });
+  $("l-win").appendChild(wrap);
+  openWindows[id] = wrap;
+  if (state.maximized) wrap.classList.add("maximized");
+  if (state.minimized) {
+    wrap.hidden = true;
+    wrap.setAttribute("data-minimized","true");
+  }
+  makeWindowInteractive(wrap);
+  focusWindow(wrap);
+  syncDesktopState();
+  if (!options.restoring) saveSession();
+  return wrap;
 }
 
-function closeWindow(){
-  var win = $("l-win").querySelector(".win");
-  openId = null;
-  var dis = document.querySelectorAll(".di");
-  for (var j=0;j<dis.length;j++) dis[j].className = dis[j].className.replace(" on","");
-  if (!win) return;
-  win.className = "win out";
-  setTimeout(function(){ if (openId === null) $("l-win").innerHTML = ""; }, reduce ? 0 : 260);
+function closeWindow(id){
+  var wrap = openWindows[id];
+  if (!wrap) return;
+  delete openWindows[id];
+  syncDesktopState();
+  saveSession();
+  var win = wrap.querySelector(".win");
+  if (win) win.classList.add("out");
+  setTimeout(function(){ wrap.remove(); }, reduce ? 0 : 260);
 }
+
+function minimizeWindow(id){
+  var wrap = openWindows[id];
+  if (!wrap || wrap.hidden) return;
+  wrap.classList.add("minimizing");
+  wrap.setAttribute("data-minimized","true");
+  setTimeout(function(){
+    wrap.hidden = true;
+    wrap.classList.remove("minimizing");
+    saveSession();
+  }, reduce ? 0 : 280);
+}
+
+function restoreWindow(id){
+  var wrap = openWindows[id];
+  if (!wrap) return openWindow(id);
+  wrap.hidden = false;
+  wrap.setAttribute("data-minimized","false");
+  wrap.classList.add("restoring");
+  focusWindow(wrap);
+  setTimeout(function(){ wrap.classList.remove("restoring"); }, reduce ? 0 : 380);
+  saveSession();
+  return wrap;
+}
+
+function toggleMaximize(id){
+  var wrap = openWindows[id];
+  if (!wrap) return;
+  wrap.classList.toggle("maximized");
+  focusWindow(wrap);
+  saveSession();
+}
+
+function attachIconDrag(btn){
+  var layer = $("l-icons");
+  btn.classList.toggle("popover-left", parseFloat(btn.style.left) > 620);
+  btn.addEventListener("pointerdown", function(e){
+    if (e.button !== 0 || !$("desktop-screen").classList.contains("os-live")) return;
+    var layerRect = layer.getBoundingClientRect();
+    var scale = layer.offsetWidth / layerRect.width;
+    var startX = e.clientX, startY = e.clientY;
+    var startLeft = parseFloat(btn.style.left) || 0;
+    var startTop = parseFloat(btn.style.top) || 0;
+    var moved = false;
+    btn.setPointerCapture(e.pointerId);
+    function drag(ev){
+      var dx = (ev.clientX - startX) * scale;
+      var dy = (ev.clientY - startY) * scale;
+      if (!moved && Math.hypot(dx,dy) < 5) return;
+      moved = true;
+      btn.classList.add("dragging");
+      var left = Math.max(0, Math.min(startLeft + dx, layer.clientWidth - btn.offsetWidth));
+      var top = Math.max(0, Math.min(startTop + dy, layer.clientHeight - 66));
+      btn.style.left = Math.round(left) + "px";
+      btn.style.top = Math.round(top) + "px";
+      btn.classList.toggle("popover-left", left > 620);
+    }
+    function drop(ev){
+      btn.removeEventListener("pointermove", drag);
+      btn.removeEventListener("pointerup", drop);
+      btn.removeEventListener("pointercancel", drop);
+      try{ btn.releasePointerCapture(ev.pointerId); }catch(err){}
+      btn.classList.remove("dragging");
+      if (!moved) return;
+      btn.setAttribute("data-dragged","true");
+      iconPositions[btn.getAttribute("data-id")] = {
+        x:Math.round(parseFloat(btn.style.left) || 0),
+        y:Math.round(parseFloat(btn.style.top) || 0)
+      };
+      writeLocal(ICON_STORAGE_KEY, iconPositions);
+      setTimeout(function(){ btn.removeAttribute("data-dragged"); }, 0);
+    }
+    btn.addEventListener("pointermove", drag);
+    btn.addEventListener("pointerup", drop);
+    btn.addEventListener("pointercancel", drop);
+  });
+}
+
+var desktopIcons = document.querySelectorAll(".di");
+for (var iconIndex=0;iconIndex<desktopIcons.length;iconIndex++) attachIconDrag(desktopIcons[iconIndex]);
 
 $("l-icons").addEventListener("click", function(e){
   var btn = e.target.closest ? e.target.closest(".di") : null;
-  if (!btn) return;
-  var id = btn.getAttribute("data-id");
-  if (id === openId) { closeWindow(); return; }
-  openId = id;
-  renderWindow();
+  if (!btn || btn.getAttribute("data-dragged") === "true") return;
+  openWindow(btn.getAttribute("data-id"));
 });
 
-renderWindow();
+$("l-dock").addEventListener("click", function(e){
+  var btn = e.target.closest ? e.target.closest(".dapp[data-app]") : null;
+  if (!btn) return;
+  openWindow(DOCK_TO_APP[btn.getAttribute("data-app")]);
+});
+$("agent-status").addEventListener("click", function(){ openWindow("agents"); });
+
+(function(){
+  var turn = 0;
+  setInterval(function(){
+    turn++;
+    Object.keys(AGENT_ACTIVITY).forEach(function(id){
+      var el = document.querySelector('[data-agent="'+id+'"]');
+      if (el) el.textContent = AGENT_ACTIVITY[id][turn % AGENT_ACTIVITY[id].length];
+    });
+  }, 3600);
+})();
+
+function restoreWorkspaceWindows(){
+  var saved = readLocal(SESSION_STORAGE_KEY, null);
+  var states = saved === null ? [{id:"projects"}] : saved;
+  states = Array.isArray(states) ? states : [{id:"projects"}];
+  states.forEach(function(state, index){
+    setTimeout(function(){ openWindow(state.id, {state:state, restoring:true}); }, reduce ? 0 : index * 130);
+  });
+}
+
+(function(){
+  var started = false;
+  var screen = $("desktop-screen");
+  var boot = $("workspace-boot");
+  var label = $("boot-label");
+  var detail = $("boot-detail");
+  function startWorkspace(){
+    if (started) return;
+    started = true;
+    if (reduce) {
+      screen.classList.remove("os-booting");
+      screen.classList.add("os-live","boot-complete");
+      boot.hidden = true;
+      restoreWorkspaceWindows();
+      document.dispatchEvent(new CustomEvent("workspace:live"));
+      return;
+    }
+    setTimeout(function(){ detail.textContent = "Reading layout memory"; }, 420);
+    setTimeout(function(){ label.textContent = "Syncing agents..."; detail.textContent = "3 services responding"; }, 820);
+    setTimeout(function(){
+      screen.classList.remove("os-booting");
+      screen.classList.add("os-live");
+      document.dispatchEvent(new CustomEvent("workspace:live"));
+    }, 1120);
+    setTimeout(restoreWorkspaceWindows, 1480);
+    setTimeout(function(){ label.textContent = "Workspace ready"; detail.textContent = "All systems calm"; }, 1780);
+    setTimeout(function(){
+      screen.classList.add("boot-complete");
+      setTimeout(function(){ boot.hidden = true; }, 780);
+    }, 2040);
+  }
+  if (document.documentElement.classList.contains("hero-ready")) startWorkspace();
+  else document.addEventListener("hero:ready", startWorkspace, {once:true});
+})();
 
 /* ============================================================
    终端打字
@@ -982,10 +1471,10 @@ renderWindow();
     }, delay);
   }
 
-  // Hero 讲完第一句话，工作区才真正“开机”。
+  // The terminal starts only after the workspace has finished restoring.
   function startTerminal(){ setTimeout(step, 420); }
-  if (document.documentElement.classList.contains("hero-ready")) startTerminal();
-  else document.addEventListener("hero:ready", startTerminal, { once: true });
+  if ($("desktop-screen").classList.contains("os-live")) startTerminal();
+  else document.addEventListener("workspace:live", startTerminal, { once: true });
 })();
 
 /* ============================================================

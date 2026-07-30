@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Hatari 关于 AI 产品、Agent 与人机协作的思考记录。">
+<title>Thinking — Hatari's AI Workspace</title>
+<link rel="stylesheet" href="subpages.css">
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in shell">
+    <a class="mark" href="preview.html" aria-label="返回首页"><i></i><span>Hatari&rsquo;s AI Workspace</span></a>
+    <div class="hdr-right">
+      <nav class="hdr-nav" aria-label="主导航">
+        <a href="projects.html">Projects</a>
+        <a href="thinking.html" aria-current="page">Thinking</a>
+        <span aria-disabled="true">Stack</span>
+        <span aria-disabled="true">About</span>
+      </nav>
+      <button class="icon-btn" id="theme" aria-label="切换深色模式">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.8 5.8l1.4 1.4M16.8 16.8l1.4 1.4M18.2 5.8l-1.4 1.4M7.2 16.8l-1.4 1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-shell">
+    <section class="page-intro thinking-intro" aria-labelledby="page-title">
+      <p class="eyebrow">Notes &amp; essays</p>
+      <div class="intro-grid">
+        <h1 id="page-title">Thinking in public.</h1>
+        <p>关于 AI 产品、Agent、人机协作和构建过程的阶段性记录。不是定论，更像持续更新的工作笔记。</p>
+      </div>
+    </section>
+
+    <section class="thinking-list" aria-label="文章列表">
+      <!-- Draft entries: replace hrefs and copy when the real articles are ready. -->
+      <a class="thought-row" id="product-moat" href="#product-moat">
+        <time class="thought-date" datetime="2026-07">2026.07</time>
+        <span class="thought-copy">
+          <span class="thought-kind">Product systems</span>
+          <h2>AI 产品真正的护城河，不只是模型</h2>
+          <p>当模型能力逐渐趋同时，产品如何通过工作流、上下文与用户习惯形成自己的长期价值。</p>
+        </span>
+        <span class="thought-time">8 min</span>
+        <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="thought-row" id="workflow-to-agent" href="#workflow-to-agent">
+        <time class="thought-date" datetime="2026-06">2026.06</time>
+        <span class="thought-copy">
+          <span class="thought-kind">Agents</span>
+          <h2>从 Workflow 到 Agent：什么时候该让系统自己决定</h2>
+          <p>固定流程和自主决策并不是二选一，关键是识别哪些环节值得交给 Agent，哪些必须保持确定性。</p>
+        </span>
+        <span class="thought-time">6 min</span>
+        <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="thought-row" id="daily-ai-tool" href="#daily-ai-tool">
+        <time class="thought-date" datetime="2026-05">2026.05</time>
+        <span class="thought-copy">
+          <span class="thought-kind">Building</span>
+          <h2>做一个能被日常使用的 AI 工具</h2>
+          <p>炫目的 demo 很容易，稳定进入真实工作却很难。记录一次从功能演示到日常工具的产品取舍。</p>
+        </span>
+        <span class="thought-time">7 min</span>
+        <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="thought-row" id="product-hypothesis" href="#product-hypothesis">
+        <time class="thought-date" datetime="2026-04">2026.04</time>
+        <span class="thought-copy">
+          <span class="thought-kind">Research</span>
+          <h2>把模糊问题变成可验证的产品假设</h2>
+          <p>面对一句“我们想做个 AI 功能”，如何把它拆成用户行为、成功信号和足够小的验证路径。</p>
+        </span>
+        <span class="thought-time">5 min</span>
+        <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="thought-row" id="quiet-interface" href="#quiet-interface">
+        <time class="thought-date" datetime="2026-03">2026.03</time>
+        <span class="thought-copy">
+          <span class="thought-kind">Human × AI</span>
+          <h2>人和 AI 协作时，界面应该退到哪里</h2>
+          <p>好的 AI 界面不一定更热闹。它应当在需要选择时出现，在用户进入思考状态时安静退后。</p>
+        </span>
+        <span class="thought-time">4 min</span>
+        <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
+      </a>
+    </section>
+  </div>
+</main>
+
+<footer class="ftr">
+  <div class="ftr-in shell">
+    <p><span>&copy; 2026 Hatari</span><span aria-hidden="true">&middot;</span><span>AI products, notes and experiments</span></p>
+    <ul class="socials">
+      <li><a href="https://github.com/Hatari130" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.8c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.4-1.1.7-1.4-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.2-.4-1.2.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.5 4.9.5.4.8 1.1.8 2.2v2.7c0 .3.2.6.8.5A9.8 9.8 0 0 0 12 2.2Z"/></svg></a></li>
+      <li><button type="button" aria-label="X，链接待补充" title="X · Link coming soon"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M18.2 2.5h3.3l-7.2 8.2 8.5 10.8h-6.7L11 14.8l-5.9 6.7H1.8l7.7-8.8L1.3 2.5h6.8l4.7 6.1Zm-1.1 17.1h1.8L7.1 4.3H5.2Z"/></svg></button></li>
+      <li><button type="button" aria-label="小红书，链接待补充" title="小红书 · Link coming soon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 4.5v15M7.5 10 5 15.5M16.5 10l2.5 5.5"/></svg></button></li>
+      <li><button type="button" aria-label="微信公众号，链接待补充" title="公众号 · Link coming soon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.35"><path d="M13.3 15.9c-1.1.7-2.5 1.1-4 1.1l-2.7 1.6.6-2.4C5.2 15.1 4 13.4 4 11.5 4 8.5 6.8 6 10.3 6c3.4 0 6.2 2.3 6.3 5.2"/><path d="M20 15.5c0 2.2-2.1 4-4.7 4-.9 0-1.8-.2-2.5-.6l-2 .9.5-1.8c-.5-.7-.8-1.6-.8-2.5 0-2.2 2.1-4 4.7-4s4.8 1.8 4.8 4Z"/></svg></button></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById("theme");
+  var dark = false;
+  var sun = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.8 5.8l1.4 1.4M16.8 16.8l1.4 1.4M18.2 5.8l-1.4 1.4M7.2 16.8l-1.4 1.4"/></svg>';
+  var moon = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.4A8.4 8.4 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z"/></svg>';
+  btn.addEventListener("click",function(){
+    dark = !dark;
+    document.documentElement.classList.toggle("dark",dark);
+    btn.innerHTML = dark ? moon : sun;
+    btn.setAttribute("aria-label",dark ? "切换到浅色模式" : "切换到深色模式");
+  });
+})();
+</script>
+</body>
+</html>

@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hatari's AI Workspace — 预览</title>
+<link rel="stylesheet" href="shared/site.css">
+<script src="shared/site.js"></script>
 <script>
 document.documentElement.classList.add("js-typing");
 try {
@@ -13,7 +15,7 @@ try {
 } catch (err) {}
 if (/[?&]motion=reduce\b/.test(location.search)) {
   document.documentElement.classList.add("reduce-motion");
-} else {
+} else if (!/[?&]motion=system\b/.test(location.search)) {
   document.documentElement.classList.add("force-motion");
 }
 </script>
@@ -28,6 +30,9 @@ if (/[?&]motion=reduce\b/.test(location.search)) {
   --ink:#161614;
   --ink-2:#6d6b66;
   --ink-3:#a3a09a;
+  --copy-en:#77746f;
+  --copy-zh:#88857f;
+  --copy-note:#96938d;
   --line:#e2e0da;
   --grid:rgba(22,22,20,.026);
   --scroll-title:0px;
@@ -54,6 +59,7 @@ html{color-scheme:light}
 html.dark{
   --paper:#131312; --paper-2:#191917; --surface:#1f1f1c;
   --ink:#ecebe6; --ink-2:#9b9891; --ink-3:#706d67; --line:#2b2a26;
+  --copy-en:#aaa7a0; --copy-zh:#9c9992; --copy-note:#85827b;
   --grid:rgba(236,235,230,.025);
   --desk-top:#282925;
   --desk-edge:#181916;
@@ -126,37 +132,48 @@ ul{list-style:none;margin:0;padding:0}
    Split layout
    ============================================================ */
 .split{
+  position:relative;
   display:grid;grid-template-columns:1fr;gap:56px;
   padding:32px 24px 80px;align-items:center;
 }
 .split>*{min-width:0}
 @media (min-width:1024px){
-  .split{grid-template-columns:minmax(0,35fr) minmax(0,65fr);gap:40px;padding:28px 0 96px 40px}
+  .split{
+    grid-template-columns:minmax(0,42fr) minmax(0,58fr);
+    gap:clamp(36px,3.35vw,52px);
+    padding:28px clamp(52px,4.5vw,72px) 96px 40px;
+    align-items:start;
+  }
 }
 
 /* ---------------- left column ---------------- */
 .intro-column{
   transition:opacity .62s cubic-bezier(.22,1,.36,1),translate .62s cubic-bezier(.22,1,.36,1);
 }
-.intro{max-width:430px}
+.intro{max-width:460px}
+.identity-group,.capability-group,.action-group{min-width:0}
+.capability-group{margin-top:52px}
+.action-group{margin-top:48px}
 .intro h1{
   margin:0;font-family:var(--ff-display);
   font-size:2.72rem;font-weight:650;
   line-height:.98;letter-spacing:0;white-space:nowrap;
   transform:translate3d(0,var(--scroll-title),0);
 }
+.typed > .title-perch{display:inline-block;opacity:1}
 @media (min-width:1024px){.intro h1{font-size:3.4rem}}
 @media (min-width:1440px){.intro h1{font-size:4rem}}
+@media (max-width:460px){.intro h1{font-size:2.4rem}}
 @media (max-width:360px){.intro h1{font-size:2rem}}
 .lede{
-  width:max-content;max-width:100%;margin:24px 0 0;font-family:var(--ff-sans);
+  width:max-content;max-width:100%;margin:20px 0 0;font-family:var(--ff-sans);
   font-size:.94rem;font-weight:420;line-height:1.68;letter-spacing:0;white-space:nowrap;
-  color:color-mix(in oklab,var(--ink-2) 88%,transparent);
+  color:var(--copy-en);
   transform:translate3d(0,var(--scroll-lede),0);
 }
 .intro-zh{
-  margin:27px 0 0;font-size:.82rem;line-height:1.88;
-  color:color-mix(in oklab,var(--ink-2) 74%,transparent);
+  margin:20px 0 0;font-size:.82rem;line-height:1.72;
+  color:var(--copy-zh);
   transform:translate3d(0,var(--scroll-copy),0);
 }
 
@@ -214,14 +231,14 @@ ul{list-style:none;margin:0;padding:0}
 html.reduce-motion .hero-caret,
 html.reduce-motion .term-body .caret{display:none}
 
-.rule-head{display:flex;align-items:center;gap:16px;margin-top:44px}
+.rule-head{display:flex;align-items:center;gap:16px;margin-top:0}
 .rule-head h2{
   margin:0;font-family:var(--ff-mono);font-size:.65rem;font-weight:400;
   text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);
 }
 .rule-head i{flex:1;height:1px;background:var(--line)}
 
-.explore{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.explore{margin-top:18px;display:flex;flex-direction:column;gap:10px}
 .explore li{display:flex;align-items:center;gap:12px;font-size:.875rem;letter-spacing:0;color:color-mix(in oklab,var(--ink) 85%,transparent)}
 .explore b{
   width:13px;height:13px;border-radius:99px;display:grid;place-items:center;
@@ -230,14 +247,14 @@ html.reduce-motion .term-body .caret{display:none}
 .explore b::after{content:"";width:3.5px;height:3.5px;border-radius:99px;background:color-mix(in oklab,var(--ink) 35%,transparent)}
 
 .build{
-  margin-top:38px;padding:19px;border-radius:8px;
+  margin-top:0;padding:18px;border-radius:8px;
   border:1px solid var(--line);
   background:color-mix(in oklab,var(--surface) 60%,transparent);
   box-shadow:0 1px 2px rgba(24,22,20,.03);
 }
 .build-hd{display:flex;align-items:center;gap:8px}
 .build-hd h2{margin:0;font-size:.8rem;font-weight:500;letter-spacing:0;color:color-mix(in oklab,var(--ink) 85%,transparent)}
-.build ul{margin-top:16px;display:flex;flex-direction:column;gap:14px}
+.build ul{margin-top:14px;display:flex;flex-direction:column;gap:12px}
 .build li{display:flex;align-items:center;gap:10px}
 .sq{
   width:22px;height:22px;flex:0 0 auto;border-radius:6px;display:grid;place-items:center;
@@ -255,8 +272,8 @@ html.reduce-motion .term-body .caret{display:none}
   .meter{width:68px}
 }
 
-.sig{margin:40px 0 0;font-family:var(--ff-sans);font-size:.76rem;letter-spacing:0;color:var(--ink-3)}
-.cta{margin-top:16px;display:flex;align-items:center;gap:12px}
+.sig{margin:24px 0 0;font-family:var(--ff-sans);font-size:.76rem;letter-spacing:0;color:var(--copy-note)}
+.cta{margin-top:14px;display:flex;align-items:center;gap:12px}
 .btn{
   display:inline-flex;align-items:center;gap:8px;
   padding:12px 20px;border-radius:99px;background:var(--ink);color:var(--paper);
@@ -276,9 +293,13 @@ html.reduce-motion .term-body .caret{display:none}
    ============================================================ */
 .slot{
   position:relative;width:calc(100% + 48px);min-width:0;margin-inline:-24px;overflow:hidden;
-  isolation:isolate;
 }
 @media (min-width:1024px){.slot{width:100%;margin-inline:0}}
+
+@media (max-width:1023px){
+  .capability-group{margin-top:44px}
+  .action-group{margin-top:40px}
+}
 
 /* The physical scene stays deliberately sparse: one desk plane, one lamp,
    and the monitor. It frames the operating system without becoming a room. */
@@ -314,7 +335,7 @@ html.reduce-motion .term-body .caret{display:none}
 
 .desk-plant{
   --desk-object-x:0px;
-  position:absolute;left:-.6%;bottom:8%;z-index:4;width:92px;height:142px;
+  position:absolute;left:-.6%;bottom:8%;z-index:5;width:92px;height:142px;
   padding:0;touch-action:none;cursor:grab;
   scale:.78;transform:translate3d(var(--desk-object-x),0,0);transform-origin:left bottom;
   filter:drop-shadow(0 13px 12px rgba(31,31,27,.16));
@@ -366,7 +387,7 @@ html.dark .desk-plant{filter:brightness(.72) drop-shadow(0 10px 10px rgba(0,0,0,
 
 .desk-lamp{
   --desk-object-x:0px;
-  position:absolute;right:calc(1.2% + 26px);bottom:8.5%;z-index:4;width:86px;height:18px;
+  position:absolute;right:calc(1.2% + 26px);bottom:8.5%;z-index:5;width:86px;height:18px;
   color:var(--lamp-body);transform:translate3d(var(--desk-object-x),0,0);transform-origin:50% 100%;
   filter:drop-shadow(0 16px 18px rgba(30,29,25,.18));touch-action:none;cursor:grab;
   transition:opacity .64s cubic-bezier(.22,1,.36,1),translate .64s cubic-bezier(.22,1,.36,1),
@@ -477,6 +498,146 @@ html.dark .desk-lamp{filter:drop-shadow(0 10px 14px rgba(0,0,0,.18))}
   border-radius:50%;background:rgba(0,0,0,.14);filter:blur(18px);transition:opacity .5s ease;
 }
 
+/* ============================================================
+   Hatari's cat — one actor, two stages, real occlusion
+   ------------------------------------------------------------
+   #cat-stage-scene lives INSIDE .slot, so its z-index interleaves
+   with the scene layers (desk 1 / monitor 3 / plant + lamp 5).
+   #cat-stage-ui lives outside .slot, for the two UI landings
+   (title, button) that .slot's overflow:hidden would clip.
+   The cat element is handed between the two stages while it moves.
+   ============================================================ */
+.cat-stage{
+  position:absolute;inset:0;pointer-events:none;
+  transition:opacity .4s ease;
+}
+#cat-stage-ui{z-index:6}
+#cat-stage-scene[data-depth="back"]{z-index:2}   /* behind the monitor */
+#cat-stage-scene[data-depth="mid"]{z-index:4}    /* past the monitor, behind the props */
+#cat-stage-scene[data-depth="front"]{z-index:6}  /* in front of everything on the desk */
+
+.hatari-cat{
+  --cat-eye:#efe9d2;
+  --cat-foot:5px;            /* paw line, measured up from the box bottom, per pose */
+  --cat-shadow:0;
+  position:absolute;left:0;top:0;width:80px;height:74px;
+  margin:0;padding:0;border:0;background:none;-webkit-appearance:none;appearance:none;
+  color:#12120f;opacity:0;overflow:visible;
+  pointer-events:none;cursor:default;
+  transform-origin:50% 100%;will-change:transform,opacity;
+  transition:filter .35s ease;
+}
+.hero-ready .hatari-cat{opacity:1}
+.hatari-cat[data-pettable="true"]{pointer-events:auto;cursor:pointer}
+.hatari-cat[data-pettable="true"]:hover{filter:drop-shadow(0 6px 6px rgba(28,27,23,.18))}
+.hatari-cat:focus-visible{
+  outline:2px solid color-mix(in oklab,var(--ink) 44%,transparent);
+  outline-offset:3px;border-radius:14px;
+}
+
+/* Pose determines where the paws are, so the shadow and the landing
+   maths both read the same number. */
+.hatari-cat[data-pose="sit"]{--cat-foot:5px}
+.hatari-cat[data-pose="walk"]{--cat-foot:7.5px}
+.hatari-cat[data-pose="loaf"]{--cat-foot:6px}
+.hatari-cat[data-pose="stretch"]{--cat-foot:3.5px}
+.hatari-cat[data-pose="peek"]{--cat-foot:2.5px}
+
+/* Contact shadow: what actually glues the cat to a surface. */
+.cat-shadow{
+  position:absolute;left:50%;bottom:calc(var(--cat-foot) - 4px);
+  width:54px;height:8px;margin-left:-27px;border-radius:50%;
+  background:rgba(24,23,20,.42);filter:blur(3px);
+  opacity:var(--cat-shadow);transition:opacity .45s ease;pointer-events:none;
+}
+html.dark .cat-shadow{background:rgba(0,0,0,.55)}
+
+.hatari-cat-svg{position:relative;display:block;width:80px;height:74px;overflow:visible}
+.cat-pose{display:none}
+.hatari-cat[data-pose="sit"] [data-cat-pose="sit"],
+.hatari-cat[data-pose="walk"] [data-cat-pose="walk"],
+.hatari-cat[data-pose="loaf"] [data-cat-pose="loaf"],
+.hatari-cat[data-pose="stretch"] [data-cat-pose="stretch"],
+.hatari-cat[data-pose="peek"] [data-cat-pose="peek"]{display:block}
+.cat-shape{fill:currentColor}
+.cat-line{
+  fill:none;stroke:currentColor;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;
+}
+/* Whiskers stay a fixed warm white: the body is near-black in both themes,
+   so mixing against a theme token would make them vanish in the dark. */
+.cat-detail{
+  fill:none;stroke:rgba(255,253,246,.62);
+  stroke-width:1.1;stroke-linecap:round;opacity:.5;
+}
+.cat-shape,.cat-line,.cat-detail{
+  transition:opacity .42s cubic-bezier(.22,1,.36,1);
+}
+.cat-eye{
+  fill:var(--cat-eye);transform-box:fill-box;transform-origin:center;
+  transition:transform .08s ease,fill .45s ease,filter .45s ease,opacity .32s ease;
+}
+.cat-ear,.cat-tail,.cat-leg{
+  transform-box:fill-box;transform-origin:center bottom;
+}
+.cat-tail{animation:catTail 3.8s ease-in-out infinite}
+.hatari-cat[data-pose="walk"] .cat-leg-a{animation:catStepA .38s steps(2,end) infinite}
+.hatari-cat[data-pose="walk"] .cat-leg-b{animation:catStepB .38s steps(2,end) infinite}
+.hatari-cat.blink .cat-eye{transform:scaleY(.08)}
+.hatari-cat.ear-twitch .cat-ear-l{animation:catEarL .44s ease-in-out 1}
+.hatari-cat.ear-twitch .cat-ear-r{animation:catEarR .44s ease-in-out 1}
+.hatari-cat.petted .cat-tail{animation-duration:.46s}
+.hatari-cat.petted .cat-ear-l{animation:catEarL .34s ease-in-out 2}
+.hatari-cat.petted .cat-ear-r{animation:catEarR .34s ease-in-out 2 .08s}
+
+/* Lamp off: the black cat disappears into the room; only its eyes remain. */
+html.dark .hatari-cat{--cat-eye:#f5ce70;color:#090907}
+html.dark .hatari-cat-svg{filter:none}
+html.dark .hatari-cat .cat-shape,
+html.dark .hatari-cat .cat-line,
+html.dark .hatari-cat .cat-detail{opacity:0}
+html.dark .hatari-cat .cat-eye{
+  opacity:1;
+  stroke:rgba(255,228,157,.9);stroke-width:.65;vector-effect:non-scaling-stroke;
+  filter:drop-shadow(0 0 1px rgba(245,206,112,.95))
+         drop-shadow(0 0 3px rgba(245,206,112,.52));
+}
+html.dark .cat-shadow{opacity:0}
+
+@keyframes catTail{
+  0%,100%{transform:rotate(-2deg)}
+  50%{transform:rotate(7deg)}
+}
+@keyframes catStepA{
+  0%,49%{transform:translateY(0) rotate(0)}
+  50%,100%{transform:translateY(-2px) rotate(8deg)}
+}
+@keyframes catStepB{
+  0%,49%{transform:translateY(-2px) rotate(-8deg)}
+  50%,100%{transform:translateY(0) rotate(0)}
+}
+@keyframes catEarL{0%,100%{transform:rotate(0)}45%{transform:rotate(-12deg)}68%{transform:rotate(5deg)}}
+@keyframes catEarR{0%,100%{transform:rotate(0)}42%{transform:rotate(11deg)}70%{transform:rotate(-4deg)}}
+body.workspace-entering .cat-stage,
+body.workspace-live .cat-stage,
+body.workspace-exiting .cat-stage{opacity:0;pointer-events:none}
+
+@media (max-width:720px){
+  .hatari-cat{pointer-events:none!important;cursor:default!important}
+  .hatari-cat .cat-tail,
+  .hatari-cat .cat-ear,
+  .hatari-cat .cat-leg{animation:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+  html:not(.force-motion) .hatari-cat{pointer-events:none!important;cursor:default!important}
+  html:not(.force-motion) .cat-tail,
+  html:not(.force-motion) .cat-ear,
+  html:not(.force-motion) .cat-leg{animation:none!important}
+}
+html.reduce-motion .hatari-cat{pointer-events:none!important;cursor:default!important}
+html.reduce-motion .cat-tail,
+html.reduce-motion .cat-ear,
+html.reduce-motion .cat-leg{animation:none!important}
+
 /* Spatial workspace portal. The same desktop DOM moves here, so every open
    window and conversation survives the camera transition. */
 .workspace-portal{
@@ -508,18 +669,43 @@ body.workspace-live .workspace-portal.settling .screen{animation:workspaceSettle
   to{opacity:1;scale:1}
 }
 
-.workspace-exit{
-  position:fixed;right:18px;top:46px;z-index:150;width:42px;height:42px;
-  display:grid;place-items:center;border:1px solid rgba(255,255,255,.26);border-radius:50%;
-  color:rgba(255,255,255,.9);background:rgba(27,26,23,.42);
-  box-shadow:0 8px 24px rgba(22,20,18,.18);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  opacity:0;scale:.9;pointer-events:none;
-  transition:opacity .28s ease,scale .28s cubic-bezier(.22,1,.36,1),background .2s ease;
+.workspace-nav{
+  position:fixed;left:0;right:0;top:0;z-index:160;height:42px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 18px;
+  color:rgba(255,255,255,.88);
+  border-bottom:1px solid rgba(255,255,255,.12);
+  background:rgba(30,28,25,.48);
+  box-shadow:0 8px 28px rgba(26,23,20,.08);
+  backdrop-filter:blur(18px) saturate(1.12);-webkit-backdrop-filter:blur(18px) saturate(1.12);
+  opacity:0;translate:0 -7px;pointer-events:none;
+  transition:opacity .32s ease,translate .42s cubic-bezier(.16,1,.3,1);
 }
-.workspace-exit:hover{background:rgba(20,19,17,.68)}
-.workspace-exit svg{width:18px;height:18px}
-body.workspace-live .workspace-exit{opacity:1;scale:1;pointer-events:auto}
+.workspace-nav[hidden]{display:none}
+.workspace-nav-id{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--ff-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+}
+.workspace-nav-id i{
+  width:7px;height:7px;border-radius:50%;background:#f1eee7;
+  box-shadow:0 0 0 3px rgba(255,255,255,.08);
+}
+.workspace-nav-links{display:flex;align-items:center;gap:26px;height:100%}
+.workspace-nav-links a,.workspace-nav-links button{
+  position:relative;display:inline-flex;align-items:center;height:100%;
+  font-size:.74rem;letter-spacing:.01em;color:rgba(255,255,255,.68);
+  transition:color .22s ease;
+}
+.workspace-nav-links a:hover,.workspace-nav-links button:hover,
+.workspace-nav-links a:focus-visible,.workspace-nav-links button:focus-visible{color:#fff}
+.workspace-nav-links [aria-current="page"]{color:#fff}
+.workspace-nav-links [aria-current="page"]::after{
+  content:"";position:absolute;left:50%;bottom:6px;width:3px;height:3px;border-radius:50%;
+  background:currentColor;translate:-50% 0;
+}
+body.workspace-entering .workspace-nav,
+body.workspace-live .workspace-nav{opacity:1;translate:0 0;pointer-events:auto}
+.workspace-exit{display:none}
 
 body.workspace-entering .hdr,
 body.workspace-live .hdr{opacity:0;translate:0 -10px;pointer-events:none}
@@ -549,7 +735,10 @@ body.workspace-live .winwrap{max-width:calc(100vw - 32px)}
   .desk-lamp,.desk-plant{display:none}
   .desk-surface{height:22%}
   .workbench-atmosphere::before{display:none}
-  .workspace-exit{right:12px;top:42px}
+  .workspace-nav{padding:0 14px}
+  .workspace-nav-id span{display:none}
+  .workspace-nav-links{gap:17px}
+  .workspace-nav-links a,.workspace-nav-links button{font-size:.7rem}
   body.workspace-live .termwrap{display:none}
   body.workspace-live .mbar-r .dim{display:none}
   body.workspace-live .mbar-l{gap:8px}
@@ -911,6 +1100,104 @@ body.workspace-live .winwrap{max-width:calc(100vw - 32px)}
 .music-volume-row{width:88px;display:grid;grid-template-columns:11px 1fr;gap:7px;align-items:center;margin-top:13px;color:#969086}
 .music-volume-row svg{width:11px;height:11px}
 
+/* Maximized apps use the available workspace instead of keeping their
+   compact 420px-window proportions. */
+body.workspace-live .winwrap.maximized .win-body{overflow:hidden}
+body.workspace-live .winwrap.maximized .code-app,
+body.workspace-live .winwrap.maximized .music-app{
+  width:100%;height:100%;min-height:0;
+}
+
+body.workspace-live .winwrap.maximized .code-app{
+  grid-template-columns:clamp(112px,10vw,176px) minmax(0,1fr);
+}
+body.workspace-live .winwrap.maximized .code-side{
+  padding:20px 16px;overflow:auto;
+}
+body.workspace-live .winwrap.maximized .code-side b{
+  margin-bottom:16px;font-size:10px;
+}
+body.workspace-live .winwrap.maximized .code-file{
+  gap:7px;margin-top:11px;font-size:10px;
+}
+body.workspace-live .winwrap.maximized .code-file i{width:6px;height:6px}
+body.workspace-live .winwrap.maximized .code-main{
+  display:flex;min-height:0;flex-direction:column;
+}
+body.workspace-live .winwrap.maximized .code-tabs{
+  height:38px;flex:0 0 38px;font-size:10px;
+}
+body.workspace-live .winwrap.maximized .code-tabs span{
+  height:38px;padding:13px 16px 0;
+}
+body.workspace-live .winwrap.maximized .code-lines{
+  min-height:0;flex:1;overflow:auto;
+  padding:22px clamp(18px,2.2vw,36px);
+  font-size:clamp(10px,.72vw,13px);line-height:1.78;
+}
+body.workspace-live .winwrap.maximized .commit-strip{
+  flex:0 0 auto;padding:13px 18px;font-size:10px;
+}
+
+body.workspace-live .winwrap.maximized .music-app{
+  grid-template-columns:clamp(150px,12vw,214px) minmax(0,1fr);
+}
+body.workspace-live .winwrap.maximized .music-library{
+  padding:22px 14px;overflow:auto;
+}
+body.workspace-live .winwrap.maximized .music-library>span{
+  padding:0 9px 14px;font-size:9px;
+}
+body.workspace-live .winwrap.maximized .music-track{
+  grid-template-columns:38px minmax(0,1fr);gap:10px;padding:9px;
+}
+body.workspace-live .winwrap.maximized .music-track i{
+  width:38px;height:38px;border-radius:7px;
+}
+body.workspace-live .winwrap.maximized .music-track b{font-size:11px}
+body.workspace-live .winwrap.maximized .music-track small{font-size:9px}
+body.workspace-live .winwrap.maximized .music-player{
+  min-width:0;min-height:0;justify-content:center;
+  padding:clamp(28px,5vh,64px) clamp(32px,6vw,96px);
+}
+body.workspace-live .winwrap.maximized .music-cover{
+  width:clamp(144px,20vh,196px);
+}
+body.workspace-live .winwrap.maximized .music-cover::after{
+  left:14px;bottom:13px;font-size:8px;
+}
+body.workspace-live .winwrap.maximized .music-meta{margin-top:18px}
+body.workspace-live .winwrap.maximized .music-meta b{font-size:16px}
+body.workspace-live .winwrap.maximized .music-meta span{font-size:10px}
+body.workspace-live .winwrap.maximized .music-timeline{
+  width:min(100%,720px);margin-top:20px;
+}
+body.workspace-live .winwrap.maximized .music-times{font-size:9px}
+body.workspace-live .winwrap.maximized .music-controls{
+  gap:24px;margin-top:15px;
+}
+body.workspace-live .winwrap.maximized .music-control{width:32px;height:32px}
+body.workspace-live .winwrap.maximized .music-control.music-toggle{width:44px;height:44px}
+body.workspace-live .winwrap.maximized .music-control svg{width:18px;height:18px}
+body.workspace-live .winwrap.maximized .music-volume-row{
+  width:120px;grid-template-columns:14px 1fr;gap:9px;margin-top:17px;
+}
+body.workspace-live .winwrap.maximized .music-volume-row svg{width:14px;height:14px}
+
+@media (max-width:720px){
+  body.workspace-live .winwrap.maximized .music-app{
+    grid-template-columns:112px minmax(0,1fr);
+  }
+  body.workspace-live .winwrap.maximized .music-library{padding:14px 8px}
+  body.workspace-live .winwrap.maximized .music-track{
+    grid-template-columns:28px minmax(0,1fr);gap:7px;padding:7px 5px;
+  }
+  body.workspace-live .winwrap.maximized .music-track i{width:28px;height:28px}
+  body.workspace-live .winwrap.maximized .music-player{padding:20px 14px}
+  body.workspace-live .winwrap.maximized .music-cover{width:min(124px,24vh)}
+  body.workspace-live .winwrap.maximized .music-timeline{margin-top:14px}
+}
+
 /* inspiration app */
 .inspiration-app{padding:12px;background:rgba(248,246,241,.7)}
 .inspiration-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
@@ -1017,15 +1304,28 @@ html.reduce-motion .plx{translate:none!important}
 
 <header class="hdr ui-stage ui-stage-header">
   <div class="hdr-in shell">
-    <a class="mark" href="preview.html"><i></i><span>Hatari&rsquo;s AI Workspace</span></a>
+    <a class="mark" href="preview.html"><i></i><span data-i18n-zh="Hatari 的 AI 工作台" data-i18n-en="Hatari&rsquo;s AI Workspace">Hatari 的 AI 工作台</span></a>
     <div class="hdr-right">
       <nav class="hdr-nav" id="nav"></nav>
+      <div class="lang-switch" role="group" aria-label="语言切换">
+        <button type="button" data-lang-option="zh" aria-pressed="true">中</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">EN</button>
+      </div>
       <button class="icon-btn" id="theme" aria-label="切换深色模式"></button>
     </div>
   </div>
 </header>
 
 <div class="workspace-portal" id="workspace-portal" aria-hidden="true"></div>
+<nav class="workspace-nav" id="workspace-nav" aria-label="工作台导航" hidden>
+  <div class="workspace-nav-id" aria-hidden="true"><i></i><span>Hatari / Workspace</span></div>
+  <div class="workspace-nav-links">
+    <button id="workspace-home" type="button" aria-current="page" data-i18n-zh="主页" data-i18n-en="Home">主页</button>
+    <a href="projects/index.html" data-i18n-zh="项目" data-i18n-en="Projects">项目</a>
+    <a href="writing/index.html" data-i18n-zh="写作" data-i18n-en="Writing">写作</a>
+    <button id="workspace-about" type="button" data-i18n-zh="关于" data-i18n-en="About">关于</button>
+  </div>
+</nav>
 <button class="workspace-exit" id="workspace-exit" type="button" aria-label="返回首页" title="返回首页" hidden>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M19 12H5M11 6l-6 6 6 6"/>
@@ -1035,33 +1335,40 @@ html.reduce-motion .plx{translate:none!important}
 <main>
   <section class="split shell">
 
+
     <!-- ============ 左侧：个人介绍 ============ -->
     <div class="intro-column">
       <div class="intro">
-        <h1 class="typed" id="t-head">Hi, I&rsquo;m Hatari.</h1>
-        <p class="lede typed" id="t-lede">I build AI products that<br>solve real problems.</p>
-        <p class="intro-zh stage stage-subtitle">
-          我是一名 AI 产品探索者和构建者。<br>
-          喜欢用产品思维理解问题，<br>
-          用代码和 AI 把想法变成现实。
-        </p>
-
-        <div class="rule-head stage stage-explore"><h2>Currently exploring</h2><i></i></div>
-        <ul class="explore stage stage-explore" id="explore"></ul>
-
-        <div class="build stage stage-progress">
-          <div class="build-hd" id="build-hd"></div>
-          <ul id="build"></ul>
+        <div class="identity-group">
+          <h1 class="typed" id="t-head">你好，我是 Hatari。</h1>
+          <p class="lede typed" id="t-lede">我构建能解决真实问题的<br>AI 产品。</p>
+          <p class="intro-zh stage stage-subtitle">
+            我是一名 AI 产品探索者和构建者。<br>
+            喜欢用产品思维理解问题，<br>
+            用代码和 AI 把想法变成现实。
+          </p>
         </div>
 
-        <p class="sig stage stage-progress">Let&rsquo;s build the future together.</p>
-        <div class="cta stage stage-progress">
-          <a class="btn" href="projects.html">我的作品
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 16.5 16.5 7.5M9 7.5h7.5V15"/></svg>
-          </a>
-          <a class="btn-o" href="mailto:hatari@example.com" aria-label="发邮件">
-            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12" rx="2.5"/><path d="M4.5 8.2l6.3 4.6a2 2 0 0 0 2.4 0l6.3-4.6"/></svg>
-          </a>
+        <div class="capability-group">
+          <div class="rule-head stage stage-explore"><h2 data-i18n-zh="正在探索" data-i18n-en="Currently exploring">正在探索</h2><i></i></div>
+          <ul class="explore stage stage-explore" id="explore"></ul>
+        </div>
+
+        <div class="action-group">
+          <div class="build stage stage-progress">
+            <div class="build-hd" id="build-hd"></div>
+            <ul id="build"></ul>
+          </div>
+
+          <p class="sig stage stage-progress" data-i18n-zh="一起把想法做成现实。" data-i18n-en="Let&rsquo;s build the future together.">一起把想法做成现实。</p>
+          <div class="cta stage stage-progress">
+            <a class="btn" href="projects/index.html">我的作品
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 16.5 16.5 7.5M9 7.5h7.5V15"/></svg>
+            </a>
+            <a class="btn-o" href="mailto:hatari@example.com" aria-label="发邮件">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12" rx="2.5"/><path d="M4.5 8.2l6.3 4.6a2 2 0 0 0 2.4 0l6.3-4.6"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1070,6 +1377,9 @@ html.reduce-motion .plx{translate:none!important}
     <div class="slot ui-stage ui-stage-workspace" id="slot">
       <div class="workbench-atmosphere" aria-hidden="true"></div>
       <div class="desk-surface" aria-hidden="true"></div>
+      <!-- 黑猫：场景舞台。放在 .slot 内部，z-index 才能真的插进
+           桌面(1) / 显示器(3) / 绿植+台灯(5) 之间，遮挡是真实的层序。 -->
+      <div class="cat-stage" id="cat-stage-scene" data-depth="mid"></div>
       <button class="desk-plant" id="desk-plant" data-desk-object="plant" type="button" aria-label="盆栽，可左右拖动" title="左右拖动盆栽">
         <span class="plant-stem"></span>
         <span class="plant-leaf l1"></span>
@@ -1168,9 +1478,77 @@ html.reduce-motion .plx{translate:none!important}
 
     <!-- ============ 手机端项目列表 ============ -->
     <section class="mlist" aria-label="项目列表">
-      <div class="rule-head" style="margin-top:0"><h2>Projects</h2><i></i></div>
+      <div class="rule-head" style="margin-top:0"><h2 data-i18n-zh="项目" data-i18n-en="Projects">项目</h2><i></i></div>
       <ul id="mlist"></ul>
     </section>
+
+    <!-- ============ 黑猫：UI 舞台（标题 / 按钮两个落点） ============
+         场景内的落点用 .slot 里面的 #cat-stage-scene，猫在两个舞台之间交接。
+         这一段放在 .split 末尾，所以键盘 Tab 顺序在主 CTA 之后。 -->
+    <div class="cat-stage" id="cat-stage-ui">
+      <button class="hatari-cat" id="hatari-cat" type="button" data-pose="loaf"
+              data-pettable="false" aria-label="摸摸 Hatari 的黑猫" title="摸摸它">
+        <span class="cat-shadow" aria-hidden="true"></span>
+        <svg class="hatari-cat-svg" viewBox="0 0 80 74" aria-hidden="true">
+          <g class="cat-pose" data-cat-pose="sit">
+            <path class="cat-line cat-tail" d="M27 57C12 71 5 58 13 46"/>
+            <ellipse class="cat-shape" cx="39" cy="51" rx="18" ry="20"/>
+            <path class="cat-shape" d="M24 65c4-7 10-10 16-8 6-2 12 1 16 8v4H24Z"/>
+            <circle class="cat-shape" cx="42" cy="28" r="14"/>
+            <path class="cat-shape cat-ear cat-ear-l" d="M30 22 32 6l11 11Z"/>
+            <path class="cat-shape cat-ear cat-ear-r" d="m43 17 12-11-1 18Z"/>
+            <ellipse class="cat-eye" cx="38" cy="28" rx="1.7" ry="2.1"/>
+            <ellipse class="cat-eye" cx="47" cy="28" rx="1.7" ry="2.1"/>
+            <path class="cat-detail" d="M42 33c1.1 1 2.3 1 3.4 0M36 35l-8 1m8-4-8-2m19 5 8 1m-8-4 8-2"/>
+          </g>
+
+          <g class="cat-pose" data-cat-pose="walk">
+            <path class="cat-line cat-tail" d="M24 41C8 46 9 27 20 25"/>
+            <path class="cat-shape" d="M18 31c12-7 31-8 43 0 5 4 5 15-1 19-12 6-31 5-41 0-7-4-7-14-1-19Z"/>
+            <circle class="cat-shape" cx="62" cy="31" r="11"/>
+            <path class="cat-shape cat-ear cat-ear-l" d="m54 25 1-12 9 8Z"/>
+            <path class="cat-shape cat-ear cat-ear-r" d="m63 21 10-8-2 13Z"/>
+            <path class="cat-line cat-leg cat-leg-a" d="M27 47v16M51 47l2 16"/>
+            <path class="cat-line cat-leg cat-leg-b" d="m36 48-2 15m25-16 5 14"/>
+            <ellipse class="cat-eye" cx="63" cy="30" rx="1.45" ry="1.85"/>
+            <ellipse class="cat-eye" cx="69" cy="29" rx="1.25" ry="1.7"/>
+          </g>
+
+          <g class="cat-pose" data-cat-pose="loaf">
+            <path class="cat-line cat-tail" d="M24 58c-13 8-18-3-10-10"/>
+            <ellipse class="cat-shape" cx="39" cy="51" rx="28" ry="17"/>
+            <circle class="cat-shape" cx="55" cy="35" r="13"/>
+            <path class="cat-shape cat-ear cat-ear-l" d="m45 29 2-14 10 10Z"/>
+            <path class="cat-shape cat-ear cat-ear-r" d="m56 24 11-9-1 16Z"/>
+            <ellipse class="cat-eye" cx="53" cy="35" rx="1.6" ry="1.9"/>
+            <ellipse class="cat-eye" cx="61" cy="34.5" rx="1.5" ry="1.85"/>
+            <path class="cat-detail" d="M51 56c7 2 13 1 18-2"/>
+          </g>
+
+          <g class="cat-pose" data-cat-pose="stretch">
+            <path class="cat-line cat-tail" d="M24 39C9 30 11 15 21 17"/>
+            <ellipse class="cat-shape" cx="25" cy="43" rx="15" ry="18"/>
+            <path class="cat-shape" d="M23 32c14-4 31 2 43 12l-7 13c-14-8-25-9-39-8Z"/>
+            <circle class="cat-shape" cx="63" cy="49" r="11"/>
+            <path class="cat-shape cat-ear cat-ear-l" d="m55 43 1-12 9 9Z"/>
+            <path class="cat-shape cat-ear cat-ear-r" d="m64 40 10-7-2 12Z"/>
+            <path class="cat-line" d="m58 56-7 10m15-9-3 10"/>
+            <ellipse class="cat-eye" cx="64" cy="49" rx="1.5" ry="1.75"/>
+            <ellipse class="cat-eye" cx="70" cy="48.5" rx="1.25" ry="1.55"/>
+          </g>
+
+          <g class="cat-pose" data-cat-pose="peek">
+            <circle class="cat-shape" cx="43" cy="35" r="15"/>
+            <path class="cat-shape cat-ear cat-ear-l" d="M31 29 33 10l12 15Z"/>
+            <path class="cat-shape cat-ear cat-ear-r" d="m44 24 13-13-1 20Z"/>
+            <path class="cat-line" d="M34 49v17m18-17 2 17"/>
+            <ellipse class="cat-eye" cx="39" cy="35" rx="1.8" ry="2.2"/>
+            <ellipse class="cat-eye" cx="48" cy="35" rx="1.8" ry="2.2"/>
+            <path class="cat-detail" d="M43 40c1 1 2.2 1 3.2 0M37 42l-8 1m8-4-8-2m18 5 8 1m-8-4 8-2"/>
+          </g>
+        </svg>
+      </button>
+    </div>
 
   </section>
 
@@ -1178,7 +1556,7 @@ html.reduce-motion .plx{translate:none!important}
 
 <footer class="ftr">
   <div class="ftr-in shell">
-    <p><span>© 2026 Hatari</span><span aria-hidden="true">·</span><span>Built with Next.js &amp; Tailwind CSS</span></p>
+    <p><span>© 2026 Hatari</span><span aria-hidden="true">·</span><span data-i18n-zh="用 AI 构建对人有用的产品。" data-i18n-en="Built with Next.js &amp; Tailwind CSS">用 AI 构建对人有用的产品。</span></p>
     <ul class="socials" id="socials"></ul>
   </div>
 </footer>
@@ -1191,31 +1569,34 @@ html.reduce-motion .plx{translate:none!important}
    数据 —— 对应 Next.js 项目的 lib/data.ts
    ============================================================ */
 var projects = [
-  {slug:"viral-hunter",     name:"热点猎手",     summary:"人工智能驱动的爆款内容洞察系统", date:"已上线", glyph:"signal"},
-  {slug:"agent-workspace",  name:"智能体工作台", summary:"多智能体协作与管理平台",         date:"80%",   glyph:"bars"},
-  {slug:"ai-content-studio",name:"智能内容工坊", summary:"人工智能内容生产工作流",           date:"65%",   glyph:"layers"},
-  {slug:"urban-ai",         name:"城市智能",     summary:"城市数据与空间智能探索",           date:"研究中", glyph:"map"}
+  {slug:"viral-hunter",     name:"热点猎手",     nameEn:"Viral Hunter",     summary:"人工智能驱动的爆款内容洞察系统", summaryEn:"AI-driven insight system for finding content growth signals", date:"已上线", dateEn:"Live", glyph:"signal"},
+  {slug:"agent-workspace",  name:"智能体工作台", nameEn:"Agent Workspace",  summary:"多智能体协作与管理平台",         summaryEn:"A workspace for coordinating multiple AI agents", date:"80%", dateEn:"80%", glyph:"bars"},
+  {slug:"ai-content-studio",name:"智能内容工坊", nameEn:"AI Content Studio", summary:"人工智能内容生产工作流",           summaryEn:"A workflow for AI-assisted content production", date:"65%", dateEn:"65%", glyph:"layers"},
+  {slug:"urban-ai",         name:"城市智能",     nameEn:"Urban AI",         summary:"城市数据与空间智能探索",           summaryEn:"Explorations in urban data and spatial intelligence", date:"研究中", dateEn:"Research", glyph:"map"},
+  {slug:"podcast-bridge",   name:"播客知识桥",   nameEn:"podcast-bridge",   summary:"让 AI 研究全球播客的本地知识库",     summaryEn:"A local knowledge base for researching global podcasts with AI", date:"开源", dateEn:"Open source", glyph:"music"}
 ];
 
 var desktopItems = [
-  {id:"projects",    label:"项目作品",     kind:"folder",   glyph:"folder", opens:"projects",    x:22,  y:14},
-  {id:"agents",      label:"网站助手",     kind:"app",      glyph:"agent",  opens:"agents",      x:98,  y:14},
-  {id:"music",       label:"工作音乐",     kind:"app",      glyph:"music",  opens:"music",       x:174, y:14},
-  {id:"thinking",    label:"我的文章",     kind:"document", glyph:"note",   badge:"文章", opens:"thinking",    x:22,  y:98},
-  {id:"code",        label:"技术能力",     kind:"document", glyph:"code",   badge:"技术", opens:"code",        x:98,  y:98},
-  {id:"inspiration", label:"灵感收藏",     kind:"folder",   glyph:"folder", opens:"inspiration", x:22,  y:182},
-  {id:"about",       label:"关于我",       kind:"document", glyph:"user",   badge:"介绍", opens:"about",       x:98,  y:182}
+  {id:"projects",    label:"项目作品", labelEn:"Projects",  kind:"folder",   glyph:"folder", opens:"projects",    x:22,  y:14},
+  {id:"agents",      label:"网站助手", labelEn:"Site helper", kind:"app",      glyph:"agent",  opens:"agents",      x:98,  y:14},
+  {id:"music",       label:"工作音乐", labelEn:"Work music", kind:"app",      glyph:"music",  opens:"music",       x:174, y:14},
+  {id:"thinking",    label:"我的文章", labelEn:"Writing",    kind:"document", glyph:"note",   badge:"文章", badgeEn:"Notes", opens:"thinking",    x:22,  y:98},
+  {id:"code",        label:"技术能力", labelEn:"Capabilities", kind:"document", glyph:"code", badge:"技术", badgeEn:"Skills", opens:"code",        x:98,  y:98},
+  {id:"inspiration", label:"灵感收藏", labelEn:"Inspiration", kind:"folder",  glyph:"folder", opens:"inspiration", x:22,  y:182},
+  {id:"about",       label:"关于我",   labelEn:"About",      kind:"document", glyph:"user",   badge:"介绍", badgeEn:"About", opens:"about",       x:98,  y:182}
 ];
 
-var exploring = ["AI Agents","LLM Workflows","Human-AI Collaboration","Product × Code"];
+var exploringZh = ["AI 智能体","大模型工作流","人机协作","产品 × 代码"];
+var exploringEn = ["AI Agents","LLM Workflows","Human-AI Collaboration","Product × Code"];
+var exploring = exploringZh;
 var building = [
   {name:"Agent Workspace",  progress:80, glyph:"bars"},
   {name:"AI Content Studio",progress:65, glyph:"layers"},
   {name:"Viral Hunter",     progress:75, glyph:"signal"}
 ];
 var dockApps = [
-  {id:"finder",label:"项目文件"},{id:"music",label:"工作音乐"},{id:"chatgpt",label:"网站助手"},
-  {id:"claude",label:"资料助手"},{id:"obsidian",label:"文章笔记"},{id:"vscode",label:"代码工具"},{id:"figma",label:"设计工具"}
+  {id:"finder",label:"项目文件",labelEn:"Project files"},{id:"music",label:"工作音乐",labelEn:"Work music"},{id:"chatgpt",label:"网站助手",labelEn:"Site helper"},
+  {id:"claude",label:"资料助手",labelEn:"Research helper"},{id:"obsidian",label:"文章笔记",labelEn:"Writing notes"},{id:"vscode",label:"代码工具",labelEn:"Code tools"},{id:"figma",label:"设计工具",labelEn:"Design tools"}
 ];
 var terminalScript = [
   {kind:0, text:"工作台状态"},
@@ -1286,17 +1667,17 @@ var iconPositions = readLocal(ICON_STORAGE_KEY, {});
    渲染
    ============================================================ */
 $("nav").innerHTML =
-  '<a href="projects.html">Projects</a>'+
-  '<a href="thinking.html">Writing</a>'+
-  '<a href="stack.html">Stack</a>'+
-  '<span aria-disabled="true">About</span>';
+  '<a href="projects/index.html">项目</a>'+
+  '<a href="writing/index.html">写作</a>'+
+  '<a href="stack.html">工具</a>'+
+  '<span aria-disabled="true">关于</span>';
 
 $("explore").innerHTML = exploring
   .map(function(t){ return "<li><b></b><span>"+t+"</span></li>"; }).join("");
 
 $("build-hd").innerHTML =
   '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="color:color-mix(in oklab,var(--ink) 55%,transparent)"><path d="M12 4.5l1.3 3.6L17 9.4l-3.7 1.3L12 14.3l-1.3-3.6L7 9.4l3.7-1.3Z"/><path d="M17.8 15.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7Z"/></svg>'+
-  "<h2>Currently building</h2>";
+  "<h2>正在构建</h2>";
 
 $("build").innerHTML = building.map(function(b){
   return '<li><span class="sq"><span style="width:12px;height:12px;display:block">'+glyph(b.glyph)+'</span></span>'+
@@ -1319,7 +1700,7 @@ $("l-icons").innerHTML = desktopItems.map(function(it,i){
 }).join("");
 
 $("mlist").innerHTML = projects.map(function(p){
-  return '<li><a class="mrow" href="project.html?project='+p.slug+'"><span class="ic"><span style="width:18px;height:18px;display:block">'+glyph(p.glyph)+
+  return '<li><a class="mrow" href="'+(p.slug === "podcast-bridge" ? "projects/podcast-bridge/index.html" : "projects/project.html?project="+p.slug)+'"><span class="ic"><span style="width:18px;height:18px;display:block">'+glyph(p.glyph)+
          '</span></span><span class="txt"><b>'+p.name+'</b><span>'+p.summary+'</span></span>'+
          '<span class="dt">'+p.date+'</span>'+chev+'</a></li>';
 }).join("");
@@ -1339,6 +1720,69 @@ $("socials").innerHTML =
   '<li><button type="button" aria-label="微信公众号，链接待补充" title="公众号 · Link coming soon">'+
   '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.35"><path d="M13.3 15.9c-1.1.7-2.5 1.1-4 1.1l-2.7 1.6.6-2.4C5.2 15.1 4 13.4 4 11.5 4 8.5 6.8 6 10.3 6c3.4 0 6.2 2.3 6.3 5.2"/><path d="M20 15.5c0 2.2-2.1 4-4.7 4-.9 0-1.8-.2-2.5-.6l-2 .9.5-1.8c-.5-.7-.8-1.6-.8-2.5 0-2.2 2.1-4 4.7-4s4.8 1.8 4.8 4Z"/><circle cx="8.1" cy="10.6" r=".6" fill="currentColor" stroke="none"/><circle cx="12.4" cy="10.6" r=".6" fill="currentColor" stroke="none"/></svg></button></li>';
 
+function homeProjectValue(project, key, language){
+  return language === "en" && project[key+"En"] ? project[key+"En"] : project[key];
+}
+
+function renderHomeLanguage(language){
+  var en = language === "en";
+  var navLabels = en ? ["Projects","Writing","Stack","About"] : ["项目","写作","工具","关于"];
+  $("nav").innerHTML =
+    '<a href="projects/index.html">'+navLabels[0]+'</a>'+
+    '<a href="writing/index.html">'+navLabels[1]+'</a>'+
+    '<a href="stack.html">'+navLabels[2]+'</a>'+
+    '<span aria-disabled="true">'+navLabels[3]+'</span>';
+
+  var list = en ? exploringEn : exploringZh;
+  $("explore").innerHTML = list.map(function(item){ return "<li><b></b><span>"+item+"</span></li>"; }).join("");
+
+  $("build-hd").innerHTML =
+    '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="color:color-mix(in oklab,var(--ink) 55%,transparent)"><path d="M12 4.5l1.3 3.6L17 9.4l-3.7 1.3L12 14.3l-1.3-3.6L7 9.4l3.7-1.3Z"/><path d="M17.8 15.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7Z"/></svg>'+
+    '<h2>'+(en ? "Currently building" : "正在构建")+'</h2>';
+
+  $("mlist").innerHTML = projects.map(function(p){
+    return '<li><a class="mrow" href="'+(p.slug === "podcast-bridge" ? "projects/podcast-bridge/index.html" : "projects/project.html?project="+p.slug)+'"><span class="ic"><span style="width:18px;height:18px;display:block">'+glyph(p.glyph)+
+           '</span></span><span class="txt"><b>'+homeProjectValue(p,"name",language)+'</b><span>'+homeProjectValue(p,"summary",language)+'</span></span><span class="dt">'+homeProjectValue(p,"date",language)+'</span>'+chev+'</a></li>';
+  }).join("");
+
+  var icons = document.querySelectorAll(".di");
+  for (var i=0;i<icons.length;i++){
+    var item = desktopItem(icons[i].getAttribute("data-id"));
+    if (!item) continue;
+    var label = en && item.labelEn ? item.labelEn : item.label;
+    var badge = en && item.badgeEn ? item.badgeEn : item.badge;
+    var labelNode = icons[i].querySelector(".lbl");
+    var badgeNode = icons[i].querySelector(".file-kind");
+    if (labelNode) labelNode.textContent = label;
+    if (badgeNode) badgeNode.textContent = badge || "";
+    icons[i].setAttribute("aria-label",(en ? "Open " : "打开")+label);
+  }
+
+  var dock = document.querySelectorAll(".dapp[data-app]");
+  for (var j=0;j<dock.length;j++){
+    var app = null;
+    for (var k=0;k<dockApps.length;k++) if (dockApps[k].id === dock[j].getAttribute("data-app")) app = dockApps[k];
+    if (!app) continue;
+    var dockLabel = en && app.labelEn ? app.labelEn : app.label;
+    var tip = dock[j].querySelector(".tip");
+    if (tip) tip.textContent = dockLabel;
+    dock[j].setAttribute("aria-label",dockLabel);
+  }
+  var trash = document.querySelector(".dapp.trash");
+  if (trash){
+    trash.setAttribute("aria-label",en ? "Trash" : "废纸篓");
+    var trashTip = trash.querySelector(".tip");
+    if (trashTip) trashTip.textContent = en ? "Trash" : "废纸篓";
+  }
+}
+
+renderHomeLanguage(window.HATARI_LANG || "zh");
+document.addEventListener("hatari:languagechange",function(event){
+  var language = event.detail && event.detail.lang === "en" ? "en" : "zh";
+  renderHomeLanguage(language);
+  if (typeof window.__setHeroLanguage === "function") window.__setHeroLanguage(language);
+});
+
 /* ============================================================
    Hero 打字动画
 
@@ -1350,9 +1794,14 @@ $("socials").innerHTML =
       跳到结尾（用户一交互就跳），也不会因为标签页休眠而乱掉节奏。
    ============================================================ */
 (function(){
+  var HERO_COPY = {
+    zh: { head:"你好，我是 Hatari。", lede:"我构建能解决\n真实问题的 AI 产品。" },
+    en: { head:"Hi, I\u2019m Hatari.", lede:"I build AI products that\nsolve real problems." }
+  };
+  var initialCopy = HERO_COPY[window.HATARI_LANG === "en" ? "en" : "zh"];
   var STEPS = [
-    { el: $("t-head"), text: "Hi, I\u2019m Hatari.", base: 42, leadIn: 300, tail: 140 },
-    { el: $("t-lede"), text: "I build AI products that\nsolve real problems.", base: 25, leadIn: 120, tail: 120 }
+    { el: $("t-head"), text: initialCopy.head, base: 42, leadIn: 300, tail: 140 },
+    { el: $("t-lede"), text: initialCopy.lede, base: 25, leadIn: 120, tail: 120 }
   ];
   var subtitleStage = document.querySelector(".stage-subtitle");
   var exploreStages = [].slice.call(document.querySelectorAll(".stage-explore"));
@@ -1480,7 +1929,17 @@ $("socials").innerHTML =
       b.el.textContent = "";
       lines.forEach(function(line, i){
         if (i) b.el.appendChild(document.createElement("br"));
-        b.el.appendChild(document.createTextNode(line));
+        var perchAt = b.el.id === "t-head" ? line.lastIndexOf("Hatari.") : -1;
+        if (perchAt < 0) {
+          b.el.appendChild(document.createTextNode(line));
+          return;
+        }
+        b.el.appendChild(document.createTextNode(line.slice(0,perchAt)));
+        var perch = document.createElement("span");
+        perch.id = "title-perch";
+        perch.className = "title-perch";
+        perch.textContent = line.slice(perchAt);
+        b.el.appendChild(perch);
       });
     });
   }
@@ -1534,6 +1993,14 @@ $("socials").innerHTML =
     hint: reduce ? "移除 ?motion=reduce 可恢复完整动效" : "默认完整动效模式"
   };
 
+  window.__setHeroLanguage = function(language){
+    var copy = HERO_COPY[language === "en" ? "en" : "zh"];
+    if (!finished) finish();
+    blocks[0].text = copy.head;
+    blocks[1].text = copy.lede;
+    settleBlocks();
+  };
+
   if (reduce) { finish(); return; }
 
   function loop(now){
@@ -1583,9 +2050,9 @@ var MUSIC_TRACKS = [
   {title:"Deep Work Loop", artist:"Hatari Workspace", root:174.61, tempo:76}
 ];
 var NOTE_DATA = [
-  {title:"智能体为什么需要运行框架？", date:"今天 · 5 分钟", body:"强大的模型只是起点，运行框架决定它能看见什么、记住什么、如何重试，以及怎样安全地完成修改。", href:"thinking.html#agent-harness"},
-  {title:"从工作流走向智能体", date:"7 月 24 日 · 4 分钟", body:"真正有意思的变化，是固定步骤开始能够检查自身进度，并选择下一步最有价值的行动。", href:"thinking.html#workflow-to-agent"},
-  {title:"安静的智能界面", date:"7 月 18 日 · 3 分钟", body:"好的智能产品不需要表演聪明，而是缩短人的意图与完成结果之间的距离。", href:"thinking.html#quiet-interface"}
+  {title:"智能体为什么需要运行框架？", date:"今天 · 5 分钟", body:"强大的模型只是起点，运行框架决定它能看见什么、记住什么、如何重试，以及怎样安全地完成修改。", href:"writing/index.html#agent-harness"},
+  {title:"从工作流走向智能体", date:"7 月 24 日 · 4 分钟", body:"真正有意思的变化，是固定步骤开始能够检查自身进度，并选择下一步最有价值的行动。", href:"writing/index.html#workflow-to-agent"},
+  {title:"安静的智能界面", date:"7 月 18 日 · 3 分钟", body:"好的智能产品不需要表演聪明，而是缩短人的意图与完成结果之间的距离。", href:"writing/index.html#quiet-interface"}
 ];
 var openWindows = {};
 var zTop = 40;
@@ -1601,12 +2068,12 @@ function desktopItem(id){
 function appBody(item){
   if (item.id === "projects") {
     return '<ul class="rows">'+projects.map(function(p,i){
-      return '<li><a class="row" href="project.html?project='+p.slug+'" style="animation-delay:'+(0.14+i*0.055)+'s">'+
+      return '<li><a class="row" href="'+(p.slug === "podcast-bridge" ? "projects/podcast-bridge/index.html" : "projects/project.html?project="+p.slug)+'" style="animation-delay:'+(0.14+i*0.055)+'s">'+
              '<span class="ic"><span style="width:17px;height:17px;display:block">'+glyph(p.glyph)+'</span></span>'+
              '<span class="txt"><b>'+p.name+'</b><span>'+p.summary+'</span></span>'+
              '<span class="dt">'+p.date+'</span>'+chev+'</a></li>';
     }).join("")+'</ul>'+
-    '<div class="win-ft"><a href="projects.html">打开项目文件夹'+arrow+'</a></div>';
+    '<div class="win-ft"><a href="projects/index.html">打开项目文件夹'+arrow+'</a></div>';
   }
   if (item.id === "agents") {
     return '<section class="support-chat" data-chat-root>'+
@@ -1647,7 +2114,7 @@ function appBody(item){
       return '<button class="note-item'+(i===0?" active":"")+'" type="button" data-note="'+i+'"><b>'+note.title+'</b><span>'+note.date+'</span></button>';
     }).join("")+'</aside><article class="note-paper"><time>'+NOTE_DATA[0].date+'</time><h3>'+NOTE_DATA[0].title+
       '</h3><p>'+NOTE_DATA[0].body+'</p><a href="'+NOTE_DATA[0].href+'">阅读笔记'+arrow+'</a></article></div>'+
-      '<div class="win-ft"><a href="thinking.html">打开全部文章'+arrow+'</a></div>';
+      '<div class="win-ft"><a href="writing/index.html">打开全部文章'+arrow+'</a></div>';
   }
   if (item.id === "code") {
     return '<div class="code-app"><aside class="code-side"><b>文件</b>'+
@@ -2186,6 +2653,8 @@ function deskObjectVisualBounds(el){
 function setDeskObjectOffset(el,value){
   el.style.setProperty("--desk-object-x",Math.round(value)+"px");
   el.setAttribute("data-desk-x",String(Math.round(value)));
+  /* 猫要跟着道具重新定位，这里是位置变化的唯一出口 */
+  try{ document.dispatchEvent(new CustomEvent("hatari:deskobject")); }catch(err){}
 }
 function clampDeskObjectOffset(el,desired,current){
   var bounds = deskObjectVisualBounds(el);
@@ -2392,18 +2861,21 @@ function restoreWorkspaceWindows(){
 var BASE_W = 960, BASE_H = 680;      // 屏幕（含机身边框）
 var STAND_H = 58;                    // 支架：颈 + 底座
 var ASSEMBLY_H = BASE_H + STAND_H;   // 738
-var SLOT_RATIO = 0.74;               // 首屏露出桌面，同时让整机保持完整
+var SLOT_RATIO_DESKTOP = 0.88;       // 桌面端为两栏建立接近一致的上下边界
+var SLOT_RATIO_COMPACT = 0.74;       // 窄屏保持原有的紧凑场景比例
 var REST_INSET = 0.88;               // 静止时整机留白，读起来像一台放在桌上的显示器
 var slot = $("slot"), scaler = $("scaler");
-var restT = "", zoomT = "", zoomed = false, lastW = -1;
+var restT = "", zoomT = "", zoomed = false, lastW = -1, lastRatio = -1;
 
 function fit(){
   if (workspaceState !== "home") return;
   var W = Math.round(slot.getBoundingClientRect().width);
-  if (W === lastW) return;      // 下面会改 height，避免 RO 自激
+  var slotRatio = window.innerWidth >= 1024 ? SLOT_RATIO_DESKTOP : SLOT_RATIO_COMPACT;
+  if (W === lastW && slotRatio === lastRatio) return; // 下面会改 height，避免 RO 自激
   lastW = W;
+  lastRatio = slotRatio;
 
-  var H = Math.round(W * SLOT_RATIO);
+  var H = Math.round(W * slotRatio);
   slot.style.height = H + "px";
 
   // 静止：整机（含支架）缩到容器内，四周留白
@@ -2473,6 +2945,9 @@ $("machine").addEventListener("pointerleave", reset);
    ============================================================ */
 var workspacePortal = $("workspace-portal");
 var workspaceExit = $("workspace-exit");
+var workspaceNav = $("workspace-nav");
+var workspaceHome = $("workspace-home");
+var workspaceAbout = $("workspace-about");
 var workspaceSourceRect = null;
 var workspaceTrigger = null;
 var workspaceRequestedApp = null;
@@ -2613,7 +3088,8 @@ function getWorkspaceCoverTransform(){
 function getHomeMachineRect(){
   var rect = slot.getBoundingClientRect();
   var width = Math.round(rect.width);
-  var height = Math.round(width * SLOT_RATIO);
+  var slotRatio = window.innerWidth >= 1024 ? SLOT_RATIO_DESKTOP : SLOT_RATIO_COMPACT;
+  var height = Math.round(width * slotRatio);
   var scale = Math.min(width / BASE_W, height / ASSEMBLY_H) * REST_INSET;
   var shift = window.innerWidth >= 1024 ? Math.min(34, width * .028) : 0;
   return {
@@ -2675,7 +3151,7 @@ function activateFullWorkspace(){
   requestAnimationFrame(settleFullWorkspace);
   setTimeout(function(){ workspacePortal.classList.remove("settling"); }, 270);
   if (workspaceFocusExit) {
-    setTimeout(function(){ workspaceExit.focus({preventScroll:true}); }, 80);
+    setTimeout(function(){ workspaceHome.focus({preventScroll:true}); }, 80);
   }
 }
 
@@ -2701,6 +3177,7 @@ function enterWorkspace(appId, fromHistory, focusExit){
 
   workspacePortal.classList.add("active");
   workspacePortal.setAttribute("aria-hidden","false");
+  workspaceNav.hidden = false;
   workspaceExit.hidden = false;
   workspaceExit.tabIndex = -1;
   workspacePortal.appendChild(scaler);
@@ -2737,6 +3214,7 @@ function finishWorkspaceExit(){
   document.body.classList.remove("workspace-exiting","workspace-entering","workspace-live");
   workspacePortal.classList.remove("active","settling");
   workspacePortal.setAttribute("aria-hidden","true");
+  workspaceNav.hidden = true;
   slot.appendChild(scaler);
   slot.classList.remove("workspace-host","zoom");
   scaler.style.position = "";
@@ -2829,6 +3307,14 @@ $("desktop-screen").addEventListener("keydown", function(e){
   enterWorkspace(null, false, true);
 });
 workspaceExit.addEventListener("click", requestWorkspaceExit);
+workspaceHome.addEventListener("click", requestWorkspaceExit);
+workspaceAbout.addEventListener("click", function(){
+  if (workspaceState !== "live") return;
+  var aboutWindow = openWindow("about");
+  if (!aboutWindow) return;
+  focusWindow(aboutWindow);
+  positionWindowForWorkspace(aboutWindow, true);
+});
 window.addEventListener("keydown", function(e){
   if (e.key === "Escape" && workspaceState === "live") {
     e.preventDefault();
@@ -2852,6 +3338,637 @@ if (location.hash === "#workspace") {
     setTimeout(function(){ enterWorkspace(null, true, false); },80);
   },{once:true});
 }
+
+/* ============================================================
+   Hero cat — two stages, real occlusion, graph-based movement
+   ------------------------------------------------------------
+   Landings are named points measured from live DOM rects. The cat
+   only ever travels along the edges of a small graph, so it never
+   dissolves in mid-air: it walks, hops, or bridges. Occlusion is
+   real z-index, not a clip: #cat-stage-scene sits inside .slot
+   between the desk (1), the monitor (3) and the props (5).
+   ============================================================ */
+(function(){
+  var uiStage    = $("cat-stage-ui");
+  var sceneStage = $("cat-stage-scene");
+  var cat        = $("hatari-cat");
+  var split      = document.querySelector(".split");
+  if (!uiStage || !sceneStage || !cat || !split) return;
+
+  var CAT_W = 80, CAT_H = 74;
+  /* Distance from the box bottom up to the paws, per pose. These mirror the
+     --cat-foot values in CSS; the two lists must change together. */
+  var POSE_FOOT = {sit:5, walk:7.5, loaf:6, stretch:3.5, peek:2.5};
+
+  /* depth  : z band inside the scene stage (back < mid < front)
+     shadow : contact shadow opacity — 0 where the cat is occluded anyway
+     pet    : only where nothing covers the cat, so the affordance is honest
+     face   : which way it looks once it has settled
+     scale  : size on the far/near plane. Monotonic in depth, so the cat
+              is smallest on top of the monitor and largest at the desk edge. */
+  var LANDINGS = {
+    title:   {stage:"ui",    depth:"front", shadow:.14, pet:true,  face:1,  pose:"sit"},
+    button:  {stage:"ui",    depth:"front", shadow:.20, pet:true,  face:1,  pose:"sit"},
+    monitor: {stage:"scene", depth:"back",  shadow:0,   pet:false, face:-1, pose:"sit"},
+    desk:    {stage:"scene", depth:"front", shadow:.34, pet:true,  face:-1, pose:"loaf"},
+    plant:   {stage:"scene", depth:"mid",   shadow:0,   pet:false, face:1,  pose:"peek"},
+    lamp:    {stage:"scene", depth:"mid",   shadow:.20, pet:false, face:-1, pose:"loaf"}
+  };
+  /* Every pair the cat can cross in one visible move. Anything else is routed. */
+  var EDGES = {
+    title:  ["button","monitor"],
+    button: ["title"],
+    monitor:["title","desk"],
+    desk:   ["monitor","plant","lamp"],
+    plant:  ["desk"],
+    lamp:   ["desk"]
+  };
+  var WALK_PAIRS = {
+    "desk>plant":1,"plant>desk":1,"desk>lamp":1,"lamp>desk":1
+  };
+  var SINK = .32;   /* how far the cat drops behind the monitor's top edge */
+
+  var current = "lamp", facing = -1, lastPoint = null;
+  var started = false, moving = false, parked = false;
+  var compact = window.innerWidth <= 720;
+  var dark = document.documentElement.classList.contains("dark");
+  var anim = null, deskFrame = 0;
+  var moveTimer = 0, introTimer = 0, resizeTimer = 0;
+  var blinkTimer = 0, earTimer = 0, petTimer = 0, petCount = 0;
+
+  function stageOf(name){ return LANDINGS[name].stage === "ui" ? uiStage : sceneStage; }
+  function idle(){ return started && !moving && !parked && workspaceState === "home"; }
+
+  /* ---------- measurement: everything in viewport coords ---------- */
+
+  /* The monitor is the only part of the scene that resizes with the viewport,
+     so the cat's size on it is derived from the bezel. The props (plant, lamp)
+     are fixed-size, so their landings use fixed scales. */
+  function monitorScale(){
+    var w = document.querySelector(".bezel").getBoundingClientRect().width || 650;
+    return Math.max(.4, Math.min(.7, .58 * w / 650));
+  }
+
+  function capMetrics(el, rect){
+    var cs = getComputedStyle(el);
+    var size = parseFloat(cs.fontSize) || 48;
+    if (!capMetrics.ctx){
+      var c = document.createElement("canvas");
+      capMetrics.ctx = c.getContext ? c.getContext("2d") : null;
+    }
+    var ctx = capMetrics.ctx;
+    if (!ctx) return {top:rect.top + size * .1, cap:size * .7};
+    ctx.font = [cs.fontStyle, cs.fontWeight, cs.fontSize, cs.fontFamily].join(" ");
+    var m = ctx.measureText("Hatari");
+    var ascent  = m.fontBoundingBoxAscent  || size * .78;
+    var descent = m.fontBoundingBoxDescent || size * .2;
+    var actual  = m.actualBoundingBoxAscent || size * .7;
+    var leading = Math.max(0, rect.height - ascent - descent);
+    var baseline = rect.top + leading / 2 + ascent;
+    return {top:baseline - actual, cap:actual};
+  }
+
+  /* For the monitor this returns the EDGE point: paws exactly on the bezel's
+     top edge. The sink behind the edge happens on arrival. */
+  function measure(name){
+    var el, rect, cap, scale;
+    if (name === "title"){
+      el = $("title-perch") || $("t-head");
+      rect = el.getBoundingClientRect();
+      cap = capMetrics(el, rect);
+      scale = Math.max(.4, Math.min(.9, cap.cap * 1.02 / CAT_H));
+      return {vx:rect.left + rect.width * .62, vy:cap.top, scale:scale};
+    }
+    if (name === "button"){
+      el = document.querySelector(".cta .btn") || document.querySelector(".cta .btn-o");
+      rect = el.getBoundingClientRect();
+      var intro = document.querySelector(".intro").getBoundingClientRect();
+      scale = Math.max(.48, Math.min(.88, rect.height * 1.22 / CAT_H));
+      return {
+        vx:Math.min(intro.right - CAT_W * scale * .5 - 4, rect.right + 32),
+        vy:rect.top + 2, scale:scale
+      };
+    }
+    if (name === "monitor"){
+      rect = document.querySelector(".bezel").getBoundingClientRect();
+      scale = monitorScale();
+      return {vx:rect.left + rect.width * .62, vy:rect.top, scale:scale};
+    }
+    if (name === "desk"){
+      var slotRect = slot.getBoundingClientRect();
+      rect = document.querySelector(".desk-surface").getBoundingClientRect();
+      scale = .84;
+      /* Low enough on the desk plane that the cat never covers the dock and
+         cannot swallow clicks meant for the workspace. */
+      return {
+        vx:slotRect.left + slotRect.width * .72,
+        vy:rect.top + rect.height * .62, scale:scale
+      };
+    }
+    if (name === "plant"){
+      el = $("desk-plant");
+      rect = el.getBoundingClientRect();
+      var pot = el.querySelector(".plant-pot").getBoundingClientRect();
+      scale = .80;
+      return {vx:rect.left + rect.width * .70, vy:pot.top + pot.height * .34, scale:scale};
+    }
+    el = $("desk-lamp").querySelector(".lamp-base");
+    rect = el.getBoundingClientRect();
+    scale = .78;
+    return {vx:rect.left + rect.width * .64, vy:rect.top + 4, scale:scale};
+  }
+
+  function sunkPoint(edge){
+    return {vx:edge.vx, vy:edge.vy + CAT_H * edge.scale * SINK, scale:edge.scale};
+  }
+
+  function local(point, stage){
+    var box = stage.getBoundingClientRect();
+    return {x:point.vx - box.left, y:point.vy - box.top, scale:point.scale};
+  }
+
+  /* transform-origin is 50% 100%, so scale keeps the box's bottom centre
+     pinned. Offsetting by the pose's paw inset puts the paws — not the
+     bottom of the bounding box — on the landing line. */
+  function xform(p, pose, dir){
+    var foot = POSE_FOOT[pose] || 5;
+    var tx = p.x - CAT_W / 2;
+    var ty = p.y - CAT_H + foot * p.scale;
+    return "translate3d(" + tx.toFixed(2) + "px," + ty.toFixed(2) + "px,0) scale(" +
+      (p.scale * dir).toFixed(4) + "," + p.scale.toFixed(4) + ")";
+  }
+
+  /* ---------- animation plumbing ---------- */
+
+  function stop(){
+    if (!anim) return;
+    var held = "";
+    try{ held = getComputedStyle(cat).transform; }catch(e){}
+    anim.onfinish = null;
+    try{ anim.cancel(); }catch(e){}
+    anim = null;
+    if (held && held !== "none") cat.style.transform = held;
+  }
+
+  function run(frames, options, done){
+    stop();
+    var last = frames[frames.length - 1];
+    if (!cat.animate || parked){
+      if (last.transform) cat.style.transform = last.transform;
+      if (done) setTimeout(done, 0);
+      return;
+    }
+    anim = cat.animate(frames, options);
+    anim.onfinish = function(){
+      if (last.transform) cat.style.transform = last.transform;
+      anim.onfinish = null;
+      try{ anim.cancel(); }catch(e){}
+      anim = null;
+      if (done) done();
+    };
+  }
+
+  function setPose(pose){ cat.setAttribute("data-pose", pose); }
+
+  function adopt(name){
+    var stage = stageOf(name);
+    if (cat.parentNode !== stage) stage.appendChild(cat);
+    return stage;
+  }
+
+  /* Land: pose, depth, shadow and the petting affordance all settle here. */
+  function finish(name, point, pose, done){
+    current = name;
+    lastPoint = point;
+    var L = LANDINGS[name];
+    var stage = adopt(name);
+    if (stage === sceneStage) sceneStage.setAttribute("data-depth", L.depth);
+    setPose(pose);
+    cat.style.transform = xform(local(point, stage), pose, facing);
+    cat.style.setProperty("--cat-shadow", String(L.shadow));
+    var interactive = !!L.pet && !parked;
+    cat.setAttribute("data-pettable", interactive ? "true" : "false");
+    cat.tabIndex = interactive ? 0 : -1;
+    cat.style.opacity = "1";
+    if (done) done();
+  }
+
+  function restPose(name){
+    if (name === "lamp") return dark ? "sit" : "loaf";
+    if (name === "desk") return Math.random() < .45 ? "loaf" : "sit";
+    return LANDINGS[name].pose;
+  }
+
+  function settle(name, point, dir, done){
+    facing = dir;
+    finish(name, point, restPose(name), function(){
+      var want = LANDINGS[name].face;
+      if (want !== facing && !parked){
+        setTimeout(function(){ if (idle()) turn(want); }, 520);
+      }
+      if (done) done();
+    });
+  }
+
+  /* A real turn, so walking left no longer plays the walk cycle backwards. */
+  function turn(dir, done){
+    if (dir === facing || parked || !cat.animate || !lastPoint){
+      facing = dir;
+      if (done) done();
+      return;
+    }
+    var stage = cat.parentNode === sceneStage ? sceneStage : uiStage;
+    var p = local(lastPoint, stage);
+    var pose = cat.getAttribute("data-pose") || "sit";
+    var from = facing;
+    run([
+      {transform:xform(p, pose, from)},
+      {transform:xform(p, pose, from * .05)},
+      {transform:xform(p, pose, dir)}
+    ], {duration:230, easing:"ease-in-out", fill:"forwards"}, function(){
+      facing = dir;
+      if (done) done();
+    });
+  }
+
+  /* ---------- the three ways it can move ---------- */
+
+  function walkStep(name, target, done){
+    var dir = target.vx >= lastPoint.vx ? 1 : -1;
+    turn(dir, function(){
+      var stage = adopt(name);
+      var from = local(lastPoint, stage), to = local(target, stage);
+      setPose("walk");
+      var dist = Math.abs(to.x - from.x) + Math.abs(to.y - from.y);
+      run([
+        {transform:xform(from, "walk", dir)},
+        {transform:xform(to, "walk", dir)}
+      ], {duration:Math.max(1100, Math.min(2800, dist * 8)), easing:"linear", fill:"forwards"},
+      function(){ settle(name, target, dir, done); });
+    });
+  }
+
+  function hopStep(name, target, done){
+    var dir = target.vx >= lastPoint.vx ? 1 : -1;
+    turn(dir, function(){
+      var stage = adopt(name);
+      /* Coming forward is safe immediately; going behind waits for the landing. */
+      if (stage === sceneStage){
+        var order = {back:0, mid:1, front:2};
+        var here = sceneStage.getAttribute("data-depth") || "mid";
+        if (order[LANDINGS[name].depth] > order[here]) {
+          sceneStage.setAttribute("data-depth", LANDINGS[name].depth);
+        }
+      }
+      var from = local(lastPoint, stage), to = local(target, stage);
+      var lift = Math.max(28, Math.abs(to.y - from.y) * .34 + 22);
+      var apex = {
+        x:(from.x + to.x) / 2,
+        y:Math.min(from.y, to.y) - lift,
+        scale:(from.scale + to.scale) / 2
+      };
+      setPose("stretch");
+      run([
+        {transform:xform(from, "stretch", dir), offset:0, easing:"cubic-bezier(.3,0,.7,.5)"},
+        {transform:xform(apex, "stretch", dir), offset:.5, easing:"cubic-bezier(.3,.5,.7,1)"},
+        {transform:xform(to, "stretch", dir), offset:1}
+      ], {duration:880, fill:"forwards"},
+      function(){ settle(name, target, dir, done); });
+    });
+  }
+
+  /* The showpiece: title <-> monitor. Always played in the UI stage, the only
+     stage .slot's overflow:hidden does not clip. */
+  function bridgeStep(name, target, done){
+    var dir = target.vx >= lastPoint.vx ? 1 : -1;
+    turn(dir, function(){
+      if (cat.parentNode !== uiStage) uiStage.appendChild(cat);
+      var from = local(lastPoint, uiStage), to = local(target, uiStage);
+      var span = Math.abs(to.x - from.x);
+      var mid = {
+        x:from.x + (to.x - from.x) * .60,
+        y:from.y + (to.y - from.y) * .40,
+        scale:from.scale + (to.scale - from.scale) * .55
+      };
+      var apex = {
+        x:to.x - dir * Math.min(74, span * .17),
+        y:Math.min(from.y, to.y) - 36,
+        scale:to.scale
+      };
+      setPose("walk");
+      run([
+        {transform:xform(from, "walk", dir), offset:0},
+        {transform:xform(mid, "walk", dir), offset:.56, easing:"cubic-bezier(.4,0,.6,1)"},
+        {transform:xform(apex, "walk", dir), offset:.80, easing:"cubic-bezier(.3,.6,.7,1)"},
+        {transform:xform(to, "walk", dir), offset:1}
+      ], {duration:2400, easing:"linear", fill:"forwards"}, function(){
+        lastPoint = target;
+        facing = dir;
+        if (name === "monitor") done();
+        else settle(name, target, dir, done);
+      });
+    });
+  }
+
+  /* Arriving on the monitor: hand over to the scene stage at the exact same
+     viewport point (so nothing jumps), then sink so the paws slide behind
+     the bezel's top edge. That hidden third is where the realism comes from. */
+  function sinkIn(edge, done){
+    var sunk = sunkPoint(edge);
+    if (cat.parentNode !== sceneStage) sceneStage.appendChild(cat);
+    sceneStage.setAttribute("data-depth", LANDINGS.monitor.depth);
+    setPose("sit");
+    cat.style.transform = xform(local(edge, sceneStage), "sit", facing);
+    run([
+      {transform:xform(local(edge, sceneStage), "sit", facing)},
+      {transform:xform(local(sunk, sceneStage), "sit", facing)}
+    ], {duration:440, easing:"cubic-bezier(.3,0,.4,1)", fill:"forwards"},
+    function(){ settle("monitor", sunk, facing, done); });
+  }
+
+  /* Leaving the monitor: rise back to the edge first, still behind the bezel,
+     so the paws emerge instead of popping into view. */
+  function liftOut(done){
+    var edge = measure("monitor");
+    var stage = sceneStage;
+    if (cat.parentNode !== stage) stage.appendChild(cat);
+    setPose("sit");
+    run([
+      {transform:xform(local(lastPoint, stage), "sit", facing)},
+      {transform:xform(local(edge, stage), "sit", facing)}
+    ], {duration:360, easing:"cubic-bezier(.2,.8,.3,1)", fill:"forwards"}, function(){
+      lastPoint = edge;
+      done();
+    });
+  }
+
+  function step(name, done){
+    var pair = current + ">" + name;
+    var bridge = (pair === "title>monitor" || pair === "monitor>title");
+    function go(){
+      var target = measure(name);
+      if (name === "monitor"){
+        var arrive = bridge ? bridgeStep : hopStep;
+        arrive("monitor", target, function(){ sinkIn(target, done); });
+        return;
+      }
+      if (bridge) bridgeStep(name, target, done);
+      else if (WALK_PAIRS[pair]) walkStep(name, target, done);
+      else hopStep(name, target, done);
+    }
+    if (current === "monitor") liftOut(go);
+    else go();
+  }
+
+  /* ---------- routing: no teleports, ever ---------- */
+
+  function route(from, to){
+    if (from === to) return [];
+    var prev = {}, seen = {}, queue = [from], node, next, i;
+    seen[from] = true;
+    while (queue.length){
+      node = queue.shift();
+      if (node === to) break;
+      next = EDGES[node] || [];
+      for (i = 0; i < next.length; i++){
+        if (seen[next[i]]) continue;
+        seen[next[i]] = true;
+        prev[next[i]] = node;
+        queue.push(next[i]);
+      }
+    }
+    if (!seen[to]) return [];
+    var path = [], c = to;
+    while (c !== from){ path.unshift(c); c = prev[c]; }
+    return path;
+  }
+
+  function travel(to, done){
+    if (!started || moving || parked || !LANDINGS[to]){ if (done) done(); return; }
+    var path = route(current, to);
+    if (!path.length){ if (done) done(); return; }
+    moving = true;
+    (function next(i){
+      if (i >= path.length){
+        moving = false;
+        if (done) done();
+        return;
+      }
+      step(path[i], function(){ next(i + 1); });
+    })(0);
+  }
+
+  /* Cats wander to nearby spots, so weight the choice by graph distance. */
+  function pickNext(){
+    var pool = [], name, d, w;
+    for (name in LANDINGS){
+      if (name === current) continue;
+      d = route(current, name).length;
+      if (!d) continue;
+      w = d === 1 ? 6 : (d === 2 ? 2 : 1);
+      while (w--) pool.push(name);
+    }
+    return pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
+  }
+
+  /* ---------- small life ---------- */
+
+  function twitchEars(){
+    cat.classList.add("ear-twitch");
+    setTimeout(function(){ cat.classList.remove("ear-twitch"); }, 520);
+  }
+
+  function postureMoment(){
+    if (!lastPoint) return;
+    if (current === "plant"){ twitchEars(); return; }
+    var pose = cat.getAttribute("data-pose");
+    var next = restPose(current);
+    if (current === "title" || current === "button" || current === "monitor") next = "sit";
+    if (next === pose) next = pose === "loaf" ? "sit" : "loaf";
+    if (next === pose){ twitchEars(); return; }
+    finish(current, lastPoint, next);
+  }
+
+  function scheduleNext(){
+    clearTimeout(moveTimer);
+    if (!started || parked) return;
+    moveTimer = setTimeout(function(){
+      if (document.hidden || workspaceState !== "home" || moving){ scheduleNext(); return; }
+      if (Math.random() < .55){ postureMoment(); scheduleNext(); return; }
+      var next = pickNext();
+      if (!next){ scheduleNext(); return; }
+      travel(next, scheduleNext);
+    }, 18000 + Math.random() * 27000);
+  }
+
+  /* A scripted opening, so a visitor who stays 30 seconds actually sees the
+     walk, the sink behind the monitor and the bridge across to the title. */
+  var INTRO = ["desk","monitor","title"];
+  function runIntro(i){
+    clearTimeout(introTimer);
+    if (i >= INTRO.length){ scheduleNext(); return; }
+    introTimer = setTimeout(function(){
+      if (!started || parked){ scheduleNext(); return; }
+      if (document.hidden || workspaceState !== "home" || moving){ runIntro(i); return; }
+      travel(INTRO[i], function(){ runIntro(i + 1); });
+    }, i === 0 ? 9000 : 7600);
+  }
+
+  function loopBlink(){
+    clearTimeout(blinkTimer);
+    if (!started || parked || document.hidden) return;
+    blinkTimer = setTimeout(function(){
+      if (started && !parked && !document.hidden){
+        cat.classList.add("blink");
+        setTimeout(function(){ cat.classList.remove("blink"); }, 150);
+      }
+      loopBlink();
+    }, 2600 + Math.random() * 4700);
+  }
+
+  function loopEars(){
+    clearTimeout(earTimer);
+    if (!started || parked || document.hidden) return;
+    earTimer = setTimeout(function(){
+      if (idle()) twitchEars();
+      loopEars();
+    }, 5200 + Math.random() * 9000);
+  }
+
+  /* ---------- lifecycle ---------- */
+
+  function park(){
+    parked = true;
+    moving = false;
+    clearTimeout(moveTimer);
+    clearTimeout(introTimer);
+    clearTimeout(blinkTimer);
+    clearTimeout(earTimer);
+    stop();
+    facing = LANDINGS.desk.face;
+    finish("desk", measure("desk"), "loaf");
+  }
+
+  function reflow(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){
+      if (!started) return;
+      var wasParked = parked;
+      compact = window.innerWidth <= 720;
+      parked = reduce || compact;
+      if (moving){ stop(); moving = false; }
+      if (parked){ park(); return; }
+      if (wasParked){
+        current = dark ? "monitor" : "lamp";
+        facing = LANDINGS[current].face;
+        if (current === "monitor") finish("monitor", sunkPoint(measure("monitor")), "sit");
+        else finish(current, measure(current), restPose(current));
+        loopBlink(); loopEars(); scheduleNext();
+        return;
+      }
+      var pose = cat.getAttribute("data-pose") || restPose(current);
+      var point = current === "monitor" ? sunkPoint(measure("monitor")) : measure(current);
+      finish(current, point, pose);
+    }, 90);
+  }
+
+  function start(){
+    if (started) return;
+    started = true;
+    compact = window.innerWidth <= 720;
+    parked = reduce || compact;
+    if (parked){ park(); return; }
+    current = "lamp";
+    facing = LANDINGS.lamp.face;
+    finish("lamp", measure("lamp"), dark ? "sit" : "loaf");
+    loopBlink();
+    loopEars();
+    runIntro(0);
+  }
+
+  cat.addEventListener("click", function(){
+    if (parked || moving || cat.getAttribute("data-pettable") !== "true") return;
+    petCount++;
+    clearTimeout(petTimer);
+    cat.classList.remove("petted");
+    void cat.offsetWidth;
+    cat.classList.add("petted");
+    petTimer = setTimeout(function(){ cat.classList.remove("petted"); }, 980);
+    /* Four pets and it has had enough. Cats leave. */
+    if (petCount % 4 === 0){
+      clearTimeout(moveTimer);
+      setTimeout(function(){
+        if (!idle()) return;
+        var next = pickNext();
+        if (next) travel(next, scheduleNext); else scheduleNext();
+      }, 620);
+    }
+  });
+
+  document.addEventListener("hatari:theme", function(e){
+    dark = !!(e.detail && e.detail.dark);
+    if (!started || parked || moving) return;
+    clearTimeout(moveTimer);
+    if (dark){
+      /* lamp off — it wakes up */
+      if (current === "lamp" && lastPoint) finish("lamp", lastPoint, "sit");
+      scheduleNext();
+    } else {
+      /* lamp on — back to the warm spot */
+      travel("lamp", function(){
+        if (lastPoint) finish("lamp", lastPoint, "loaf");
+        scheduleNext();
+      });
+    }
+  });
+
+  /* The props are draggable, so re-measure when they actually move —
+     one rAF per change instead of a rect read on every pointermove. */
+  document.addEventListener("hatari:deskobject", function(){
+    if (!idle() || deskFrame) return;
+    if (current !== "plant" && current !== "lamp") return;
+    deskFrame = requestAnimationFrame(function(){
+      deskFrame = 0;
+      if (!idle() || !lastPoint) return;
+      finish(current, measure(current), cat.getAttribute("data-pose") || restPose(current));
+    });
+  });
+
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden){
+      clearTimeout(blinkTimer);
+      clearTimeout(earTimer);
+      clearTimeout(moveTimer);
+      return;
+    }
+    loopBlink();
+    loopEars();
+    if (started && !parked && !moving) scheduleNext();
+  });
+
+  window.addEventListener("resize", reflow, {passive:true});
+  if (window.ResizeObserver) new ResizeObserver(reflow).observe(split);
+
+  window.__hatariCat = {
+    landings:Object.keys(LANDINGS),
+    moveTo:function(name){ clearTimeout(moveTimer); clearTimeout(introTimer); travel(name, scheduleNext); },
+    pet:function(){ cat.click(); },
+    state:function(){
+      return {
+        landing:current,
+        pose:cat.getAttribute("data-pose"),
+        facing:facing,
+        depth:sceneStage.getAttribute("data-depth"),
+        stage:cat.parentNode === sceneStage ? "scene" : "ui",
+        moving:moving,
+        parked:parked
+      };
+    }
+  };
+
+  if (document.documentElement.classList.contains("hero-ready")) start();
+  else document.addEventListener("hero:ready", start, {once:true});
+})();
 
 /* Scroll depth stays intentionally small so the page still feels settled. */
 (function(){
@@ -2907,6 +4024,7 @@ if (location.hash === "#workspace") {
     btn.setAttribute("aria-pressed",dark ? "true" : "false");
     lamp.setAttribute("aria-pressed",dark ? "false" : "true");
     lamp.setAttribute("aria-label",dark ? "打开台灯并切换到浅色模式" : "关闭台灯并切换到深色模式");
+    document.dispatchEvent(new CustomEvent("hatari:theme",{detail:{dark:dark}}));
   }
 
   function toggleTheme(){

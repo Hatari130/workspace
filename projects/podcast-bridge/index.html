@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="podcast-bridge：一个供 AI Agent 使用的全球播客研究 Skill。">
+<title data-i18n-zh="podcast-bridge — Hatari 的 AI 工作台" data-i18n-en="podcast-bridge — Hatari's AI Workspace">podcast-bridge — Hatari 的 AI 工作台</title>
+<link rel="stylesheet" href="../../subpages.css">
+<link rel="stylesheet" href="podcast-bridge.css">
+<link rel="stylesheet" href="../../shared/site.css">
+<script src="../../shared/site.js"></script>
+</head>
+<body class="podcast-page">
+
+<header class="hdr">
+  <div class="hdr-in shell">
+    <a class="mark" href="../../preview.html" aria-label="返回首页"><i></i><span data-i18n-zh="Hatari 的 AI 工作台" data-i18n-en="Hatari&rsquo;s AI Workspace">Hatari 的 AI 工作台</span></a>
+    <div class="hdr-right">
+      <nav class="hdr-nav" aria-label="主导航">
+        <a href="../index.html" aria-current="page" data-i18n-zh="项目" data-i18n-en="Projects">项目</a>
+        <a href="../../writing/index.html" data-i18n-zh="写作" data-i18n-en="Writing">写作</a>
+        <a href="../../stack.html" data-i18n-zh="工具" data-i18n-en="Stack">工具</a>
+        <span aria-disabled="true" data-i18n-zh="关于" data-i18n-en="About">关于</span>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="语言切换">
+        <button type="button" data-lang-option="zh" aria-pressed="true">中</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="icon-btn" id="theme" aria-label="切换深色模式">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.8 5.8l1.4 1.4M16.8 16.8l1.4 1.4M18.2 5.8l-1.4 1.4M7.2 16.8l-1.4 1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="detail-shell">
+    <a class="detail-back" href="../index.html"><span aria-hidden="true">←</span> <span data-i18n-zh="所有项目" data-i18n-en="All projects">所有项目</span></a>
+
+    <section class="detail-hero" aria-labelledby="project-title">
+      <div class="detail-copy">
+        <p class="eyebrow" data-i18n-zh="面向 Agent 的播客研究" data-i18n-en="Agent-native podcast research">面向 Agent 的播客研究</p>
+        <h1 id="project-title">podcast-<br>bridge</h1>
+        <p data-i18n-zh="让 AI Agent 用自然语言订阅、转录和研究全球播客，并把内容沉淀为本地知识库。" data-i18n-en="Let an AI agent subscribe to, transcribe, and research global podcasts in natural language, then preserve the material in a local knowledge base.">让 AI Agent 用自然语言订阅、转录和研究全球播客，并把内容沉淀为本地知识库。</p>
+        <div class="detail-status"><i aria-hidden="true"></i><span data-i18n-zh="开源 · 本地优先" data-i18n-en="Open source · local-first">开源 · 本地优先</span></div>
+      </div>
+      <div class="detail-visual" aria-label="podcast-bridge 本地播客研究工作台概念预览">
+        <div class="project-shot shot-podcast">
+          <div class="shot-window">
+            <div class="mock-topbar"><i></i><i></i><i></i><b>podcast-bridge</b></div>
+            <div class="podcast-mock">
+              <aside class="podcast-mock-nav"><span class="podcast-mock-mark"></span><i class="is-active"></i><i></i><i></i><i></i></aside>
+              <div class="podcast-mock-main">
+                <div class="podcast-mock-head"><b></b><i></i></div>
+                <div class="podcast-mock-list"><span><i></i><b></b><em></em></span><span><i></i><b></b><em></em></span><span><i></i><b></b><em></em></span></div>
+                <div class="podcast-mock-player"><b></b><span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-facts" aria-label="项目概况">
+      <div class="detail-fact"><span data-i18n-zh="角色" data-i18n-en="Role">角色</span><b data-i18n-zh="产品 + AI" data-i18n-en="Product + AI">产品 + AI</b></div>
+      <div class="detail-fact"><span data-i18n-zh="形式" data-i18n-en="Form">形式</span><b data-i18n-zh="Agent Skill" data-i18n-en="Agent Skill">Agent Skill</b></div>
+      <div class="detail-fact"><span data-i18n-zh="年份" data-i18n-en="Year">年份</span><b>2026</b></div>
+      <div class="detail-fact"><span data-i18n-zh="重点" data-i18n-en="Focus">重点</span><b data-i18n-zh="播客 → 研究" data-i18n-en="Podcast → Research">播客 → 研究</b></div>
+    </section>
+
+    <section class="build-notes" aria-label="podcast-bridge 产品创作说明">
+      <section class="build-chapter build-intro" aria-labelledby="product-what-title">
+        <header class="build-chapter-head">
+          <div class="build-chapter-label"><span>00</span><p data-i18n-zh="它是什么" data-i18n-en="What it is">它是什么</p></div>
+          <h2 id="product-what-title" data-i18n-zh="一个供 AI Agent 使用的<br>全球播客研究 Skill。" data-i18n-en="A global podcast research skill<br>for AI agents.">一个供 AI Agent 使用的<br>全球播客研究 Skill。</h2>
+        </header>
+        <div class="build-chapter-body">
+          <p class="build-lead">podcast-bridge 让 Agent 能用自然语言管理播客订阅、转录与追问节目内容，并把结果保存为可以长期调用的本地知识库。</p>
+          <p>它不是让 AI 替用户跳过播客，而是把单向收听变成一个可检索、可追问、可比较、可以反复研究的知识过程。</p>
+          <div class="plain-pipeline" role="img" aria-label="用户通过 Agent 研究全球播客并形成本地知识库的六步流程">
+            <span><em>01</em><b>告诉 Agent</b><small>直接描述研究问题</small></span>
+            <span><em>02</em><b>添加 RSS</b><small>接入不同地区节目</small></span>
+            <span><em>03</em><b>同步节目</b><small>标题、日期与简介</small></span>
+            <span><em>04</em><b>转录定位</b><small>原文与时间位置</small></span>
+            <span><em>05</em><b>比较研究</b><small>跨节目寻找共识</small></span>
+            <span><em>06</em><b>长期保存</b><small>Markdown 与索引</small></span>
+          </div>
+          <p class="build-note"><b>产品边界：</b>这里的“全球播客”不是一个预置所有节目的封闭数据库，而是通过开放 RSS 接入不同地区和平台的内容；它不竞争播放体验，解决的是播客如何进入研究工作流。</p>
+        </div>
+      </section>
+
+      <section class="build-chapter" aria-labelledby="user-need-title">
+        <header class="build-chapter-head">
+          <div class="build-chapter-label"><span>01</span><p data-i18n-zh="用户需求" data-i18n-en="User need">用户需求</p></div>
+          <h2 id="user-need-title" data-i18n-zh="用户需求：为什么要做这个产品" data-i18n-en="User need: why make this product">用户需求：为什么要做这个产品</h2>
+        </header>
+        <div class="build-chapter-body">
+          <p class="build-lead">在 AI、科技和创业领域，很多最早、最完整的判断会先出现在长播客里，而不是论文、新闻稿或正式文章中。</p>
+          <p>Amanda Askell 对模型价值与行为的解释、Andrej Karpathy 对 AI 编程和大模型的思考，往往会通过长访谈保留完整的推理过程。对产品经理、研究员、创业者和公司创始人来说，播客已经是一类重要的一手信息源。</p>
+          <p>但音频天然是线性的：一两个小时听完以后，用户通常只剩下模糊印象，很难定位原文，更难把不同节目、不同嘉宾和不同时间段的讨论连接起来。</p>
+
+          <div class="problem-chain" role="img" aria-label="前沿播客内容从听到观点到无法进入研究的问题链路">
+            <div><span>01</span><b>前沿观点出现</b><p>藏在一两小时音频里</p></div>
+            <i aria-hidden="true">→</i>
+            <div><span>02</span><b>听完只留印象</b><p>想不起节目与位置</p></div>
+            <i aria-hidden="true">→</i>
+            <div><span>03</span><b>无法交叉比较</b><p>观点散落在不同节目</p></div>
+            <i aria-hidden="true">→</i>
+            <div><span>04</span><b>研究无法积累</b><p>对话结束，资料也消失</p></div>
+          </div>
+
+          <div class="build-observations" aria-label="三个关键用户问题">
+            <article><span>01</span><div><b>来源分散</b><p>节目分布在不同平台和地区，缺少统一的订阅与研究入口。</p></div></article>
+            <article><span>02</span><div><b>原文不可定位</b><p>“听过”不等于“找得到”，更难回答某个概念在几分几秒被提到。</p></div></article>
+            <article><span>03</span><div><b>知识不能累积</b><p>一次总结可以解决当下问题，但没有本地资料就无法在几周后继续研究。</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="build-chapter" aria-labelledby="implementation-title">
+        <header class="build-chapter-head">
+          <div class="build-chapter-label"><span>02</span><p data-i18n-zh="功能与实现" data-i18n-en="Functions &amp; implementation">功能与实现</p></div>
+          <h2 id="implementation-title" data-i18n-zh="实现了哪些功能，如何实现" data-i18n-en="What it does and how it works">实现了哪些功能，如何实现</h2>
+        </header>
+        <div class="build-chapter-body">
+          <p class="build-lead">这个 Skill 把订阅管理、内容理解、跨节目研究和长期保存放在同一条工作流里，用户只需要用自然语言提出问题。</p>
+          <p class="build-note"><b>例如：</b>“过去一个月，全球播客在 AI 领域主要关注哪些问题？不同嘉宾对 Agent 的判断有什么共识和分歧？”</p>
+
+          <div class="function-table" role="table" aria-label="podcast-bridge 功能与实现方式">
+            <div class="function-row function-header" role="row">
+              <span role="columnheader">功能</span><span role="columnheader">用户得到什么</span><span role="columnheader">如何实现</span>
+            </div>
+            <div class="function-row" role="row">
+              <b role="cell">管理订阅</b><p role="cell">用自然语言添加、查看和更新播客源</p><p role="cell">兼容常见 RSS 结构，同步节目元数据并把订阅清单保存在本地</p>
+            </div>
+            <div class="function-row" role="row">
+              <b role="cell">转录与定位</b><p role="cell">找到某个概念出现的时间位置和原文</p><p role="cell">获取选中音频，生成带有可定位片段的 Markdown 全文</p>
+            </div>
+            <div class="function-row" role="row">
+              <b role="cell">总结与追问</b><p role="cell">提炼嘉宾观点，并围绕细节继续提问</p><p role="cell">检索相关转录片段，让 Agent 结合前后文回答并返回来源</p>
+            </div>
+            <div class="function-row" role="row">
+              <b role="cell">跨节目研究</b><p role="cell">按主题和时间范围比较不同节目</p><p role="cell">从元数据与已转录全文中筛选样本，再由 Agent 归纳共识与分歧</p>
+            </div>
+            <div class="function-row" role="row">
+              <b role="cell">长期知识库</b><p role="cell">以后再次研究时直接复用已有内容</p><p role="cell">SQLite 保存元数据和全文索引，Markdown 保存可读、可迁移的原文</p>
+            </div>
+          </div>
+
+          <div class="implementation-map" role="img" aria-label="用户通过 Agent 调用 podcast-bridge，并把 RSS 和音频处理成本地 SQLite 索引与 Markdown 全文">
+            <article><small data-i18n-zh="输入" data-i18n-en="Input">输入</small><b>用户需求</b><span data-i18n-zh="自然语言" data-i18n-en="Natural language">自然语言</span></article>
+            <i aria-hidden="true">→</i>
+            <article><small data-i18n-zh="接口" data-i18n-en="Interface">接口</small><b>AI Agent</b><span data-i18n-zh="理解研究意图" data-i18n-en="Understand research intent">理解研究意图</span></article>
+            <i aria-hidden="true">→</i>
+            <article class="implementation-core"><small data-i18n-zh="工作流" data-i18n-en="Workflow">工作流</small><b>podcast-bridge</b><span data-i18n-zh="RSS · 转录 · 检索 · 研究" data-i18n-en="RSS · transcription · search · research">RSS · 转录 · 检索 · 研究</span></article>
+            <i aria-hidden="true">→</i>
+            <article><small data-i18n-zh="本地记忆" data-i18n-en="Local memory">本地记忆</small><b>SQLite + Markdown</b><span data-i18n-zh="索引与原文" data-i18n-en="Index and source text">索引与原文</span></article>
+          </div>
+          <p class="diagram-caption">Agent 负责理解研究意图和组织回答；podcast-bridge 负责稳定执行订阅、转录与检索；本地文件负责保存可复查的来源。</p>
+        </div>
+      </section>
+
+      <section class="build-chapter" aria-labelledby="tradeoff-title">
+        <header class="build-chapter-head">
+          <div class="build-chapter-label"><span>03</span><p data-i18n-zh="取舍" data-i18n-en="Trade-offs">取舍</p></div>
+          <h2 id="tradeoff-title" data-i18n-zh="我的取舍" data-i18n-en="The trade-offs">我的取舍</h2>
+        </header>
+        <div class="build-chapter-body">
+          <p class="build-lead">这个版本先验证工作流是否成立，因此我把资源花在“能否稳定完成任务”上，而不是先做完整的独立界面。</p>
+
+          <div class="tradeoff-table" aria-label="podcast-bridge 的四项产品取舍">
+            <article><span>01</span><div><b>以 RSS 为入口，不绑定单一平台</b><p>原因：开放标准更适合接入不同地区和平台的播客，也让订阅源属于用户。</p><small>代价：不同 RSS 的字段与音频地址并不完全一致，需要兼容和回退处理。</small></div></article>
+            <article><span>02</span><div><b>按需转录，不默认批量处理</b><p>原因：先搜索轻量元数据，把时间和算力留给真正值得深挖的内容。</p><small>代价：第一次研究某期节目时，需要等待转录完成。</small></div></article>
+            <article><span>03</span><div><b>先做 Agent Skill，不先做独立 GUI</b><p>原因：自然语言已经可以承接订阅、筛选、转录、追问和研究，适合验证完整需求。</p><small>代价：使用者需要已有的 Agent 环境。</small></div></article>
+            <article><span>04</span><div><b>本地 SQLite + Markdown，不先做云知识图谱</b><p>原因：资料可搜索、可读、可迁移，也不会在一次对话结束后消失。</p><small>代价：跨设备协作和复杂语义关联能力暂时有限。</small></div></article>
+          </div>
+
+          <blockquote class="build-conclusion">我真正想验证的，不是“AI 能不能替人听完播客”，而是当播客变成 Agent 可以长期调用的资料后，用户能不能用它持续研究、比较并形成自己的判断。</blockquote>
+          <a class="build-source" href="https://github.com/Hatari130/podcast-bridge" target="_blank" rel="noreferrer">查看 GitHub 项目 <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </section>
+  </div>
+</main>
+
+<footer class="ftr">
+  <div class="ftr-in shell">
+    <p><span>&copy; 2026 Hatari</span><span aria-hidden="true">&middot;</span><span data-i18n-zh="用 AI 构建对人有用的产品。" data-i18n-en="Building useful things for humans with AI.">用 AI 构建对人有用的产品。</span></p>
+    <ul class="socials">
+      <li><a href="https://github.com/Hatari130" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.8c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.4-1.1.7-1.4-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.2-.4-1.2.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.5 4.9.5.4.8 1.1.8 2.2v2.7c0 .3.2.6.8.5A9.8 9.8 0 0 0 12 2.2Z"/></svg></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById("theme");
+  var dark = false;
+  var sun = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.8 5.8l1.4 1.4M16.8 16.8l1.4 1.4M18.2 5.8l-1.4 1.4M7.2 16.8l1.4 1.4"/></svg>';
+  var moon = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.4A8.4 8.4 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z"/></svg>';
+  btn.addEventListener("click",function(){
+    dark = !dark;
+    document.documentElement.classList.toggle("dark",dark);
+    btn.innerHTML = dark ? moon : sun;
+    btn.setAttribute("aria-label",dark ? "切换到浅色模式" : "切换到深色模式");
+  });
+})();
+</script>
+</body>
+</html>

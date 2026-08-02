@@ -1,0 +1,29 @@
+.lang-switch{
+  display:inline-flex;
+  align-items:center;
+  gap:2px;
+  padding:2px;
+  border:1px solid var(--line,#e2e0da);
+  border-radius:7px;
+  background:color-mix(in oklab,var(--paper,#f5f4f1) 72%,transparent);
+}
+.lang-switch button{
+  min-width:28px;
+  height:26px;
+  padding:0 7px;
+  border-radius:4px;
+  color:var(--ink-3,#a3a09a);
+  font-family:var(--ff-mono,ui-monospace,monospace);
+  font-size:.62rem;
+  line-height:1;
+  letter-spacing:.04em;
+  transition:background .25s,color .25s;
+}
+.lang-switch button:hover{color:var(--ink,#161614)}
+.lang-switch button[aria-pressed="true"]{
+  background:var(--ink,#161614);
+  color:var(--paper,#f5f4f1);
+}
+@media (max-width:720px){
+  .lang-switch button{min-width:25px;padding:0 5px}
+}

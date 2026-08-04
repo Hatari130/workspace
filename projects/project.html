@@ -84,6 +84,17 @@
       en:{kicker:"City map generation for agents",status:"Open source · MIT",summary:"Turn cities, place lists, or POI data into reviewable GIS maps, then optionally generate stylized city guide posters.",facts:[["Role","Product + Skill"],["Format","Agent Skill"],["Year","2026"],["Focus","City map generation"]],problem:"Making a city guide map means repeatedly handling place lookup, coordinate conversion, map data, road and building rendering, and visual consistency.",system:"Map Creator organizes place resolution, GCJ-02 to WGS84 alignment, OpenStreetMap GIS rendering, and optional GPT Image stylization into an Agent toolchain, while keeping POI JSON available for human review.",next:"Keep testing resolution accuracy across cities and place types, the reliability of OSM requests, and how much control remains between the GIS draft and the stylized poster."},
       visual:"map"
     },
+    "exam-reverse-engineer":{
+      title:"Exam Reverse Engineer", kicker:"面向自命题专业课的真题分析 Skill", status:"开源 · GitHub", progress:100,
+      summary:"从历年真题中还原出题规律，输出分阶段报告与可执行的复习策略。",
+      facts:[["角色","产品 + Skill"],["形式","Agent Skill"],["年份","2026"],["重点","真题研究"]],
+      problem:"很多备考分析停留在“哪些知识点出现过”。但连续多年的自命题专业课真题，还包含题型结构、出题措辞、轮换周期和年度变量；如果只做频次统计，就会丢掉这些命题信号。",
+      system:"Exam Reverse Engineer 把分析拆成四个阶段：先按年份整理题型、题量与分值，再建立知识点—年份矩阵并识别阶段和轮换周期；随后分析措辞、出题人偏好与外部事件响应，最后输出分级预测、优先级矩阵、时间分配、答题框架和模拟题。",
+      next:"继续用不同学科和更长年份跨度验证方法边界，尤其关注样本不连续、题面不完整和反预测行为对结果的影响。",
+      repo:"https://github.com/Hatari130/exam-reverse-engineer",
+      en:{kicker:"A skill for reverse-engineering self-set exams",status:"Open source · GitHub",summary:"Recover question-setting patterns from past papers and turn them into staged analysis and study strategy.",facts:[["Role","Product + Skill"],["Format","Agent Skill"],["Year","2026"],["Focus","Exam research"]],problem:"Exam preparation often stops at counting which topics appeared. A continuous set of self-set papers also contains structural, wording, rotation, and yearly signals that frequency alone cannot explain.",system:"Exam Reverse Engineer works in four phases: classify each year's question types, counts, and scores; build a topic–year matrix and identify stages and rotation; analyze wording, setter preferences, and responses to external events; then produce tiered predictions, a priority matrix, time allocation, answer frameworks, and mock questions.",next:"Keep testing the method across disciplines and longer time spans, especially where samples are incomplete, question text is noisy, or setters deliberately break historical patterns."},
+      visual:"exam"
+    },
     "cinema-stars-maps":{
       title:"Cinema Stars Maps", kicker:"每个人的电影史 · 观影数据可视化", status:"已上线 · 在线体验", progress:100,
       summary:"把豆瓣观影记录变成一片可探索、可分享的电影史星空。",
@@ -104,6 +115,9 @@
     if (type === "cinema") {
       return '<div class="project-shot shot-cinema"><img class="project-real-image" src="cinema-stars-maps/cinema-stars-maps-site.png" alt="Cinema Stars Maps 每个人的电影史网站界面"></div>';
     }
+    if (type === "exam") {
+      return '<div class="project-shot shot-exam"><div class="shot-window"><div class="mock-topbar"><i></i><i></i><i></i><b>exam-reverse-engineer</b></div><div class="exam-mock"><div class="exam-mock-head"><span>PAST PAPERS</span><b>2020—2025</b></div><div class="exam-mock-matrix" aria-hidden="true"><i></i><i class="is-on"></i><i></i><i class="is-hot"></i><i></i><i class="is-on"></i><i class="is-on"></i><i></i><i></i><i></i><i class="is-hot"></i><i></i><i></i><i class="is-hot"></i><i class="is-on"></i><i></i><i></i><i class="is-on"></i></div><div class="exam-mock-flow"><span><b>01</b><em>摄入</em></span><i></i><span><b>02</b><em>结构</em></span><i></i><span><b>03</b><em>画像</em></span><i></i><span><b>04</b><em>策略</em></span></div></div></div></div>';
+    }
     return '<div class="project-shot shot-map"><img class="project-real-image" src="map-creator/changning-industrial-memory-map.jpg" alt="Map Creator 生成的长宁工业记忆打卡地图"></div>';
   }
 
@@ -122,9 +136,11 @@
     document.getElementById("project-summary").textContent = copy.summary;
     document.getElementById("project-status").textContent = copy.status;
     var projectLink = document.getElementById("project-link");
-    if (project.website) {
-      projectLink.href = project.website;
-      projectLink.textContent = language === "en" ? "Open website ↗" : "打开网站 ↗";
+    if (project.website || project.repo) {
+      projectLink.href = project.website || project.repo;
+      projectLink.textContent = project.website
+        ? (language === "en" ? "Open website ↗" : "打开网站 ↗")
+        : (language === "en" ? "View repository ↗" : "查看 GitHub 仓库 ↗");
       projectLink.hidden = false;
     } else {
       projectLink.hidden = true;

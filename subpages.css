@@ -169,6 +169,7 @@ html.dark .project-shot{outline-color:oklch(1 0 0 / .12)}
 .shot-podcast{background:#e7edeb}
 .shot-map{background:#e9e2d3}
 .shot-cinema{background:#060f22}
+.shot-exam{background:#e8eee9}
 .shot-map .project-real-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .shot-cinema .project-real-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .shot-window{
@@ -205,6 +206,18 @@ html.dark .project-shot{outline-color:oklch(1 0 0 / .12)}
 .podcast-mock-player>span{height:20px;display:flex;align-items:center;gap:3px}
 .podcast-mock-player span i{flex:1;min-width:2px;border-radius:2px;background:#8aaca7}
 .podcast-mock-player span i:nth-child(1){height:25%}.podcast-mock-player span i:nth-child(2){height:62%}.podcast-mock-player span i:nth-child(3){height:42%}.podcast-mock-player span i:nth-child(4){height:82%}.podcast-mock-player span i:nth-child(5){height:52%}.podcast-mock-player span i:nth-child(6){height:74%}.podcast-mock-player span i:nth-child(7){height:36%}.podcast-mock-player span i:nth-child(8){height:58%}
+.exam-mock{height:calc(100% - 24px);padding:16px 17px;background:linear-gradient(145deg,#f9fbf9,#edf3ef)}
+.exam-mock-head{display:flex;align-items:center;justify-content:space-between;font-family:var(--ff-mono);font-size:6px;letter-spacing:.08em;color:#72847d}
+.exam-mock-head b{font-weight:500;color:#9ba7a2;letter-spacing:0}
+.exam-mock-matrix{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-top:15px;padding:9px;border:1px solid #dbe5de;border-radius:4px;background:rgba(255,255,255,.72)}
+.exam-mock-matrix i{display:block;height:13px;border-radius:2px;background:#e6ece7}
+.exam-mock-matrix i.is-on{background:#9bb6a9}
+.exam-mock-matrix i.is-hot{background:#c59878}
+.exam-mock-flow{display:grid;grid-template-columns:1fr 14px 1fr 14px 1fr 14px 1fr;align-items:center;gap:4px;margin-top:17px}
+.exam-mock-flow span{display:flex;flex-direction:column;gap:4px;padding:7px 5px;border:1px solid #d9e3dd;border-radius:4px;background:#fff}
+.exam-mock-flow b{font-family:var(--ff-mono);font-size:6px;font-weight:500;color:#789486}
+.exam-mock-flow em{font-size:7px;font-style:normal;color:#465952}
+.exam-mock-flow>i{height:1px;background:#b8c9bf}
 
 .project-body{padding:23px 22px 21px}
 .project-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}

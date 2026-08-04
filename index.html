@@ -1621,6 +1621,7 @@ html.reduce-motion .plx{translate:none!important}
 var projects = [
   {slug:"cinema-stars-maps",name:"每个人的电影史", nameEn:"Cinema Stars Maps", summary:"把豆瓣观影记录变成电影史星空", summaryEn:"Turn a film diary into a cinema star map", date:"已上线", dateEn:"Live", glyph:"map"},
   {slug:"map-creator",      name:"地图生成器",     nameEn:"Map Creator",       summary:"面向 Agent 的城市地图生成 Skill", summaryEn:"An Agent Skill for generating city maps", date:"开源", dateEn:"Open source", glyph:"map"},
+  {slug:"exam-reverse-engineer", name:"真题逆向分析", nameEn:"Exam Reverse Engineer", summary:"从历年真题还原出题规律与复习策略", summaryEn:"Recover exam patterns and study strategy from past papers", date:"开源", dateEn:"Open source", glyph:"note"},
   {slug:"podcast-bridge",   name:"播客知识桥",   nameEn:"podcast-bridge",   summary:"让 AI 研究全球播客的本地知识库",     summaryEn:"A local knowledge base for researching global podcasts with AI", date:"开源", dateEn:"Open source", glyph:"music"}
 ];
 var homeLanguage = window.HATARI_LANG === "en" ? "en" : "zh";
@@ -1629,6 +1630,7 @@ function projectHref(slug){
   if (slug === "podcast-bridge") return "projects/podcast-bridge/index.html";
   if (slug === "map-creator") return "projects/map-creator/index.html";
   if (slug === "cinema-stars-maps") return "projects/cinema-stars-maps/index.html";
+  if (slug === "exam-reverse-engineer") return "projects/exam-reverse-engineer/index.html";
   return "projects/project.html?project="+encodeURIComponent(slug);
 }
 
@@ -1648,6 +1650,7 @@ var exploring = exploringZh;
 var featuredProjects = [
   {name:"Cinema Stars Maps", progress:100, glyph:"map"},
   {name:"Map Creator",       progress:100, glyph:"map"},
+  {name:"Exam Reverse Engineer", progress:100, glyph:"note"},
   {name:"podcast-bridge",    progress:100, glyph:"music"}
 ];
 var dockApps = [
@@ -2500,7 +2503,7 @@ function getLocalAssistantReply(question){
       return "Hatari explores and builds AI products. The process starts from real problems, turns vague ideas into testable product directions, and brings them to life through interface design and code.";
     }
     if (/project|work|case|built/.test(q)) {
-      return "The current collection includes Cinema Stars Maps, Map Creator, and podcast-bridge. Open Project files to browse them and continue into a detail page.";
+      return "The current collection includes Cinema Stars Maps, Map Creator, Exam Reverse Engineer, and podcast-bridge. Open Project files to browse them and continue into a detail page.";
     }
     if (/skill|capabilit|technolog|focus|good at/.test(q)) {
       return "The focus is on agents, workflows, human–AI collaboration, and product engineering, spanning product analysis, interaction prototypes, frontend implementation, and applied AI.";

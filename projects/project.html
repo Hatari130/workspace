@@ -41,7 +41,7 @@
         <p class="eyebrow" id="project-kicker">AI 产品</p>
         <h1 id="project-title">正在加载项目……</h1>
         <p id="project-summary"></p>
-        <div class="detail-status"><i aria-hidden="true"></i><span id="project-status"></span></div>
+        <div class="detail-status"><i aria-hidden="true"></i><span id="project-status"></span><a id="project-link" class="detail-link" target="_blank" rel="noreferrer" hidden></a></div>
       </div>
       <div class="detail-visual" id="project-visual" aria-label="项目界面概念预览"></div>
     </section>
@@ -124,6 +124,17 @@
       en:{kicker:"City map generation for agents",status:"Open source · MIT",summary:"Turn cities, place lists, or POI data into reviewable GIS maps, then optionally generate stylized city guide posters.",facts:[["Role","Product + Skill"],["Format","Agent Skill"],["Year","2026"],["Focus","City map generation"]],problem:"Making a city guide map means repeatedly handling place lookup, coordinate conversion, map data, road and building rendering, and visual consistency.",system:"Map Creator organizes place resolution, GCJ-02 to WGS84 alignment, OpenStreetMap GIS rendering, and optional GPT Image stylization into an Agent toolchain, while keeping POI JSON available for human review.",next:"Keep testing resolution accuracy across cities and place types, the reliability of OSM requests, and how much control remains between the GIS draft and the stylized poster."},
       visual:"map"
     },
+    "cinema-stars-maps":{
+      title:"Cinema Stars Maps", kicker:"每个人的电影史 · 观影数据可视化", status:"已上线 · 在线体验", progress:100,
+      summary:"把豆瓣观影记录变成一片可探索、可分享的电影史星空。",
+      facts:[["角色","产品 + 网站"],["形式","网站"],["年份","2026"],["重点","观影可视化"]],
+      problem:"电影记录通常停留在一张列表里：用户能看到看过什么，却很难感受到自己的观影轨迹、年代和电影之间的关系。",
+      system:"后端抓取豆瓣公开观影页，或接收 CSV 备用导入；pipeline 按年份、国别与编辑库完成匹配和分区，再生成星空 JSON 与 SVG 海报。星等和星座是查询结果，不额外落库。",
+      next:"继续补全编辑库，改善中文片名与年份的匹配，并在公开部署时把后台任务从轻量起步方案迁移到更稳定的队列与数据库。",
+      website:"https://cinema-stars-maps.onrender.com/",
+      en:{kicker:"Every cinema · personal film history",status:"Live · try it online",summary:"Turn a personal film diary into an explorable and shareable cinema star map.",facts:[["Role","Product + Website"],["Format","Website"],["Year","2026"],["Focus","Film data visualization"]],problem:"Film records usually stay as a list: people can see what they watched, but not the relationships between their viewing history, eras, regions, and films.",system:"The backend reads a public Douban film diary or accepts a CSV fallback; a pipeline matches and places films by year, country, and editorial lists, then generates star-map JSON and an SVG poster. Ratings and constellations remain query results rather than stored data.",next:"Keep expanding the editorial library, improve Chinese-title and year matching, and move background jobs from the lightweight starting setup to a more durable queue and database for public deployment."},
+      visual:"cinema"
+    },
   };
 
   function visual(type,title){
@@ -139,6 +150,9 @@
     }
     if (type === "map") {
       return '<div class="project-shot shot-map"><img class="project-real-image" src="map-creator/changning-industrial-memory-map.jpg" alt="Map Creator 生成的长宁工业记忆打卡地图"></div>';
+    }
+    if (type === "cinema") {
+      return '<div class="project-shot shot-cinema"><img class="project-real-image" src="cinema-stars-maps/cinema-stars-maps-site.png" alt="Cinema Stars Maps 每个人的电影史网站界面"></div>';
     }
     return '<div class="project-shot shot-urban"><div class="shot-window">'+top+'<div class="urban-layout"><div class="map-grid"><i></i><i></i><i></i><i></i></div><aside class="urban-panel"><b></b><i></i><i></i><i></i><i></i></aside></div></div></div>';
   }
@@ -157,6 +171,16 @@
     document.getElementById("project-title").textContent = project.title;
     document.getElementById("project-summary").textContent = copy.summary;
     document.getElementById("project-status").textContent = copy.status;
+    var projectLink = document.getElementById("project-link");
+    if (project.website) {
+      projectLink.href = project.website;
+      projectLink.textContent = language === "en" ? "Open website ↗" : "打开网站 ↗";
+      projectLink.hidden = false;
+    } else {
+      projectLink.hidden = true;
+      projectLink.removeAttribute("href");
+      projectLink.textContent = "";
+    }
     document.getElementById("project-visual").innerHTML = visual(project.visual,project.title);
     document.getElementById("project-problem").textContent = copy.problem;
     document.getElementById("project-system").textContent = copy.system;

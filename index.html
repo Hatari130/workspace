@@ -1619,13 +1619,18 @@ html.reduce-motion .plx{translate:none!important}
    数据 —— 对应 Next.js 项目的 lib/data.ts
    ============================================================ */
 var projects = [
-  {slug:"viral-hunter",     name:"热点猎手",     nameEn:"Viral Hunter",     summary:"人工智能驱动的爆款内容洞察系统", summaryEn:"AI-driven insight system for finding content growth signals", date:"已上线", dateEn:"Live", glyph:"signal"},
-  {slug:"agent-workspace",  name:"智能体工作台", nameEn:"Agent Workspace",  summary:"多智能体协作与管理平台",         summaryEn:"A workspace for coordinating multiple AI agents", date:"80%", dateEn:"80%", glyph:"bars"},
-  {slug:"ai-content-studio",name:"智能内容工坊", nameEn:"AI Content Studio", summary:"人工智能内容生产工作流",           summaryEn:"A workflow for AI-assisted content production", date:"65%", dateEn:"65%", glyph:"layers"},
-  {slug:"urban-ai",         name:"城市智能",     nameEn:"Urban AI",         summary:"城市数据与空间智能探索",           summaryEn:"Explorations in urban data and spatial intelligence", date:"研究中", dateEn:"Research", glyph:"map"},
+  {slug:"cinema-stars-maps",name:"每个人的电影史", nameEn:"Cinema Stars Maps", summary:"把豆瓣观影记录变成电影史星空", summaryEn:"Turn a film diary into a cinema star map", date:"已上线", dateEn:"Live", glyph:"map"},
+  {slug:"map-creator",      name:"地图生成器",     nameEn:"Map Creator",       summary:"面向 Agent 的城市地图生成 Skill", summaryEn:"An Agent Skill for generating city maps", date:"开源", dateEn:"Open source", glyph:"map"},
   {slug:"podcast-bridge",   name:"播客知识桥",   nameEn:"podcast-bridge",   summary:"让 AI 研究全球播客的本地知识库",     summaryEn:"A local knowledge base for researching global podcasts with AI", date:"开源", dateEn:"Open source", glyph:"music"}
 ];
 var homeLanguage = window.HATARI_LANG === "en" ? "en" : "zh";
+
+function projectHref(slug){
+  if (slug === "podcast-bridge") return "projects/podcast-bridge/index.html";
+  if (slug === "map-creator") return "projects/map-creator/index.html";
+  if (slug === "cinema-stars-maps") return "projects/cinema-stars-maps/index.html";
+  return "projects/project.html?project="+encodeURIComponent(slug);
+}
 
 var desktopItems = [
   {id:"projects",    label:"项目作品", labelEn:"Projects",  kind:"folder",   glyph:"folder", opens:"projects",    x:22,  y:14},
@@ -1640,10 +1645,10 @@ var desktopItems = [
 var exploringZh = ["AI 智能体","大模型工作流","人机协作","产品 × 代码"];
 var exploringEn = ["AI Agents","LLM Workflows","Human-AI Collaboration","Product × Code"];
 var exploring = exploringZh;
-var building = [
-  {name:"Agent Workspace",  progress:80, glyph:"bars"},
-  {name:"AI Content Studio",progress:65, glyph:"layers"},
-  {name:"Viral Hunter",     progress:75, glyph:"signal"}
+var featuredProjects = [
+  {name:"Cinema Stars Maps", progress:100, glyph:"map"},
+  {name:"Map Creator",       progress:100, glyph:"map"},
+  {name:"podcast-bridge",    progress:100, glyph:"music"}
 ];
 var dockApps = [
   {id:"finder",label:"项目文件",labelEn:"Project files"},{id:"music",label:"工作音乐",labelEn:"Work music"},{id:"chatgpt",label:"网站助手",labelEn:"Site helper"},
@@ -1670,9 +1675,6 @@ var G = {
   code:'<path d="M9.4 8.5 5.5 12l3.9 3.5M14.6 8.5 18.5 12l-3.9 3.5"/>',
   image:'<rect x="4" y="5.5" width="16" height="13" rx="2.5"/><circle cx="9" cy="10" r="1.4"/><path d="M4.6 16.6 9.5 12l3.2 3 2.6-2.4 4.1 3.8"/>',
   user:'<circle cx="12" cy="8.2" r="3.3"/><path d="M5.5 19c.8-3.5 3-5.3 6.5-5.3s5.7 1.8 6.5 5.3"/>',
-  signal:'<path d="M4 18.5h16"/><path d="M7.5 18.5v-4M12 18.5V8.5M16.5 18.5v-7"/><circle cx="12" cy="5.6" r="1.4"/>',
-  bars:'<rect x="4.5" y="12" width="3.6" height="7" rx="1"/><rect x="10.2" y="7.5" width="3.6" height="11.5" rx="1"/><rect x="15.9" y="10" width="3.6" height="9" rx="1"/>',
-  layers:'<path d="M12 4.5 4.5 8.8 12 13l7.5-4.2Z"/><path d="M4.5 13.2 12 17.5l7.5-4.3"/>',
   map:'<rect x="4.5" y="4.5" width="15" height="15" rx="2.5"/><path d="M4.5 10.5h15M10.5 4.5v15"/>',
   music:'<path d="M9 18V7.5l9-2v10.2"/><ellipse cx="6.5" cy="18" rx="2.5" ry="2"/><ellipse cx="15.5" cy="15.7" rx="2.5" ry="2"/>'
 };
@@ -1728,9 +1730,9 @@ $("explore").innerHTML = exploring
 
 $("build-hd").innerHTML =
   '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="color:color-mix(in oklab,var(--ink) 55%,transparent)"><path d="M12 4.5l1.3 3.6L17 9.4l-3.7 1.3L12 14.3l-1.3-3.6L7 9.4l3.7-1.3Z"/><path d="M17.8 15.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7Z"/></svg>'+
-  "<h2>正在构建</h2>";
+  "<h2>真实项目</h2>";
 
-$("build").innerHTML = building.map(function(b){
+$("build").innerHTML = featuredProjects.map(function(b){
   return '<li><span class="sq"><span style="width:12px;height:12px;display:block">'+glyph(b.glyph)+'</span></span>'+
          '<span class="nm">'+b.name+'</span>'+
          '<span class="meter"><em>'+b.progress+'%</em><span><i data-w="'+b.progress+'"></i></span></span></li>';
@@ -1751,7 +1753,7 @@ $("l-icons").innerHTML = desktopItems.map(function(it,i){
 }).join("");
 
 $("mlist").innerHTML = projects.map(function(p){
-  return '<li><a class="mrow" href="'+(p.slug === "podcast-bridge" ? "projects/podcast-bridge/index.html" : "projects/project.html?project="+p.slug)+'"><span class="ic"><span style="width:18px;height:18px;display:block">'+glyph(p.glyph)+
+  return '<li><a class="mrow" href="'+projectHref(p.slug)+'"><span class="ic"><span style="width:18px;height:18px;display:block">'+glyph(p.glyph)+
          '</span></span><span class="txt"><b>'+p.name+'</b><span>'+p.summary+'</span></span>'+
          '<span class="dt">'+p.date+'</span>'+chev+'</a></li>';
 }).join("");
@@ -1798,10 +1800,10 @@ function renderHomeLanguage(language){
 
   $("build-hd").innerHTML =
     '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="color:color-mix(in oklab,var(--ink) 55%,transparent)"><path d="M12 4.5l1.3 3.6L17 9.4l-3.7 1.3L12 14.3l-1.3-3.6L7 9.4l3.7-1.3Z"/><path d="M17.8 15.2l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7Z"/></svg>'+
-    '<h2>'+(en ? "Currently building" : "正在构建")+'</h2>';
+    '<h2>'+(en ? "Real projects" : "真实项目")+'</h2>';
 
   $("mlist").innerHTML = projects.map(function(p){
-    return '<li><a class="mrow" href="'+(p.slug === "podcast-bridge" ? "projects/podcast-bridge/index.html" : "projects/project.html?project="+p.slug)+'"><span class="ic"><span style="width:18px;height:18px;display:block">'+glyph(p.glyph)+
+    return '<li><a class="mrow" href="'+projectHref(p.slug)+'"><span class="ic"><span style="width:18px;height:18px;display:block">'+glyph(p.glyph)+
            '</span></span><span class="txt"><b>'+homeProjectValue(p,"name",language)+'</b><span>'+homeProjectValue(p,"summary",language)+'</span></span><span class="dt">'+homeProjectValue(p,"date",language)+'</span>'+chev+'</a></li>';
   }).join("");
 
@@ -2135,7 +2137,7 @@ function appBody(item, language){
   var itemLabel = desktopItemValue(item,"label",language);
   if (item.id === "projects") {
     return '<ul class="rows">'+projects.map(function(p,i){
-      return '<li><a class="row" href="'+(p.slug === "podcast-bridge" ? "projects/podcast-bridge/index.html" : "projects/project.html?project="+p.slug)+'" style="animation-delay:'+(0.14+i*0.055)+'s">'+
+      return '<li><a class="row" href="'+projectHref(p.slug)+'" style="animation-delay:'+(0.14+i*0.055)+'s">'+
              '<span class="ic"><span style="width:17px;height:17px;display:block">'+glyph(p.glyph)+'</span></span>'+
              '<span class="txt"><b>'+homeProjectValue(p,"name",language)+'</b><span>'+homeProjectValue(p,"summary",language)+'</span></span>'+
              '<span class="dt">'+homeProjectValue(p,"date",language)+'</span>'+chev+'</a></li>';
@@ -2498,7 +2500,7 @@ function getLocalAssistantReply(question){
       return "Hatari explores and builds AI products. The process starts from real problems, turns vague ideas into testable product directions, and brings them to life through interface design and code.";
     }
     if (/project|work|case|built/.test(q)) {
-      return "The current collection includes Viral Hunter, Agent Workspace, AI Content Studio, Urban AI, and podcast-bridge. Open Project files to browse them and continue into a detail page.";
+      return "The current collection includes Cinema Stars Maps, Map Creator, and podcast-bridge. Open Project files to browse them and continue into a detail page.";
     }
     if (/skill|capabilit|technolog|focus|good at/.test(q)) {
       return "The focus is on agents, workflows, human–AI collaboration, and product engineering, spanning product analysis, interaction prototypes, frontend implementation, and applied AI.";

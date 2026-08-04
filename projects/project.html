@@ -74,46 +74,6 @@
 <script>
 (function(){
   var PROJECTS = {
-    "viral-hunter":{
-      title:"Viral Hunter", kicker:"内容洞察", status:"内测中 · 持续监测信号", progress:78,
-      summary:"从内容样本中发现增长信号，归纳传播结构，并把洞察转成可执行的选题与创作建议。",
-      facts:[["角色","产品 + AI"],["阶段","内测中"],["年份","2026"],["重点","信号发现"]],
-      problem:"创作者通常能看到结果，却很难知道内容为什么传播。传统报表展示数字，却没有把模式翻译成下一步行动。",
-      system:"Research Agent 持续采集样本，Analyst Agent 比较结构、节奏和反馈信号，最后生成带证据的机会简报。",
-      next:"继续测试小样本下的可靠性、跨平台信号归一化，以及建议是否真正提高创作决策速度。",
-      en:{kicker:"Content intelligence",status:"Live beta · monitoring signals",summary:"Find growth signals in content samples, explain why they spread, and turn the pattern into actionable ideas.",facts:[["Role","Product + AI"],["Stage","Live beta"],["Year","2026"],["Focus","Signal discovery"]],problem:"Creators can see outcomes, but rarely understand why something spread. Traditional reports show numbers without translating patterns into the next action.",system:"A Research Agent collects samples, an Analyst Agent compares structure, pacing, and feedback signals, then produces an evidence-backed opportunity brief.",next:"Keep testing reliability on small samples, cross-platform signal normalization, and whether recommendations actually speed up creative decisions."},
-      visual:"viral"
-    },
-    "agent-workspace":{
-      title:"Agent Workspace", kicker:"多智能体协作", status:"构建中 · 3 个智能体在线", progress:80,
-      summary:"一个可观察的多 Agent 协作空间，让任务拆分、工具调用、上下文和执行状态一眼可见。",
-      facts:[["角色","产品 + 系统"],["阶段","构建中"],["年份","2026"],["重点","智能体运行框架"]],
-      problem:"Agent 一旦进入长任务，用户很容易失去方向感：不知道它正在做什么、卡在哪里，以及该何时介入。",
-      system:"工作区把规划、执行、验证和人工确认拆成可见节点，并保存每次工具调用、产物和恢复点。",
-      next:"正在验证多 Agent 交接、失败恢复和权限边界，让自主性增加时仍然保持足够的可控性。",
-      en:{kicker:"Multi-agent operations",status:"Building · 3 agents online",summary:"An observable workspace for multi-agent collaboration, keeping task breakdown, tool calls, context, and execution state visible.",facts:[["Role","Product + System"],["Stage","Building"],["Year","2026"],["Focus","Agent harness"]],problem:"Once an agent enters a long task, people lose their sense of direction: they cannot tell what it is doing, where it is stuck, or when to step in.",system:"The workspace makes planning, execution, verification, and human approval visible, while saving every tool call, artifact, and recovery point.",next:"Testing multi-agent handoffs, failure recovery, and permission boundaries so more autonomy does not mean less control."},
-      visual:"agent"
-    },
-    "ai-content-studio":{
-      title:"AI Content Studio", kicker:"创作者工作流", status:"构建中 · 私有预览", progress:65,
-      summary:"把研究、提纲、写作与多平台改写收进同一条内容工作流，减少上下文来回切换。",
-      facts:[["角色","产品设计"],["阶段","构建中"],["年份","2026"],["重点","创作流程"]],
-      problem:"内容工作散落在搜索、文档、聊天和发布工具之间。真正耗时的往往不是写作，而是反复搬运上下文。",
-      system:"Studio 将来源、创作意图和版本历史放进同一上下文，由不同 Agent 负责研究、结构与渠道适配。",
-      next:"重点测试长文一致性、编辑者控制感，以及 AI 建议在什么时候出现最自然。",
-      en:{kicker:"Creator workflow",status:"Building · private preview",summary:"Bring research, outlining, writing, and multi-platform adaptation into one content workflow.",facts:[["Role","Product design"],["Stage","Building"],["Year","2026"],["Focus","Creative flow"]],problem:"Content work is scattered across search, documents, chat, and publishing tools. The costly part is often moving context around, not writing itself.",system:"Studio keeps sources, creative intent, and version history in one context, with different agents handling research, structure, and channel adaptation.",next:"Testing long-form consistency, editorial control, and when AI suggestions feel most natural."},
-      visual:"studio"
-    },
-    "urban-ai":{
-      title:"Urban AI", kicker:"空间智能", status:"研究中 · 梳理机会", progress:42,
-      summary:"探索空间数据、城市感知与生成式 AI 的结合方式，把复杂信息变成可理解的决策线索。",
-      facts:[["角色","研究"],["阶段","探索"],["年份","2025"],["重点","空间智能"]],
-      problem:"城市数据维度很多，但对普通决策者来说往往过于专业、分散，也缺少能解释变化原因的交互方式。",
-      system:"把空间指标、时间变化与自然语言查询连接起来，让用户能从地图中的异常继续追问原因和影响。",
-      next:"目前聚焦数据可信度、空间尺度变化和解释层，避免生成式界面给出看似合理但无法追溯的结论。",
-      en:{kicker:"Spatial intelligence",status:"Research · mapping opportunities",summary:"Explore how spatial data, urban sensing, and generative AI can turn complexity into clearer decisions.",facts:[["Role","Research"],["Stage","Exploration"],["Year","2025"],["Focus","Spatial AI"]],problem:"Urban data has many dimensions, but it is often too specialized and fragmented for everyday decision-makers, without an interaction model that explains why things changed.",system:"Connect spatial indicators, temporal change, and natural-language queries so users can investigate the causes and effects behind anomalies on a map.",next:"Focusing on data trust, changing spatial scales, and the explanation layer so a generative interface cannot produce plausible but untraceable conclusions."},
-      visual:"urban"
-    },
     "map-creator":{
       title:"Map Creator", kicker:"面向 Agent 的城市地图生成", status:"开源 · MIT", progress:100,
       summary:"把城市、地点清单或 POI 数据转换成可复查的 GIS 地图，并进一步生成风格化的城市导览海报。",
@@ -137,32 +97,22 @@
     },
   };
 
-  function visual(type,title){
-    var top = '<div class="mock-topbar"><i></i><i></i><i></i><b>'+title+'</b></div>';
-    if (type === "viral") {
-      return '<div class="project-shot shot-viral"><div class="shot-window">'+top+'<div class="dashboard"><aside class="dash-nav"><span class="dash-brand"></span><i></i><i></i><i></i><i></i></aside><div class="dash-main"><div class="mock-title"></div><div class="metric-row"><span><b></b><i></i></span><span><b></b><i></i></span><span><b></b><i></i></span></div><div class="bar-chart"><i style="height:30%"></i><i style="height:46%"></i><i style="height:38%"></i><i style="height:68%"></i><i style="height:57%"></i><i style="height:82%"></i><i style="height:72%"></i><i style="height:91%"></i></div></div></div></div></div>';
-    }
-    if (type === "agent") {
-      return '<div class="project-shot shot-agent"><div class="shot-window">'+top+'<div class="agent-canvas"><span class="connector connector-a"></span><span class="connector connector-b"></span><span class="connector connector-c"></span><span class="node node-a"></span><span class="node node-b"></span><span class="node node-c"></span><span class="node node-d"></span></div></div></div>';
-    }
-    if (type === "studio") {
-      return '<div class="project-shot shot-studio"><div class="shot-window">'+top+'<div class="studio-layout"><aside class="studio-side"><b></b><i></i><i></i><i></i><i></i></aside><div class="studio-doc"><h3></h3><p></p><p></p><p></p><p></p></div><aside class="studio-tool"><i></i><i></i><i></i></aside></div></div></div>';
-    }
+  function visual(type){
     if (type === "map") {
       return '<div class="project-shot shot-map"><img class="project-real-image" src="map-creator/changning-industrial-memory-map.jpg" alt="Map Creator 生成的长宁工业记忆打卡地图"></div>';
     }
     if (type === "cinema") {
       return '<div class="project-shot shot-cinema"><img class="project-real-image" src="cinema-stars-maps/cinema-stars-maps-site.png" alt="Cinema Stars Maps 每个人的电影史网站界面"></div>';
     }
-    return '<div class="project-shot shot-urban"><div class="shot-window">'+top+'<div class="urban-layout"><div class="map-grid"><i></i><i></i><i></i><i></i></div><aside class="urban-panel"><b></b><i></i><i></i><i></i><i></i></aside></div></div></div>';
+    return '<div class="project-shot shot-map"><img class="project-real-image" src="map-creator/changning-industrial-memory-map.jpg" alt="Map Creator 生成的长宁工业记忆打卡地图"></div>';
   }
 
-  var slug = new URLSearchParams(window.location.search).get("project") || "agent-workspace";
+  var slug = new URLSearchParams(window.location.search).get("project") || "map-creator";
   if (slug === "podcast-bridge") {
     window.location.replace("podcast-bridge/index.html");
     return;
   }
-  var project = PROJECTS[slug] || PROJECTS["agent-workspace"];
+  var project = PROJECTS[slug] || PROJECTS["map-creator"];
   document.body.setAttribute("data-project",slug);
   function renderProject(language){
     var copy = language === "en" && project.en ? project.en : project;
@@ -181,7 +131,7 @@
       projectLink.removeAttribute("href");
       projectLink.textContent = "";
     }
-    document.getElementById("project-visual").innerHTML = visual(project.visual,project.title);
+    document.getElementById("project-visual").innerHTML = visual(project.visual);
     document.getElementById("project-problem").textContent = copy.problem;
     document.getElementById("project-system").textContent = copy.system;
     document.getElementById("project-next").textContent = copy.next;

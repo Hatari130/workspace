@@ -106,25 +106,49 @@ ul{list-style:none;margin:0;padding:0}
   transition:opacity .58s cubic-bezier(.22,1,.36,1),
              translate .58s cubic-bezier(.22,1,.36,1),background-color .52s,border-color .52s;
 }
-.hdr-in{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.hdr-in{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:relative}
 .mark{display:flex;align-items:center;gap:12px}
-.mark i{width:9px;height:9px;border-radius:99px;background:var(--ink)}
-.mark span{font-family:var(--ff-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.15em}
-.hdr-nav{display:flex;align-items:center;gap:28px}
-.hdr-nav a,.hdr-nav span{font-size:.85rem;letter-spacing:0;color:var(--ink-2);transition:color .3s}
-.hdr-nav a:hover{color:var(--ink)}
-.hdr-nav span{opacity:.55;cursor:default}
-.hdr-right{display:flex;align-items:center;gap:24px}
+.mark i{width:10px;height:10px;border-radius:99px;background:var(--ink)}
+.mark span{font-family:var(--ff-mono);font-size:.9rem;text-transform:uppercase;letter-spacing:.1em}
+.hdr-nav{
+  position:absolute;left:50%;transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:2px;padding:3px;
+  border:1px solid color-mix(in oklab,var(--line) 82%,transparent);border-radius:8px;
+  background:color-mix(in oklab,var(--paper) 72%,transparent);
+  box-shadow:0 1px 2px color-mix(in oklab,var(--ink) 7%,transparent);
+  transition:background-color .25s,border-color .25s,box-shadow .25s;
+}
+.hdr-nav a,.hdr-nav span{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;
+  min-width:54px;height:30px;padding:0 12px;border-radius:5px;
+  font-size:.78rem;letter-spacing:0;color:var(--ink-2);
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:background-color .2s,color .2s,scale .16s;
+}
+.hdr-nav a:hover{
+  background:color-mix(in oklab,var(--ink) 5%,transparent);color:var(--ink)
+}
+.hdr-nav a:focus-visible{outline:2px solid color-mix(in oklab,var(--ink) 45%,transparent);outline-offset:2px}
+.hdr-nav a:active{scale:.96}
+.hdr-nav a[aria-current="page"]{
+  background:var(--ink);color:var(--paper);
+  box-shadow:inset 0 -1px 0 color-mix(in oklab,var(--paper) 20%,transparent)
+}
+.hdr-nav span{opacity:.58;cursor:default}
+.hdr-right{display:flex;align-items:center;gap:24px;margin-left:auto}
 .icon-btn{
   width:36px;height:36px;border-radius:99px;display:grid;place-items:center;
-  color:var(--ink-2);transition:background .3s,color .3s;
+  color:var(--ink-2);-webkit-tap-highlight-color:transparent;
+  transition:background-color .25s,color .25s,scale .16s;
 }
 .icon-btn:hover{background:color-mix(in oklab,var(--ink) 5%,transparent);color:var(--ink)}
+.icon-btn:active{scale:.96}
 @media (max-width:720px){
   .hdr-in{padding:0 20px}
   .hdr-right{gap:10px}
-  .hdr-nav{gap:18px}
-  .hdr-nav span{display:none}
+  .hdr-nav{position:static;transform:none;gap:1px;padding:2px}
+  .hdr-nav a,.hdr-nav span{min-width:0;height:28px;padding:0 7px;font-size:.7rem}
 }
 @media (max-width:460px){.mark span{display:none}}
 
@@ -139,11 +163,14 @@ ul{list-style:none;margin:0;padding:0}
 .split>*{min-width:0}
 @media (min-width:1024px){
   .split{
+    --scene-bridge:clamp(90px,7.2vw,132px);
+    --scene-feather:clamp(132px,10vw,184px);
     grid-template-columns:minmax(0,42fr) minmax(0,58fr);
-    gap:clamp(36px,3.35vw,52px);
+    gap:0;
     padding:28px clamp(52px,4.5vw,72px) 96px 40px;
     align-items:start;
   }
+  .intro-column{position:relative;z-index:7}
 }
 
 /* ---------------- left column ---------------- */
@@ -250,7 +277,7 @@ html.reduce-motion .term-body .caret{display:none}
   margin-top:0;padding:18px;border-radius:8px;
   border:1px solid var(--line);
   background:color-mix(in oklab,var(--surface) 60%,transparent);
-  box-shadow:0 1px 2px rgba(24,22,20,.03);
+  box-shadow:0 1px 2px color-mix(in oklab,var(--ink) 6%,transparent);
 }
 .build-hd{display:flex;align-items:center;gap:8px}
 .build-hd h2{margin:0;font-size:.8rem;font-weight:500;letter-spacing:0;color:color-mix(in oklab,var(--ink) 85%,transparent)}
@@ -277,16 +304,21 @@ html.reduce-motion .term-body .caret{display:none}
 .btn{
   display:inline-flex;align-items:center;gap:8px;
   padding:12px 20px;border-radius:99px;background:var(--ink);color:var(--paper);
-  font-size:.82rem;font-weight:500;letter-spacing:0;transition:transform .3s;
+  font-size:.82rem;font-weight:500;letter-spacing:0;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .3s,background-color .25s,scale .16s;
 }
 .btn:hover{transform:translateY(-2px)}
+.btn:active{scale:.96}
 .btn svg{transition:transform .3s}
 .btn:hover svg{transform:translate(2px,-2px)}
 .btn-o{
   width:46px;height:46px;border-radius:99px;display:grid;place-items:center;
-  border:1px solid var(--line);color:var(--ink-2);transition:border-color .3s,color .3s;
+  border:1px solid var(--line);color:var(--ink-2);-webkit-tap-highlight-color:transparent;
+  transition:border-color .3s,color .3s,background-color .25s,scale .16s;
 }
 .btn-o:hover{border-color:color-mix(in oklab,var(--ink) 30%,transparent);color:var(--ink)}
+.btn-o:active{scale:.96}
 
 /* ============================================================
    The machine — laid out at a fixed 960x680, then scaled to fit
@@ -294,7 +326,9 @@ html.reduce-motion .term-body .caret{display:none}
 .slot{
   position:relative;width:calc(100% + 48px);min-width:0;margin-inline:-24px;overflow:hidden;
 }
-@media (min-width:1024px){.slot{width:100%;margin-inline:0}}
+@media (min-width:1024px){
+  .slot{z-index:1;width:100%;margin-inline:0;overflow:visible;isolation:isolate}
+}
 
 @media (max-width:1023px){
   .capability-group{margin-top:44px}
@@ -384,6 +418,20 @@ html.reduce-motion .term-body .caret{display:none}
   background:rgba(61,60,55,.13);
 }
 html.dark .desk-plant{filter:brightness(.72) drop-shadow(0 10px 10px rgba(0,0,0,.2))}
+
+@media (min-width:1024px){
+  .workbench-atmosphere{
+    left:calc(-1 * var(--scene-bridge));
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--scene-feather),#000 100%);
+    mask-image:linear-gradient(to right,transparent 0,#000 var(--scene-feather),#000 100%);
+  }
+  .desk-surface{
+    left:calc(-1 * var(--scene-bridge));
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--scene-feather),#000 100%);
+    mask-image:linear-gradient(to right,transparent 0,#000 var(--scene-feather),#000 100%);
+  }
+  .desk-plant{left:clamp(-78px,-4vw,-52px)}
+}
 
 .desk-lamp{
   --desk-object-x:0px;
@@ -871,8 +919,9 @@ body.workspace-live .winwrap{max-width:calc(100vw - 32px)}
 .screen.os-live .dock{animation:dockIn .7s cubic-bezier(.16,1,.3,1) both}
 .screen.os-live .term{animation:termIn .6s cubic-bezier(.16,1,.3,1) .65s both}
 .screen.os-live .window-layer{opacity:1;transition:opacity .45s ease}
-.sync-status{display:flex;align-items:center;gap:6px;padding:3px 7px;border-radius:99px;background:rgba(0,0,0,.12);transition:background .25s}
+.sync-status{display:flex;align-items:center;gap:6px;padding:3px 7px;border-radius:99px;background:rgba(0,0,0,.12);-webkit-tap-highlight-color:transparent;transition:background-color .25s,scale .16s}
 .sync-status:hover{background:rgba(0,0,0,.22)}
+.sync-status:active{scale:.96}
 .sync-status i{width:5px;height:5px;border-radius:99px;background:#91d29b;box-shadow:0 0 0 0 rgba(145,210,155,.45);animation:livePulse 2.4s ease-out infinite}
 .sync-status span{font-size:10px}
 
@@ -1094,7 +1143,7 @@ body.workspace-live .winwrap{max-width:calc(100vw - 32px)}
 .music-controls{display:flex;align-items:center;justify-content:center;gap:19px;margin-top:10px}
 .music-control{width:25px;height:25px;display:grid;place-items:center;border-radius:50%;color:#403d36;transition:background .2s,scale .18s}
 .music-control:hover{background:rgba(38,35,30,.07)}
-.music-control:active{scale:.9}
+.music-control:active{scale:.96}
 .music-control svg{width:15px;height:15px}
 .music-control.music-toggle{width:34px;height:34px;background:#272620;color:#fff}
 .music-volume-row{width:88px;display:grid;grid-template-columns:11px 1fr;gap:7px;align-items:center;margin-top:13px;color:#969086}
@@ -1246,7 +1295,7 @@ body.workspace-live .winwrap.maximized .music-volume-row svg{width:14px;height:1
   transition:transform .22s cubic-bezier(.16,1,.3,1);
 }
 .dapp svg{width:100%;height:100%;display:block;border-radius:12px;transition:transform .14s ease,filter .14s ease}
-.dapp:active svg{transform:scale(.9);filter:brightness(.9)}
+.dapp:active svg{transform:scale(.96);filter:brightness(.9)}
 .dapp:focus-visible{--dock-scale:1.1;--dock-lift:-5px}
 .dapp:not(.trash) svg{box-shadow:0 2px 6px rgba(0,0,0,.22)}
 .tip{
@@ -1280,8 +1329,9 @@ body.workspace-live .winwrap.maximized .music-volume-row svg{width:14px;height:1
 @media (min-width:1024px){.ftr-in{padding:28px 40px}}
 .ftr p{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-family:var(--ff-sans);font-size:.7rem;color:var(--ink-3)}
 .socials{display:flex;align-items:center;gap:4px}
-.socials a,.socials button{width:36px;height:36px;border-radius:99px;display:grid;place-items:center;color:var(--ink-3);transition:background .3s,color .3s}
+.socials a,.socials button{width:36px;height:36px;border-radius:99px;display:grid;place-items:center;color:var(--ink-3);-webkit-tap-highlight-color:transparent;transition:background-color .25s,color .25s,scale .16s}
 .socials a:hover,.socials button:hover{background:color-mix(in oklab,var(--ink) 5%,transparent);color:var(--ink)}
+.socials a:active,.socials button:active{scale:.96}
 
 /* ============================================================
    Reduced motion — 动效只承载氛围，不承载信息
@@ -1304,7 +1354,7 @@ html.reduce-motion .plx{translate:none!important}
 
 <header class="hdr ui-stage ui-stage-header">
   <div class="hdr-in shell">
-    <a class="mark" href="preview.html"><i></i><span data-i18n-zh="Hatari 的 AI 工作台" data-i18n-en="Hatari&rsquo;s AI Workspace">Hatari 的 AI 工作台</span></a>
+    <a class="mark" href="index.html"><i></i><span data-i18n-zh="Hatari 的 AI 工作台" data-i18n-en="Hatari&rsquo;s AI Workspace">Hatari 的 AI 工作台</span></a>
     <div class="hdr-right">
       <nav class="hdr-nav" id="nav"></nav>
       <div class="lang-switch" role="group" aria-label="语言切换">
@@ -1342,7 +1392,7 @@ html.reduce-motion .plx{translate:none!important}
         <div class="identity-group">
           <h1 class="typed" id="t-head">你好，我是 Hatari。</h1>
           <p class="lede typed" id="t-lede">我构建能解决真实问题的<br>AI 产品。</p>
-          <p class="intro-zh stage stage-subtitle">
+          <p class="intro-zh stage stage-subtitle" data-i18n-zh="我是一名 AI 产品探索者和构建者。<br>喜欢用产品思维理解问题，<br>用代码和 AI 把想法变成现实。" data-i18n-en="I explore and build AI products.<br>I use product thinking to understand problems,<br>then use code and AI to turn ideas into reality.">
             我是一名 AI 产品探索者和构建者。<br>
             喜欢用产品思维理解问题，<br>
             用代码和 AI 把想法变成现实。
@@ -1362,7 +1412,7 @@ html.reduce-motion .plx{translate:none!important}
 
           <p class="sig stage stage-progress" data-i18n-zh="一起把想法做成现实。" data-i18n-en="Let&rsquo;s build the future together.">一起把想法做成现实。</p>
           <div class="cta stage stage-progress">
-            <a class="btn" href="projects/index.html">我的作品
+            <a class="btn" href="projects/index.html" data-i18n-zh="我的作品" data-i18n-en="My work">我的作品
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 16.5 16.5 7.5M9 7.5h7.5V15"/></svg>
             </a>
             <a class="btn-o" href="mailto:hatari@example.com" aria-label="发邮件">
@@ -1437,13 +1487,13 @@ html.reduce-motion .plx{translate:none!important}
               <div class="mbar">
                 <div class="mbar-l">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.9"><path d="M8.5 8.5h7v7h-7z"/><path d="M8.5 8.5A2.25 2.25 0 1 0 6.25 6.25v2.25M15.5 8.5a2.25 2.25 0 1 1 2.25-2.25V8.5M8.5 15.5a2.25 2.25 0 1 0-2.25 2.25V15.5M15.5 15.5a2.25 2.25 0 1 1 2.25 2.25V15.5"/></svg>
-                  <b>Hatari 的工作台</b><span class="dim">文件</span>
+                  <b data-i18n-zh="Hatari 的工作台" data-i18n-en="Hatari&rsquo;s Workspace">Hatari 的工作台</b><span class="dim" data-i18n-zh="文件" data-i18n-en="Files">文件</span>
                 </div>
                 <div class="mbar-r">
-                  <button class="sync-status" id="agent-status" type="button" aria-label="打开网站助手">
-                    <i aria-hidden="true"></i><span>网站助手在线</span>
+                  <button class="sync-status" id="agent-status" type="button" aria-label="打开网站助手" data-i18n-aria-zh="打开网站助手" data-i18n-aria-en="Open site helper">
+                    <i aria-hidden="true"></i><span data-i18n-zh="网站助手在线" data-i18n-en="Site helper online">网站助手在线</span>
                   </button>
-                  <span class="dim">上海</span>
+                  <span class="dim" data-i18n-zh="上海" data-i18n-en="Shanghai">上海</span>
                   <span id="clock">12:36 PM</span>
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.85"><path d="M4.5 9.4a11 11 0 0 1 15 0"/><path d="M7.6 12.6a6.6 6.6 0 0 1 8.8 0"/><path d="M10.6 15.8a2.4 2.4 0 0 1 2.8 0"/><circle cx="12" cy="18.4" r=".9" fill="currentColor" stroke="none"/></svg>
                   <svg viewBox="0 0 30 16" width="24" height="13" fill="none" style="opacity:.9"><rect x="1" y="2.4" width="24" height="11.2" rx="3.2" stroke="currentColor" stroke-opacity=".55" stroke-width="1.2"/><rect x="3" y="4.4" width="17" height="7.2" rx="2" fill="currentColor"/><path d="M27 6.2c1.1.4 1.1 3.2 0 3.6z" fill="currentColor" fill-opacity=".55"/></svg>
@@ -1452,8 +1502,8 @@ html.reduce-motion .plx{translate:none!important}
 
               <div class="workspace-boot" id="workspace-boot" role="status" aria-live="polite">
                 <i class="boot-mark" aria-hidden="true"></i>
-                <b id="boot-label">正在恢复工作台...</b>
-                <span id="boot-detail">正在读取本地会话</span>
+                <b id="boot-label" data-i18n-zh="正在恢复工作台..." data-i18n-en="Restoring workspace...">正在恢复工作台...</b>
+                <span id="boot-detail" data-i18n-zh="正在读取本地会话" data-i18n-en="Reading local session">正在读取本地会话</span>
               </div>
 
               <div class="icons plx" id="l-icons"></div>
@@ -1575,6 +1625,7 @@ var projects = [
   {slug:"urban-ai",         name:"城市智能",     nameEn:"Urban AI",         summary:"城市数据与空间智能探索",           summaryEn:"Explorations in urban data and spatial intelligence", date:"研究中", dateEn:"Research", glyph:"map"},
   {slug:"podcast-bridge",   name:"播客知识桥",   nameEn:"podcast-bridge",   summary:"让 AI 研究全球播客的本地知识库",     summaryEn:"A local knowledge base for researching global podcasts with AI", date:"开源", dateEn:"Open source", glyph:"music"}
 ];
+var homeLanguage = window.HATARI_LANG === "en" ? "en" : "zh";
 
 var desktopItems = [
   {id:"projects",    label:"项目作品", labelEn:"Projects",  kind:"folder",   glyph:"folder", opens:"projects",    x:22,  y:14},
@@ -1599,10 +1650,10 @@ var dockApps = [
   {id:"claude",label:"资料助手",labelEn:"Research helper"},{id:"obsidian",label:"文章笔记",labelEn:"Writing notes"},{id:"vscode",label:"代码工具",labelEn:"Code tools"},{id:"figma",label:"设计工具",labelEn:"Design tools"}
 ];
 var terminalScript = [
-  {kind:0, text:"工作台状态"},
-  {kind:1, text:"$ 当前目标"},
-  {kind:2, text:"为真实的人"},
-  {kind:2, text:"构建真正有用的智能产品。"}
+  {kind:0, text:"工作台状态", textEn:"Workspace status"},
+  {kind:1, text:"$ 当前目标", textEn:"$ Current goal"},
+  {kind:2, text:"为真实的人", textEn:"Build for real people"},
+  {kind:2, text:"构建真正有用的智能产品。", textEn:"Build AI products that are genuinely useful."}
 ];
 
 /* ============================================================
@@ -1667,9 +1718,9 @@ var iconPositions = readLocal(ICON_STORAGE_KEY, {});
    渲染
    ============================================================ */
 $("nav").innerHTML =
+  '<a href="index.html" aria-current="page">主页</a>'+
   '<a href="projects/index.html">项目</a>'+
   '<a href="writing/index.html">写作</a>'+
-  '<a href="stack.html">工具</a>'+
   '<span aria-disabled="true">关于</span>';
 
 $("explore").innerHTML = exploring
@@ -1724,13 +1775,22 @@ function homeProjectValue(project, key, language){
   return language === "en" && project[key+"En"] ? project[key+"En"] : project[key];
 }
 
+function desktopItemValue(item, key, language){
+  return language === "en" && item[key+"En"] ? item[key+"En"] : item[key];
+}
+
+function noteValue(note, key, language){
+  return language === "en" && note[key+"En"] ? note[key+"En"] : note[key];
+}
+
 function renderHomeLanguage(language){
   var en = language === "en";
-  var navLabels = en ? ["Projects","Writing","Stack","About"] : ["项目","写作","工具","关于"];
+  homeLanguage = en ? "en" : "zh";
+  var navLabels = en ? ["Home","Projects","Writing","About"] : ["主页","项目","写作","关于"];
   $("nav").innerHTML =
-    '<a href="projects/index.html">'+navLabels[0]+'</a>'+
-    '<a href="writing/index.html">'+navLabels[1]+'</a>'+
-    '<a href="stack.html">'+navLabels[2]+'</a>'+
+    '<a href="index.html" aria-current="page">'+navLabels[0]+'</a>'+
+    '<a href="projects/index.html">'+navLabels[1]+'</a>'+
+    '<a href="writing/index.html">'+navLabels[2]+'</a>'+
     '<span aria-disabled="true">'+navLabels[3]+'</span>';
 
   var list = en ? exploringEn : exploringZh;
@@ -1774,6 +1834,9 @@ function renderHomeLanguage(language){
     var trashTip = trash.querySelector(".tip");
     if (trashTip) trashTip.textContent = en ? "Trash" : "废纸篓";
   }
+
+  if (typeof renderWorkspaceLanguage === "function") renderWorkspaceLanguage(homeLanguage);
+  if (typeof refreshOpenWindowsLanguage === "function") refreshOpenWindowsLanguage();
 }
 
 renderHomeLanguage(window.HATARI_LANG || "zh");
@@ -2050,13 +2113,14 @@ var MUSIC_TRACKS = [
   {title:"Deep Work Loop", artist:"Hatari Workspace", root:174.61, tempo:76}
 ];
 var NOTE_DATA = [
-  {title:"智能体为什么需要运行框架？", date:"今天 · 5 分钟", body:"强大的模型只是起点，运行框架决定它能看见什么、记住什么、如何重试，以及怎样安全地完成修改。", href:"writing/index.html#agent-harness"},
-  {title:"从工作流走向智能体", date:"7 月 24 日 · 4 分钟", body:"真正有意思的变化，是固定步骤开始能够检查自身进度，并选择下一步最有价值的行动。", href:"writing/index.html#workflow-to-agent"},
-  {title:"安静的智能界面", date:"7 月 18 日 · 3 分钟", body:"好的智能产品不需要表演聪明，而是缩短人的意图与完成结果之间的距离。", href:"writing/index.html#quiet-interface"}
+  {title:"智能体为什么需要运行框架？", titleEn:"Why agents need a runtime", date:"今天 · 5 分钟", dateEn:"Today · 5 min", body:"强大的模型只是起点，运行框架决定它能看见什么、记住什么、如何重试，以及怎样安全地完成修改。", bodyEn:"A powerful model is only the starting point. The runtime decides what it can see, remember, retry, and change safely.", href:"writing/index.html#agent-harness"},
+  {title:"从工作流走向智能体", titleEn:"From workflows to agents", date:"7 月 24 日 · 4 分钟", dateEn:"Jul 24 · 4 min", body:"真正有意思的变化，是固定步骤开始能够检查自身进度，并选择下一步最有价值的行动。", bodyEn:"The interesting shift begins when fixed steps can inspect their progress and choose the next most valuable action.", href:"writing/index.html#workflow-to-agent"},
+  {title:"安静的智能界面", titleEn:"Quiet intelligent interfaces", date:"7 月 18 日 · 3 分钟", dateEn:"Jul 18 · 3 min", body:"好的智能产品不需要表演聪明，而是缩短人的意图与完成结果之间的距离。", bodyEn:"Good intelligent products do not need to perform intelligence; they shorten the distance between intent and outcome.", href:"writing/index.html#quiet-interface"}
 ];
 var openWindows = {};
 var zTop = 40;
 var workspaceState = "home";
+var workspaceBootPhase = 0;
 var workspaceHomeWindowLayout = {};
 var workspaceHomeIconLayout = {};
 
@@ -2065,59 +2129,79 @@ function desktopItem(id){
   return null;
 }
 
-function appBody(item){
+function appBody(item, language){
+  language = language === "en" ? "en" : homeLanguage;
+  var en = language === "en";
+  var itemLabel = desktopItemValue(item,"label",language);
   if (item.id === "projects") {
     return '<ul class="rows">'+projects.map(function(p,i){
       return '<li><a class="row" href="'+(p.slug === "podcast-bridge" ? "projects/podcast-bridge/index.html" : "projects/project.html?project="+p.slug)+'" style="animation-delay:'+(0.14+i*0.055)+'s">'+
              '<span class="ic"><span style="width:17px;height:17px;display:block">'+glyph(p.glyph)+'</span></span>'+
-             '<span class="txt"><b>'+p.name+'</b><span>'+p.summary+'</span></span>'+
-             '<span class="dt">'+p.date+'</span>'+chev+'</a></li>';
+             '<span class="txt"><b>'+homeProjectValue(p,"name",language)+'</b><span>'+homeProjectValue(p,"summary",language)+'</span></span>'+
+             '<span class="dt">'+homeProjectValue(p,"date",language)+'</span>'+chev+'</a></li>';
     }).join("")+'</ul>'+
-    '<div class="win-ft"><a href="projects/index.html">打开项目文件夹'+arrow+'</a></div>';
+    '<div class="win-ft"><a href="projects/index.html">'+(en ? "Open project files" : "打开项目文件夹")+arrow+'</a></div>';
   }
   if (item.id === "agents") {
+    var chatCopy = en ? {
+      name:"Hatari Site Helper",
+      status:"Local demo · Online",
+      transcript:"Conversation",
+      greeting:"Hi, I’m the site helper. Ask me about this workspace, the projects, or the person behind it.",
+      suggestions:["What can this website do?","What kind of builder is Hatari?"],
+      placeholder:"Ask about this workspace...",
+      send:"Send"
+    } : {
+      name:"Hatari 网站助手",
+      status:"本地演示 · 在线",
+      transcript:"对话记录",
+      greeting:"你好，我是网站助手。你可以问我关于这个网站、项目作品或作者的问题。",
+      suggestions:["这个网站有哪些功能？","作者是个什么样的人？"],
+      placeholder:"输入你想了解的问题...",
+      send:"发送"
+    };
     return '<section class="support-chat" data-chat-root>'+
       '<header class="chat-agentbar"><span class="chat-agent-avatar">'+glyph("agent")+'<i aria-hidden="true"></i></span>'+
-      '<span class="chat-agent-copy"><b>Hatari 网站助手</b><span><i aria-hidden="true"></i>本地演示 · 在线</span></span></header>'+
-      '<div class="chat-transcript" aria-label="对话记录" aria-live="polite">'+
-      '<div class="chat-message assistant"><p class="chat-bubble">你好，我是网站助手。你可以问我关于这个网站、项目作品或作者的问题。</p></div></div>'+
-      '<div class="chat-suggestions" aria-label="建议问题">'+
-      '<button class="chat-suggestion" type="button" data-question="这个网站有哪些功能？">这个网站有哪些功能？</button>'+
-      '<button class="chat-suggestion" type="button" data-question="作者是个什么样的人？">作者是个什么样的人？</button></div>'+
-      '<form class="chat-form"><input class="chat-input" name="question" type="text" maxlength="160" autocomplete="off" aria-label="输入问题" placeholder="输入你想了解的问题...">'+
-      '<button class="chat-send" type="submit">发送</button></form></section>';
+      '<span class="chat-agent-copy"><b>'+chatCopy.name+'</b><span><i aria-hidden="true"></i>'+chatCopy.status+'</span></span></header>'+
+      '<div class="chat-transcript" aria-label="'+chatCopy.transcript+'" aria-live="polite">'+
+      '<div class="chat-message assistant"><p class="chat-bubble">'+chatCopy.greeting+'</p></div></div>'+
+      '<div class="chat-suggestions" aria-label="'+(en ? "Suggested questions" : "建议问题")+'">'+
+      '<button class="chat-suggestion" type="button" data-question="'+chatCopy.suggestions[0]+'">'+chatCopy.suggestions[0]+'</button>'+
+      '<button class="chat-suggestion" type="button" data-question="'+chatCopy.suggestions[1]+'">'+chatCopy.suggestions[1]+'</button></div>'+
+      '<form class="chat-form"><input class="chat-input" name="question" type="text" maxlength="160" autocomplete="off" aria-label="'+(en ? "Ask a question" : "输入问题")+'" placeholder="'+chatCopy.placeholder+'">'+
+      '<button class="chat-send" type="submit">'+chatCopy.send+'</button></form></section>';
   }
   if (item.id === "music") {
     return '<section class="music-app" data-music-root>'+
-      '<aside class="music-library"><span>Workspace sessions</span>'+
+      '<aside class="music-library"><span>'+(en ? "Workspace sessions" : "工作台会话")+'</span>'+
       MUSIC_TRACKS.map(function(track,i){
         return '<button class="music-track'+(i===0?" active":"")+'" type="button" data-track="'+i+'">'+
           '<i aria-hidden="true"></i><span><b>'+track.title+'</b><small>'+track.artist+'</small></span></button>';
       }).join("")+'</aside>'+
       '<div class="music-player"><div class="music-cover" data-cover="0" aria-hidden="true"></div>'+
       '<div class="music-meta"><b data-music-title>'+MUSIC_TRACKS[0].title+'</b><span data-music-artist>'+MUSIC_TRACKS[0].artist+'</span></div>'+
-      '<div class="music-timeline"><input class="music-seek" type="range" min="0" max="1000" value="0" aria-label="播放进度">'+
+      '<div class="music-timeline"><input class="music-seek" type="range" min="0" max="1000" value="0" aria-label="'+(en ? "Playback progress" : "播放进度")+'">'+
       '<div class="music-times"><span data-current-time>0:00</span><span data-duration>0:24</span></div></div>'+
       '<div class="music-controls">'+
-      '<button class="music-control" type="button" data-music-action="previous" aria-label="上一首">'+
+      '<button class="music-control" type="button" data-music-action="previous" aria-label="'+(en ? "Previous track" : "上一首")+'">'+
       '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h2v14H7zM18 6.2v11.6L10.2 12z"/></svg></button>'+
-      '<button class="music-control music-toggle" type="button" data-music-action="toggle" aria-label="播放">'+
+      '<button class="music-control music-toggle" type="button" data-music-action="toggle" aria-label="'+(en ? "Play" : "播放")+'">'+
       '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.2 5.7v12.6L18 12z"/></svg></button>'+
-      '<button class="music-control" type="button" data-music-action="next" aria-label="下一首">'+
+      '<button class="music-control" type="button" data-music-action="next" aria-label="'+(en ? "Next track" : "下一首")+'">'+
       '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15 5h2v14h-2zM6 6.2v11.6l7.8-5.8z"/></svg></button></div>'+
       '<label class="music-volume-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10v4h3l4 3V7L8 10Z"/><path d="M15 9.2a4 4 0 0 1 0 5.6"/></svg>'+
-      '<input class="music-volume" type="range" min="0" max="1" step=".05" value=".55" aria-label="音量"></label>'+
+      '<input class="music-volume" type="range" min="0" max="1" step=".05" value=".55" aria-label="'+(en ? "Volume" : "音量")+'"></label>'+
       '<audio preload="metadata"></audio></div></section>';
   }
   if (item.id === "thinking") {
     return '<div class="notes-app"><aside class="notes-list">'+NOTE_DATA.map(function(note,i){
-      return '<button class="note-item'+(i===0?" active":"")+'" type="button" data-note="'+i+'"><b>'+note.title+'</b><span>'+note.date+'</span></button>';
-    }).join("")+'</aside><article class="note-paper"><time>'+NOTE_DATA[0].date+'</time><h3>'+NOTE_DATA[0].title+
-      '</h3><p>'+NOTE_DATA[0].body+'</p><a href="'+NOTE_DATA[0].href+'">阅读笔记'+arrow+'</a></article></div>'+
-      '<div class="win-ft"><a href="writing/index.html">打开全部文章'+arrow+'</a></div>';
+      return '<button class="note-item'+(i===0?" active":"")+'" type="button" data-note="'+i+'"><b>'+noteValue(note,"title",language)+'</b><span>'+noteValue(note,"date",language)+'</span></button>';
+    }).join("")+'</aside><article class="note-paper"><time>'+noteValue(NOTE_DATA[0],"date",language)+'</time><h3>'+noteValue(NOTE_DATA[0],"title",language)+
+      '</h3><p>'+noteValue(NOTE_DATA[0],"body",language)+'</p><a href="'+NOTE_DATA[0].href+'">'+(en ? "Read note" : "阅读笔记")+arrow+'</a></article></div>'+
+      '<div class="win-ft"><a href="writing/index.html">'+(en ? "Open all writing" : "打开全部文章")+arrow+'</a></div>';
   }
   if (item.id === "code") {
-    return '<div class="code-app"><aside class="code-side"><b>文件</b>'+
+    return '<div class="code-app"><aside class="code-side"><b>'+(en ? "Files" : "文件")+'</b>'+
       '<span class="code-file"><i></i>agents.ts</span><span class="code-file"><i></i>harness.ts</span>'+
       '<span class="code-file"><i></i>memory.ts</span><span class="code-file"><i></i>tools.ts</span></aside>'+
       '<section class="code-main"><div class="code-tabs"><span>harness.ts</span></div><div class="code-lines">'+
@@ -2126,33 +2210,78 @@ function appBody(item){
       '<p>  <span class="kw">const</span> result = <span class="kw">await</span> agent.run({</p>'+
       '<p>    task, context, tools: <span class="str">trustedTools</span></p>'+
       '<p>  });</p><p>  <span class="kw">return</span> evaluator.check(result);</p><p>}</p>'+
-      '<p><span class="cm">// 安静的系统，真正有用的结果</span></p></div>'+
-      '<div class="commit-strip"><b>功能：优化智能体工作流</b><span>2 小时前</span><a href="stack.html">查看技术能力 →</a></div></section></div>';
+      '<p><span class="cm">// '+(en ? "Quiet systems, useful outcomes" : "安静的系统，真正有用的结果")+'</span></p></div>'+
+      '<div class="commit-strip"><b>'+(en ? "Feature: improve agent workflows" : "功能：优化智能体工作流")+'</b><span>'+(en ? "2 hours ago" : "2 小时前")+'</span></div></section></div>';
   }
   if (item.id === "about") {
     return '<div class="about-app"><aside class="about-side"><span class="about-avatar">H</span>'+
-      '<strong>Hatari</strong><small>人工智能产品构建者<br>上海</small>'+
-      '<span class="about-availability"><i></i>期待有价值的合作</span></aside>'+
-      '<section class="about-copy"><span class="kicker">关于我</span>'+
-      '<h3>把模糊的智能想法，变成真正有用的产品。</h3>'+
-      '<p>我在产品思考、界面设计与代码之间工作，构建安静、可靠，并能帮助人们完成真实任务的工具。</p>'+
-      '<ul class="about-facts"><li><b>关注方向</b><span>智能体、工作流与人机协作</span></li>'+
-      '<li><b>工作方式</b><span>快速原型、观察反馈、持续优化并交付</span></li></ul>'+
-      '<a href="mailto:hatari@example.com">和我聊聊'+arrow+'</a></section></div>';
+      '<strong>Hatari</strong><small>'+(en ? "AI product builder<br>Shanghai" : "人工智能产品构建者<br>上海")+'</small>'+
+      '<span class="about-availability"><i></i>'+(en ? "Open to meaningful work" : "期待有价值的合作")+'</span></aside>'+
+      '<section class="about-copy"><span class="kicker">'+(en ? "About me" : "关于我")+'</span>'+
+      '<h3>'+(en ? "Turning vague ideas about intelligence into useful products." : "把模糊的智能想法，变成真正有用的产品。")+'</h3>'+
+      '<p>'+(en ? "I work between product thinking, interface design, and code to build quiet, reliable tools that help people complete real tasks." : "我在产品思考、界面设计与代码之间工作，构建安静、可靠，并能帮助人们完成真实任务的工具。")+'</p>'+
+      '<ul class="about-facts"><li><b>'+(en ? "Focus" : "关注方向")+'</b><span>'+(en ? "Agents, workflows, and human–AI collaboration" : "智能体、工作流与人机协作")+'</span></li>'+
+      '<li><b>'+(en ? "Way of working" : "工作方式")+'</b><span>'+(en ? "Rapid prototypes, observed feedback, continuous delivery" : "快速原型、观察反馈、持续优化并交付")+'</span></li></ul>'+
+      '<a href="mailto:hatari@example.com">'+(en ? "Let’s talk" : "和我聊聊")+arrow+'</a></section></div>';
   }
   return '<div class="inspiration-app"><div class="inspiration-grid">'+
     '<span class="inspiration-tile"></span><span class="inspiration-tile"></span><span class="inspiration-tile"></span>'+
     '<span class="inspiration-tile"></span><span class="inspiration-tile"></span><span class="inspiration-tile"></span>'+
-    '</div><div class="inspiration-caption"><span>安静的系统 / 空间化界面</span><span>已收藏 6 项</span></div></div>';
+    '</div><div class="inspiration-caption"><span>'+(en ? "Quiet systems / spatial interfaces" : "安静的系统 / 空间化界面")+'</span><span>'+(en ? "6 saved" : "已收藏 6 项")+'</span></div></div>';
 }
 
-function windowHTML(item){
-  return '<section class="win" role="dialog" aria-label="'+item.label+'窗口">'+
+function windowHTML(item, language){
+  language = language === "en" ? "en" : homeLanguage;
+  var itemLabel = desktopItemValue(item,"label",language);
+  return '<section class="win" role="dialog" aria-label="'+itemLabel+(language === "en" ? " window" : "窗口")+'">'+
     '<header class="win-hd"><span class="lights">'+
-    '<button class="r" type="button" data-action="close" aria-label="关闭'+item.label+'"></button>'+
-    '<button class="y" type="button" data-action="minimize" aria-label="最小化'+item.label+'"></button>'+
-    '<button class="g" type="button" data-action="maximize" aria-label="最大化'+item.label+'"></button>'+
-    '</span><h2>'+item.label+'</h2></header><div class="win-body">'+appBody(item)+'</div></section>';
+    '<button class="r" type="button" data-action="close" aria-label="'+(language === "en" ? "Close " : "关闭")+itemLabel+'"></button>'+
+    '<button class="y" type="button" data-action="minimize" aria-label="'+(language === "en" ? "Minimize " : "最小化")+itemLabel+'"></button>'+
+    '<button class="g" type="button" data-action="maximize" aria-label="'+(language === "en" ? "Maximize " : "最大化")+itemLabel+'"></button>'+
+    '</span><h2>'+itemLabel+'</h2></header><div class="win-body">'+appBody(item,language)+'</div></section>';
+}
+
+var workspaceBootCopy = {
+  zh:[
+    ["正在恢复工作台...","正在读取本地会话"],
+    ["正在读取布局记录","正在恢复上次工作状态"],
+    ["正在连接网站助手...","本地知识已准备"],
+    ["工作台已就绪","所有系统运行平稳"]
+  ],
+  en:[
+    ["Restoring workspace...","Reading local session"],
+    ["Reading layout record","Restoring the last work state"],
+    ["Connecting site helper...","Local knowledge is ready"],
+    ["Workspace ready","All systems are running smoothly"]
+  ]
+};
+
+function renderWorkspaceLanguage(language){
+  var en = language === "en";
+  var mbarTitle = document.querySelector(".mbar-l b");
+  var mbarFiles = document.querySelector(".mbar-l .dim");
+  var agentStatus = $("agent-status");
+  var agentLabel = agentStatus ? agentStatus.querySelector("span") : null;
+  var locationLabel = document.querySelector(".mbar-r .dim");
+  var bootLabel = $("boot-label");
+  var bootDetail = $("boot-detail");
+  if (mbarTitle) mbarTitle.textContent = en ? "Hatari's Workspace" : "Hatari 的工作台";
+  if (mbarFiles) mbarFiles.textContent = en ? "Files" : "文件";
+  if (agentLabel) agentLabel.textContent = en ? "Site helper online" : "网站助手在线";
+  if (agentStatus) agentStatus.setAttribute("aria-label",en ? "Open site helper" : "打开网站助手");
+  if (locationLabel) locationLabel.textContent = en ? "Shanghai" : "上海";
+  if (bootLabel && bootDetail && typeof workspaceBootCopy !== "undefined"){
+    var copy = workspaceBootCopy[en ? "en" : "zh"][workspaceBootPhase] || workspaceBootCopy[en ? "en" : "zh"][0];
+    bootLabel.textContent = copy[0];
+    bootDetail.textContent = copy[1];
+  }
+  var screen = $("desktop-screen");
+  if (screen) screen.setAttribute("aria-label",en ? "Enter Hatari's AI Workspace" : "进入 Hatari 的人工智能工作台");
+}
+
+function setWorkspaceBootPhase(phase){
+  workspaceBootPhase = phase;
+  renderWorkspaceLanguage(homeLanguage);
 }
 
 function syncDesktopState(){
@@ -2213,7 +2342,8 @@ function updateNote(wrap, index){
   if (!paper) return;
   var buttons = wrap.querySelectorAll(".note-item");
   for (var i=0;i<buttons.length;i++) buttons[i].classList.toggle("active", Number(buttons[i].getAttribute("data-note")) === index);
-  paper.innerHTML = '<time>'+note.date+'</time><h3>'+note.title+'</h3><p>'+note.body+'</p><a href="'+note.href+'">阅读笔记'+arrow+'</a>';
+  var en = homeLanguage === "en";
+  paper.innerHTML = '<time>'+noteValue(note,"date",homeLanguage)+'</time><h3>'+noteValue(note,"title",homeLanguage)+'</h3><p>'+noteValue(note,"body",homeLanguage)+'</p><a href="'+note.href+'">'+(en ? "Read note" : "阅读笔记")+arrow+'</a>';
 }
 
 var musicTrackUrls = {};
@@ -2301,7 +2431,7 @@ function initMusicPlayer(wrap){
   function renderPlaying(){
     var playing = !audio.paused;
     toggle.innerHTML = playing ? pauseIcon : playIcon;
-    toggle.setAttribute("aria-label",playing ? "暂停" : "播放");
+    toggle.setAttribute("aria-label",playing ? (homeLanguage === "en" ? "Pause" : "暂停") : (homeLanguage === "en" ? "Play" : "播放"));
   }
   function renderTrack(){
     var track = MUSIC_TRACKS[currentIndex];
@@ -2360,6 +2490,27 @@ function initMusicPlayer(wrap){
 
 function getLocalAssistantReply(question){
   var q = question.toLowerCase();
+  if (homeLanguage === "en") {
+    if (/website|feature|what can|content|page/.test(q)) {
+      return "This workspace presents Hatari’s projects, product thinking, technical capabilities, and background. The files on the right can be opened, and project entries lead to detail pages.";
+    }
+    if (/author|hatari|builder|person|background/.test(q)) {
+      return "Hatari explores and builds AI products. The process starts from real problems, turns vague ideas into testable product directions, and brings them to life through interface design and code.";
+    }
+    if (/project|work|case|built/.test(q)) {
+      return "The current collection includes Viral Hunter, Agent Workspace, AI Content Studio, Urban AI, and podcast-bridge. Open Project files to browse them and continue into a detail page.";
+    }
+    if (/skill|capabilit|technolog|focus|good at/.test(q)) {
+      return "The focus is on agents, workflows, human–AI collaboration, and product engineering, spanning product analysis, interaction prototypes, frontend implementation, and applied AI.";
+    }
+    if (/contact|collaborat|email|talk/.test(q)) {
+      return "Use the email button on the left, or open the About window to learn more about possible collaborations.";
+    }
+    if (/who are you|assistant|helper/.test(q)) {
+      return "I’m the portfolio’s site helper. I use local knowledge to help you quickly understand the workspace, its projects, and the person behind them.";
+    }
+    return "I can introduce the workspace, its projects, capabilities, and contact details. You can also choose one of the suggested questions below.";
+  }
   if (/网站|功能|能做什么|有哪些内容|页面/.test(q)) {
     return "这个网站主要展示 Hatari 的项目作品、产品思考、技术能力和个人介绍。右侧工作台里的文件都可以打开，项目条目还能继续进入详情页。";
   }
@@ -2405,7 +2556,7 @@ function appendChatTyping(wrap){
   if (!transcript) return null;
   var row = document.createElement("div");
   row.className = "chat-message assistant typing";
-  row.innerHTML = '<p class="chat-bubble" aria-label="网站助手正在输入"><i></i><i></i><i></i></p>';
+  row.innerHTML = '<p class="chat-bubble" aria-label="'+(homeLanguage === "en" ? "Site helper is typing" : "网站助手正在输入")+'"><i></i><i></i><i></i></p>';
   transcript.appendChild(row);
   transcript.scrollTop = transcript.scrollHeight;
   return row;
@@ -2434,7 +2585,7 @@ function sendWebsiteAssistantMessage(wrap, value){
       appendChatMessage(wrap, "assistant", reply);
     }, function(){
       if (typing) typing.remove();
-      appendChatMessage(wrap, "assistant", "暂时没有获取到回复，请稍后再试。");
+      appendChatMessage(wrap, "assistant", homeLanguage === "en" ? "I couldn’t get a reply right now. Please try again." : "暂时没有获取到回复，请稍后再试。");
     }).then(function(){
       if (!wrap.isConnected) return;
       setChatBusy(wrap, false);
@@ -2526,7 +2677,7 @@ function openWindow(id, options){
   wrap.style.left = (Number.isFinite(state.x) ? state.x : d.x) + "px";
   wrap.style.top = (Number.isFinite(state.y) ? state.y : d.y) + "px";
   wrap.style.width = (Number.isFinite(state.w) ? state.w : d.w) + "px";
-  wrap.innerHTML = windowHTML(item);
+  wrap.innerHTML = windowHTML(item,homeLanguage);
   $("l-win").appendChild(wrap);
   openWindows[id] = wrap;
   if (state.maximized) wrap.classList.add("maximized");
@@ -2540,6 +2691,25 @@ function openWindow(id, options){
   if (workspaceState === "live") positionWindowForWorkspace(wrap, false);
   if (!options.restoring) saveSession();
   return wrap;
+}
+
+function refreshOpenWindowsLanguage(){
+  if (typeof openWindows === "undefined" || !openWindows) return;
+  Object.keys(openWindows).forEach(function(id){
+    var wrap = openWindows[id];
+    if (!wrap || !wrap.isConnected) return;
+    var replacement = document.createElement("div");
+    replacement.className = wrap.className;
+    replacement.setAttribute("data-window",id);
+    replacement.style.cssText = wrap.style.cssText;
+    replacement.hidden = wrap.hidden;
+    if (wrap.hasAttribute("data-minimized")) replacement.setAttribute("data-minimized",wrap.getAttribute("data-minimized"));
+    replacement.innerHTML = windowHTML(desktopItem(id),homeLanguage);
+    wrap.replaceWith(replacement);
+    openWindows[id] = replacement;
+    makeWindowInteractive(replacement);
+  });
+  syncDesktopState();
 }
 
 function closeWindow(id){
@@ -2772,15 +2942,15 @@ function restoreWorkspaceWindows(){
       document.dispatchEvent(new CustomEvent("workspace:live"));
       return;
     }
-    setTimeout(function(){ detail.textContent = "正在读取布局记录"; }, 120);
-    setTimeout(function(){ label.textContent = "正在连接网站助手..."; detail.textContent = "本地知识已准备"; }, 220);
+    setTimeout(function(){ setWorkspaceBootPhase(1); }, 120);
+    setTimeout(function(){ setWorkspaceBootPhase(2); }, 220);
     setTimeout(function(){
       screen.classList.remove("os-booting");
       screen.classList.add("os-live");
       document.dispatchEvent(new CustomEvent("workspace:live"));
     }, 300);
     setTimeout(restoreWorkspaceWindows, 440);
-    setTimeout(function(){ label.textContent = "工作台已就绪"; detail.textContent = "所有系统运行平稳"; }, 540);
+    setTimeout(function(){ setWorkspaceBootPhase(3); }, 540);
     setTimeout(function(){
       screen.classList.add("boot-complete");
       setTimeout(function(){ boot.hidden = true; }, 400);
@@ -2796,18 +2966,25 @@ function restoreWorkspaceWindows(){
 (function(){
   var body = $("term-body"), line = 0, chars = 0, done = false, statusIndex = 0;
   var statusText = "";
-  var statusMessages = [
+  var statusMessagesZh = [
     "[同步] 工作台状态已保存",
     "[助手] 本地知识已准备",
     "[待命] 网站助手正在等待问题",
     "[记录] 工作记忆已完成整理"
+  ];
+  var statusMessagesEn = [
+    "[sync] Workspace state saved",
+    "[helper] Local knowledge is ready",
+    "[idle] Site helper is waiting",
+    "[log] Work memory is organized"
   ];
 
   function paint(isDone){
     var html = "";
     for (var i=0;i<terminalScript.length;i++){
       var e = terminalScript[i];
-      var txt = isDone || i < line ? e.text : (i === line ? e.text.slice(0, chars) : null);
+      var sourceText = homeLanguage === "en" && e.textEn ? e.textEn : e.text;
+      var txt = isDone || i < line ? sourceText : (i === line ? sourceText.slice(0, chars) : null);
       if (txt === null) continue;
       html += '<p class="p'+e.kind+'">'+(txt || " ")+"</p>";
     }
@@ -2818,11 +2995,18 @@ function restoreWorkspaceWindows(){
     body.innerHTML = html;
   }
 
+  document.addEventListener("hatari:languagechange",function(){
+    var messages = homeLanguage === "en" ? statusMessagesEn : statusMessagesZh;
+    statusText = messages[Math.max(0,statusIndex - 1) % messages.length];
+    paint(done || reduce);
+  });
+
   if (reduce) { paint(true); return; }
 
   function scheduleStatus(){
     setTimeout(function(){
-      statusText = statusMessages[statusIndex++ % statusMessages.length];
+      var messages = homeLanguage === "en" ? statusMessagesEn : statusMessagesZh;
+      statusText = messages[statusIndex++ % messages.length];
       paint(true);
       scheduleStatus();
     }, 7800 + Math.random() * 5200);

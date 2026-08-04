@@ -13,12 +13,12 @@
 
 <header class="hdr">
   <div class="hdr-in shell">
-    <a class="mark" href="../preview.html" aria-label="返回首页"><i></i><span data-i18n-zh="Hatari 的 AI 工作台" data-i18n-en="Hatari&rsquo;s AI Workspace">Hatari 的 AI 工作台</span></a>
+    <a class="mark" href="../index.html" aria-label="返回首页"><i></i><span data-i18n-zh="Hatari 的 AI 工作台" data-i18n-en="Hatari&rsquo;s AI Workspace">Hatari 的 AI 工作台</span></a>
     <div class="hdr-right">
       <nav class="hdr-nav" aria-label="主导航">
+        <a href="../index.html" data-i18n-zh="主页" data-i18n-en="Home">主页</a>
         <a href="index.html" aria-current="page" data-i18n-zh="项目" data-i18n-en="Projects">项目</a>
         <a href="../writing/index.html" data-i18n-zh="写作" data-i18n-en="Writing">写作</a>
-        <a href="../stack.html" data-i18n-zh="工具" data-i18n-en="Stack">工具</a>
         <span aria-disabled="true" data-i18n-zh="关于" data-i18n-en="About">关于</span>
       </nav>
       <div class="lang-switch" role="group" aria-label="语言切换">
@@ -34,17 +34,66 @@
 
 <main>
   <div class="page-shell">
-    <section class="page-intro" aria-labelledby="page-title">
-      <p class="eyebrow" data-i18n-zh="已选项目" data-i18n-en="Selected builds">已选项目</p>
-      <div class="intro-grid">
-        <h1 id="page-title" data-i18n-zh="正在构建的项目。" data-i18n-en="Things I&rsquo;m building.">正在构建的项目。</h1>
-        <p data-i18n-zh="一些正在形成中的 AI 产品、工作流和界面实验。这里先放概念版本，后续可以直接替换成真实项目介绍与产品截图。" data-i18n-en="A selection of AI products, workflows, and interface experiments in progress. These pages are working notes that can grow with the real projects.">一些正在形成中的 AI 产品、工作流和界面实验。这里先放概念版本，后续可以直接替换成真实项目介绍与产品截图。</p>
+    <section class="projects-head" aria-label="项目筛选" data-i18n-aria-zh="项目筛选" data-i18n-aria-en="Project filters">
+      <h1 class="project-page-title" data-i18n-zh="项目作品" data-i18n-en="Projects">项目作品</h1>
+      <div class="project-filter-panel" role="group" aria-label="筛选条件" data-i18n-aria-zh="筛选条件" data-i18n-aria-en="Filter options">
+        <div class="project-filter-field">
+          <label class="project-filter-label" for="project-filter-progress" data-i18n-zh="完成进度" data-i18n-en="Progress">完成进度</label>
+          <div class="project-filter-select-wrap">
+            <select class="project-filter-select" id="project-filter-progress" data-project-filter-select data-filter-group="progress" data-i18n-aria-zh="完成进度" data-i18n-aria-en="Progress">
+              <option value="all" data-i18n-zh="全部" data-i18n-en="All">全部</option>
+              <option value="complete" data-i18n-zh="已完成" data-i18n-en="Complete">已完成</option>
+              <option value="incomplete" data-i18n-zh="未完成" data-i18n-en="In progress">未完成</option>
+            </select>
+            <span class="project-filter-select-arrow" aria-hidden="true">⌄</span>
+          </div>
+        </div>
+
+        <div class="project-filter-field">
+          <label class="project-filter-label" for="project-filter-form" data-i18n-zh="产品形式" data-i18n-en="Format">产品形式</label>
+          <div class="project-filter-select-wrap">
+            <select class="project-filter-select" id="project-filter-form" data-project-filter-select data-filter-group="form" data-i18n-aria-zh="产品形式" data-i18n-aria-en="Format">
+              <option value="all" data-i18n-zh="全部" data-i18n-en="All">全部</option>
+              <option value="miniapp" data-i18n-zh="小程序" data-i18n-en="Mini app">小程序</option>
+              <option value="web" data-i18n-zh="网站" data-i18n-en="Website">网站</option>
+              <option value="skill" data-i18n-zh="Skill" data-i18n-en="Skill">Skill</option>
+            </select>
+            <span class="project-filter-select-arrow" aria-hidden="true">⌄</span>
+          </div>
+        </div>
+
+        <div class="project-filter-field">
+          <label class="project-filter-label" for="project-filter-type" data-i18n-zh="项目类型" data-i18n-en="Type">项目类型</label>
+          <div class="project-filter-select-wrap">
+            <select class="project-filter-select" id="project-filter-type" data-project-filter-select data-filter-group="type" data-i18n-aria-zh="项目类型" data-i18n-aria-en="Type">
+              <option value="all" data-i18n-zh="全部" data-i18n-en="All">全部</option>
+              <option value="productivity" data-i18n-zh="工具提效" data-i18n-en="Productivity">工具提效</option>
+              <option value="research" data-i18n-zh="研究探索" data-i18n-en="Research">研究探索</option>
+              <option value="playful" data-i18n-zh="娱乐趣味" data-i18n-en="Playful">娱乐趣味</option>
+            </select>
+            <span class="project-filter-select-arrow" aria-hidden="true">⌄</span>
+          </div>
+        </div>
+
+        <div class="project-filter-field">
+          <label class="project-filter-label" for="project-filter-stage" data-i18n-zh="项目阶段" data-i18n-en="Stage">项目阶段</label>
+          <div class="project-filter-select-wrap">
+            <select class="project-filter-select" id="project-filter-stage" data-project-filter-select data-filter-group="stage" data-i18n-aria-zh="项目阶段" data-i18n-aria-en="Stage">
+              <option value="all" data-i18n-zh="全部" data-i18n-en="All">全部</option>
+              <option value="research" data-i18n-zh="研究中" data-i18n-en="Research">研究中</option>
+              <option value="building" data-i18n-zh="构建中" data-i18n-en="Building">构建中</option>
+              <option value="beta" data-i18n-zh="内测中" data-i18n-en="Beta">内测中</option>
+              <option value="published" data-i18n-zh="已发布" data-i18n-en="Published">已发布</option>
+            </select>
+            <span class="project-filter-select-arrow" aria-hidden="true">⌄</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="projects-grid" aria-label="项目列表">
+    <section class="projects-grid" aria-label="项目列表" data-i18n-aria-zh="项目列表" data-i18n-aria-en="Project list">
       <!-- Placeholder project: replace copy and mockup with the real product later. -->
-      <a class="project-card" id="viral-hunter" href="project.html?project=viral-hunter" aria-label="查看 Viral Hunter 项目详情">
+      <a class="project-card" id="viral-hunter" href="project.html?project=viral-hunter" aria-label="查看 Viral Hunter 项目详情" data-progress="incomplete" data-form="web" data-type="productivity" data-stage="beta">
         <div class="project-shot shot-viral" role="img" aria-label="Viral Hunter 数据仪表盘概念预览">
           <div class="shot-window">
             <div class="mock-topbar"><i></i><i></i><i></i><b>Viral Hunter</b></div>
@@ -65,7 +114,7 @@
         </div>
       </a>
 
-      <a class="project-card" id="agent-workspace" href="project.html?project=agent-workspace" aria-label="查看 Agent Workspace 项目详情">
+      <a class="project-card" id="agent-workspace" href="project.html?project=agent-workspace" aria-label="查看 Agent Workspace 项目详情" data-progress="incomplete" data-form="web" data-type="productivity" data-stage="building">
         <div class="project-shot shot-agent" role="img" aria-label="Agent Workspace 编排画布概念预览">
           <div class="shot-window">
             <div class="mock-topbar"><i></i><i></i><i></i><b>Agent Workspace</b></div>
@@ -82,7 +131,7 @@
         </div>
       </a>
 
-      <a class="project-card" id="ai-content-studio" href="project.html?project=ai-content-studio" aria-label="查看 AI Content Studio 项目详情">
+      <a class="project-card" id="ai-content-studio" href="project.html?project=ai-content-studio" aria-label="查看 AI Content Studio 项目详情" data-progress="incomplete" data-form="web" data-type="productivity" data-stage="building">
         <div class="project-shot shot-studio" role="img" aria-label="AI Content Studio 编辑器概念预览">
           <div class="shot-window">
             <div class="mock-topbar"><i></i><i></i><i></i><b>AI Content Studio</b></div>
@@ -100,7 +149,7 @@
         </div>
       </a>
 
-      <a class="project-card" id="urban-ai" href="project.html?project=urban-ai" aria-label="查看 Urban AI 项目详情">
+      <a class="project-card" id="urban-ai" href="project.html?project=urban-ai" aria-label="查看 Urban AI 项目详情" data-progress="incomplete" data-form="web" data-type="research" data-stage="research">
         <div class="project-shot shot-urban" role="img" aria-label="Urban AI 城市地图概念预览">
           <div class="shot-window">
             <div class="mock-topbar"><i></i><i></i><i></i><b>Urban AI</b></div>
@@ -117,7 +166,7 @@
         </div>
       </a>
 
-      <a class="project-card" id="podcast-bridge" href="podcast-bridge/index.html" aria-label="查看 podcast-bridge 项目详情">
+      <a class="project-card" id="podcast-bridge" href="podcast-bridge/index.html" aria-label="查看 podcast-bridge 项目详情" data-progress="complete" data-form="skill" data-type="research" data-stage="published">
         <div class="project-shot shot-podcast" role="img" aria-label="podcast-bridge 本地播客知识库概念预览">
           <div class="shot-window">
             <div class="mock-topbar"><i></i><i></i><i></i><b>podcast-bridge</b></div>
@@ -143,9 +192,67 @@
           <div class="project-meta"><ul class="project-tags"><li data-i18n-zh="智能体 Skill" data-i18n-en="Agent Skill">智能体 Skill</li><li data-i18n-zh="本地优先" data-i18n-en="Local-first">本地优先</li></ul><span class="project-year">2026</span></div>
         </div>
       </a>
+
+      <div class="project-empty" id="project-empty" hidden>
+        <p data-i18n-zh="没有符合这些条件的项目。" data-i18n-en="No projects match these filters.">没有符合这些条件的项目。</p>
+      </div>
     </section>
   </div>
 </main>
+
+<script>
+(function(){
+  "use strict";
+
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".project-card"));
+  var selects = Array.prototype.slice.call(document.querySelectorAll("[data-project-filter-select]"));
+  var summary = document.getElementById("project-filter-summary");
+  var empty = document.getElementById("project-empty");
+  var active = {progress:"all",form:"all",type:"all",stage:"all"};
+
+  function currentLanguage(){
+    return document.documentElement.getAttribute("data-lang") === "en" ? "en" : "zh";
+  }
+
+  function matches(card){
+    var groups = ["progress","form","type","stage"];
+    for (var i=0;i<groups.length;i++){
+      var group = groups[i];
+      if (active[group] === "all") continue;
+      var values = (card.getAttribute("data-"+group) || "").split(/\s+/);
+      if (values.indexOf(active[group]) === -1) return false;
+    }
+    return true;
+  }
+
+  function render(){
+    var visible = 0;
+    for (var s=0;s<selects.length;s++){
+      var field = selects[s].closest(".project-filter-field");
+      if (field) field.classList.toggle("is-active",selects[s].value !== "all");
+    }
+    for (var i=0;i<cards.length;i++){
+      var show = matches(cards[i]);
+      cards[i].hidden = !show;
+      cards[i].setAttribute("aria-hidden",String(!show));
+      if (show) visible++;
+    }
+    if (summary) summary.textContent = currentLanguage() === "en" ? visible+" "+(visible === 1 ? "project" : "projects") : visible+" 个项目";
+    if (empty) empty.hidden = visible !== 0;
+  }
+
+  for (var i=0;i<selects.length;i++){
+    selects[i].addEventListener("change",function(){
+      var group = this.getAttribute("data-filter-group");
+      active[group] = this.value || "all";
+      render();
+    });
+  }
+
+  document.addEventListener("hatari:languagechange",render);
+  render();
+})();
+</script>
 
 <footer class="ftr">
   <div class="ftr-in shell">

@@ -2,28 +2,39 @@
   display:inline-flex;
   align-items:center;
   gap:2px;
-  padding:2px;
+  padding:3px;
   border:1px solid var(--line,#e2e0da);
-  border-radius:7px;
+  border-radius:8px;
   background:color-mix(in oklab,var(--paper,#f5f4f1) 72%,transparent);
+  box-shadow:0 1px 2px color-mix(in oklab,var(--ink,#161614) 8%,transparent);
+  transition:background-color .25s,border-color .25s,box-shadow .25s;
 }
 .lang-switch button{
-  min-width:28px;
-  height:26px;
-  padding:0 7px;
-  border-radius:4px;
-  color:var(--ink-3,#a3a09a);
+  min-width:30px;
+  height:30px;
+  padding:0 8px;
+  border-radius:5px;
+  color:var(--ink-2,#6f6d67);
   font-family:var(--ff-mono,ui-monospace,monospace);
-  font-size:.62rem;
+  font-size:.68rem;
   line-height:1;
-  letter-spacing:.04em;
-  transition:background .25s,color .25s;
+  letter-spacing:.02em;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:background-color .2s,color .2s,scale .16s;
 }
 .lang-switch button:hover{color:var(--ink,#161614)}
+.lang-switch button:focus-visible{
+  outline:2px solid color-mix(in oklab,var(--ink,#161614) 45%,transparent);
+  outline-offset:2px;
+}
+.lang-switch button:active{scale:.96}
 .lang-switch button[aria-pressed="true"]{
   background:var(--ink,#161614);
   color:var(--paper,#f5f4f1);
+  box-shadow:0 1px 2px color-mix(in oklab,var(--ink,#161614) 20%,transparent);
 }
 @media (max-width:720px){
-  .lang-switch button{min-width:25px;padding:0 5px}
+  .lang-switch{padding:2px}
+  .lang-switch button{min-width:27px;height:28px;padding:0 6px;font-size:.64rem}
 }

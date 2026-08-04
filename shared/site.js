@@ -26,6 +26,20 @@
       var title = titleNode.getAttribute(isEnglish() ? "data-i18n-title-en" : "data-i18n-title-zh");
       if (title !== null) titleNode.setAttribute("title",title);
     }
+
+    var attributes = [
+      ["aria-label","data-i18n-aria-zh","data-i18n-aria-en"],
+      ["placeholder","data-i18n-placeholder-zh","data-i18n-placeholder-en"]
+    ];
+    for (var k=0;k<attributes.length;k++){
+      var spec = attributes[k];
+      var attrNodes = scope.querySelectorAll ? scope.querySelectorAll("["+spec[1]+"]") : [];
+      for (var m=0;m<attrNodes.length;m++){
+        var attrNode = attrNodes[m];
+        var attrValue = attrNode.getAttribute(isEnglish() ? spec[2] : spec[1]);
+        if (attrValue !== null) attrNode.setAttribute(spec[0],attrValue);
+      }
+    }
   }
 
   function updateSwitches(){

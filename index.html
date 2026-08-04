@@ -2118,9 +2118,8 @@ var MUSIC_TRACKS = [
   {title:"Deep Work Loop", artist:"Hatari Workspace", root:174.61, tempo:76}
 ];
 var NOTE_DATA = [
-  {title:"智能体为什么需要运行框架？", titleEn:"Why agents need a runtime", date:"今天 · 5 分钟", dateEn:"Today · 5 min", body:"强大的模型只是起点，运行框架决定它能看见什么、记住什么、如何重试，以及怎样安全地完成修改。", bodyEn:"A powerful model is only the starting point. The runtime decides what it can see, remember, retry, and change safely.", href:"writing/index.html#agent-harness"},
-  {title:"从工作流走向智能体", titleEn:"From workflows to agents", date:"7 月 24 日 · 4 分钟", dateEn:"Jul 24 · 4 min", body:"真正有意思的变化，是固定步骤开始能够检查自身进度，并选择下一步最有价值的行动。", bodyEn:"The interesting shift begins when fixed steps can inspect their progress and choose the next most valuable action.", href:"writing/index.html#workflow-to-agent"},
-  {title:"安静的智能界面", titleEn:"Quiet intelligent interfaces", date:"7 月 18 日 · 3 分钟", dateEn:"Jul 18 · 3 min", body:"好的智能产品不需要表演聪明，而是缩短人的意图与完成结果之间的距离。", bodyEn:"Good intelligent products do not need to perform intelligence; they shorten the distance between intent and outcome.", href:"writing/index.html#quiet-interface"}
+  {title:"用 Obsidian+claude 去深度阅读", titleEn:"Deep reading with Obsidian + Claude", date:"2026.02.22 · 小红书", dateEn:"Feb 22, 2026 · Xiaohongshu", body:"把扫描版书籍转成 Markdown，放进 Obsidian，再让 Claude 按章节总结、翻译，并沉淀成可复用的 Skill。", bodyEn:"Turn scanned books into Markdown, use Claude to summarize and translate chapter by chapter in Obsidian, then distill the process into a reusable Skill.", href:"https://www.xiaohongshu.com/explore/699af2b3000000001a02ad5e?xsec_token=ABwt7lE9aqBr6Lpmps0oKY3aw16f9nxZgu397ZdTRnRrI=&xsec_source=pc_user"},
+  {title:"不要做网站，而是做插件", titleEn:"Don’t build a website; build a plugin", date:"2026.07.21 · 小红书", dateEn:"Jul 21, 2026 · Xiaohongshu", body:"AI 让做产品变容易，也让用户更容易忘记。浏览器插件可以减少打开网页和重复输入的阻力，成为更顺手的产品入口。", bodyEn:"AI makes products easier to build, but easier to forget. A browser plugin can remove the friction of opening a site and become a more natural product entry point.", href:"https://www.xiaohongshu.com/explore/6a5f9753000000001c00df93?xsec_token=ABADNzvNrSD4T3HsbfC4dAtWNXtt-dBxafWWQJiC8bDs4=&xsec_source=pc_user"}
 ];
 var openWindows = {};
 var zTop = 40;
@@ -2202,7 +2201,7 @@ function appBody(item, language){
     return '<div class="notes-app"><aside class="notes-list">'+NOTE_DATA.map(function(note,i){
       return '<button class="note-item'+(i===0?" active":"")+'" type="button" data-note="'+i+'"><b>'+noteValue(note,"title",language)+'</b><span>'+noteValue(note,"date",language)+'</span></button>';
     }).join("")+'</aside><article class="note-paper"><time>'+noteValue(NOTE_DATA[0],"date",language)+'</time><h3>'+noteValue(NOTE_DATA[0],"title",language)+
-      '</h3><p>'+noteValue(NOTE_DATA[0],"body",language)+'</p><a href="'+NOTE_DATA[0].href+'">'+(en ? "Read note" : "阅读笔记")+arrow+'</a></article></div>'+
+      '</h3><p>'+noteValue(NOTE_DATA[0],"body",language)+'</p><a href="'+NOTE_DATA[0].href+'" target="_blank" rel="noopener noreferrer">'+(en ? "Read note" : "阅读笔记")+arrow+'</a></article></div>'+
       '<div class="win-ft"><a href="writing/index.html">'+(en ? "Open all writing" : "打开全部文章")+arrow+'</a></div>';
   }
   if (item.id === "code") {

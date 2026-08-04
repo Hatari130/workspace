@@ -35,67 +35,30 @@
 <main>
   <div class="page-shell">
     <section class="page-intro thinking-intro" aria-labelledby="page-title">
-      <p class="eyebrow" data-i18n-zh="笔记与文章" data-i18n-en="Notes &amp; essays">笔记与文章</p>
-      <div class="intro-grid">
-        <h1 id="page-title" data-i18n-zh="公开写作。" data-i18n-en="Writing in public.">公开写作。</h1>
-        <p data-i18n-zh="关于 AI 产品、Agent、人机协作和构建过程的阶段性记录。不是定论，更像持续更新的工作笔记。" data-i18n-en="Working notes on AI products, agents, human–AI collaboration, and the process of building. Not final answers, but observations that can keep changing.">关于 AI 产品、Agent、人机协作和构建过程的阶段性记录。不是定论，更像持续更新的工作笔记。</p>
-      </div>
+      <h1 id="page-title" class="writing-page-title" data-i18n-zh="笔记与文章" data-i18n-en="Notes &amp; essays">笔记与文章</h1>
+      <p class="writing-page-description" data-i18n-zh="关于 AI 产品、Agent、人机协作和构建过程的阶段性记录。" data-i18n-en="Ongoing notes on AI products, agents, human–AI collaboration, and the process of building.">关于 AI 产品、Agent、人机协作和构建过程的阶段性记录。</p>
     </section>
 
     <section class="thinking-list" aria-label="文章列表">
-      <!-- Draft entries: replace hrefs and copy when the real articles are ready. -->
-      <a class="thought-row" id="agent-harness" href="#agent-harness">
-        <time class="thought-date" datetime="2026-07">2026.07</time>
+      <a class="thought-row" id="obsidian-deep-reading" href="https://www.xiaohongshu.com/explore/699af2b3000000001a02ad5e?xsec_token=ABwt7lE9aqBr6Lpmps0oKY3aw16f9nxZgu397ZdTRnRrI=&amp;xsec_source=pc_user" target="_blank" rel="noopener noreferrer" aria-label="在小红书阅读：用 Obsidian+claude 去深度阅读">
+        <time class="thought-date" datetime="2026-02-22">2026.02</time>
         <span class="thought-copy">
-          <span class="thought-kind" data-i18n-zh="智能体系统" data-i18n-en="Agent systems">智能体系统</span>
-          <h2 data-i18n-zh="为什么 Agent 需要 Harness？" data-i18n-en="Why does an agent need a harness?">为什么 Agent 需要 Harness？</h2>
-          <p data-i18n-zh="模型能力只是起点。真正决定 Agent 能看见什么、记住什么、如何重试以及怎样安全行动的，是它身边的 Harness。" data-i18n-en="Model capability is only the starting point. The harness determines what an agent can see, remember, retry, and do safely.">模型能力只是起点。真正决定 Agent 能看见什么、记住什么、如何重试以及怎样安全行动的，是它身边的 Harness。</p>
+          <span class="thought-kind" data-i18n-zh="AI 笔记 · 本地知识库" data-i18n-en="AI notes · Local knowledge">AI 笔记 · 本地知识库</span>
+          <h2 data-i18n-zh="用 Obsidian+claude 去深度阅读" data-i18n-en="Deep reading with Obsidian + Claude">用 Obsidian+claude 去深度阅读</h2>
+          <p data-i18n-zh="把扫描版书籍转成 Markdown，放进 Obsidian，再让 Claude 按章节总结、翻译，并沉淀成可复用的 Skill。" data-i18n-en="Turn scanned books into Markdown, use Claude to summarize and translate chapter by chapter in Obsidian, then distill the process into a reusable Skill.">把扫描版书籍转成 Markdown，放进 Obsidian，再让 Claude 按章节总结、翻译，并沉淀成可复用的 Skill。</p>
         </span>
-        <span class="thought-time" data-i18n-zh="5 分钟" data-i18n-en="5 min">5 分钟</span>
+        <span class="thought-time" data-i18n-zh="小红书" data-i18n-en="Xiaohongshu">小红书</span>
         <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
       </a>
 
-      <a class="thought-row" id="workflow-to-agent" href="#workflow-to-agent">
-        <time class="thought-date" datetime="2026-06">2026.06</time>
+      <a class="thought-row" id="website-or-plugin" href="https://www.xiaohongshu.com/explore/6a5f9753000000001c00df93?xsec_token=ABADNzvNrSD4T3HsbfC4dAtWNXtt-dBxafWWQJiC8bDs4=&amp;xsec_source=pc_user" target="_blank" rel="noopener noreferrer" aria-label="在小红书阅读：不要做网站，而是做插件">
+        <time class="thought-date" datetime="2026-07-21">2026.07</time>
         <span class="thought-copy">
-          <span class="thought-kind" data-i18n-zh="智能体" data-i18n-en="Agents">智能体</span>
-          <h2 data-i18n-zh="从 Workflow 到 Agent：什么时候该让系统自己决定" data-i18n-en="From workflow to agent: when should the system decide for itself?">从 Workflow 到 Agent：什么时候该让系统自己决定</h2>
-          <p data-i18n-zh="固定流程和自主决策并不是二选一，关键是识别哪些环节值得交给 Agent，哪些必须保持确定性。" data-i18n-en="Fixed workflows and autonomous decisions are not opposites. The key is knowing which steps benefit from an agent and which must remain deterministic.">固定流程和自主决策并不是二选一，关键是识别哪些环节值得交给 Agent，哪些必须保持确定性。</p>
+          <span class="thought-kind" data-i18n-zh="AI 产品 · 产品入口" data-i18n-en="AI products · Product entry">AI 产品 · 产品入口</span>
+          <h2 data-i18n-zh="不要做网站，而是做插件" data-i18n-en="Don’t build a website; build a plugin">不要做网站，而是做插件</h2>
+          <p data-i18n-zh="AI 让做产品变容易，也让用户更容易忘记。浏览器插件可以减少打开网页和重复输入的阻力，成为更顺手的产品入口。" data-i18n-en="AI makes products easier to build, but easier to forget. A browser plugin can remove the friction of opening a site and become a more natural product entry point.">AI 让做产品变容易，也让用户更容易忘记。浏览器插件可以减少打开网页和重复输入的阻力，成为更顺手的产品入口。</p>
         </span>
-        <span class="thought-time" data-i18n-zh="6 分钟" data-i18n-en="6 min">6 分钟</span>
-        <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
-      </a>
-
-      <a class="thought-row" id="daily-ai-tool" href="#daily-ai-tool">
-        <time class="thought-date" datetime="2026-05">2026.05</time>
-        <span class="thought-copy">
-          <span class="thought-kind" data-i18n-zh="构建" data-i18n-en="Building">构建</span>
-          <h2 data-i18n-zh="做一个能被日常使用的 AI 工具" data-i18n-en="Building an AI tool people can use every day">做一个能被日常使用的 AI 工具</h2>
-          <p data-i18n-zh="炫目的 demo 很容易，稳定进入真实工作却很难。记录一次从功能演示到日常工具的产品取舍。" data-i18n-en="A flashy demo is easy; becoming part of real work is hard. A record of the product choices between a feature demo and a daily tool.">炫目的 demo 很容易，稳定进入真实工作却很难。记录一次从功能演示到日常工具的产品取舍。</p>
-        </span>
-        <span class="thought-time" data-i18n-zh="7 分钟" data-i18n-en="7 min">7 分钟</span>
-        <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
-      </a>
-
-      <a class="thought-row" id="product-hypothesis" href="#product-hypothesis">
-        <time class="thought-date" datetime="2026-04">2026.04</time>
-        <span class="thought-copy">
-          <span class="thought-kind" data-i18n-zh="研究" data-i18n-en="Research">研究</span>
-          <h2 data-i18n-zh="把模糊问题变成可验证的产品假设" data-i18n-en="Turning a vague problem into a testable product hypothesis">把模糊问题变成可验证的产品假设</h2>
-          <p data-i18n-zh="面对一句“我们想做个 AI 功能”，如何把它拆成用户行为、成功信号和足够小的验证路径。" data-i18n-en="When someone says “we want an AI feature,” how do you break it into user behavior, success signals, and a small enough test?">面对一句“我们想做个 AI 功能”，如何把它拆成用户行为、成功信号和足够小的验证路径。</p>
-        </span>
-        <span class="thought-time" data-i18n-zh="5 分钟" data-i18n-en="5 min">5 分钟</span>
-        <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
-      </a>
-
-      <a class="thought-row" id="quiet-interface" href="#quiet-interface">
-        <time class="thought-date" datetime="2026-03">2026.03</time>
-        <span class="thought-copy">
-          <span class="thought-kind" data-i18n-zh="人 × AI" data-i18n-en="Human × AI">人 × AI</span>
-          <h2 data-i18n-zh="人和 AI 协作时，界面应该退到哪里" data-i18n-en="When people and AI work together, where should the interface step back?">人和 AI 协作时，界面应该退到哪里</h2>
-          <p data-i18n-zh="好的 AI 界面不一定更热闹。它应当在需要选择时出现，在用户进入思考状态时安静退后。" data-i18n-en="A good AI interface does not need to be louder. It should appear when a choice is needed and step back when the user is thinking.">好的 AI 界面不一定更热闹。它应当在需要选择时出现，在用户进入思考状态时安静退后。</p>
-        </span>
-        <span class="thought-time" data-i18n-zh="4 分钟" data-i18n-en="4 min">4 分钟</span>
+        <span class="thought-time" data-i18n-zh="小红书" data-i18n-en="Xiaohongshu">小红书</span>
         <svg class="thought-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></svg>
       </a>
     </section>

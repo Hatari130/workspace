@@ -171,6 +171,8 @@ html.dark .project-shot{outline-color:oklch(1 0 0 / .12)}
 .shot-studio{background:#eeeae8}
 .shot-urban{background:#e5ebec}
 .shot-podcast{background:#e7edeb}
+.shot-map{background:#e9e2d3}
+.shot-map .project-real-image{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .shot-window{
   position:absolute;left:26px;right:26px;top:28px;bottom:-24px;overflow:hidden;
   border:1px solid rgba(34,36,40,.08);border-radius:7px;background:#fafafa;

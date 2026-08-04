@@ -114,6 +114,16 @@
       en:{kicker:"Spatial intelligence",status:"Research · mapping opportunities",summary:"Explore how spatial data, urban sensing, and generative AI can turn complexity into clearer decisions.",facts:[["Role","Research"],["Stage","Exploration"],["Year","2025"],["Focus","Spatial AI"]],problem:"Urban data has many dimensions, but it is often too specialized and fragmented for everyday decision-makers, without an interaction model that explains why things changed.",system:"Connect spatial indicators, temporal change, and natural-language queries so users can investigate the causes and effects behind anomalies on a map.",next:"Focusing on data trust, changing spatial scales, and the explanation layer so a generative interface cannot produce plausible but untraceable conclusions."},
       visual:"urban"
     },
+    "map-creator":{
+      title:"Map Creator", kicker:"面向 Agent 的城市地图生成", status:"开源 · MIT", progress:100,
+      summary:"把城市、地点清单或 POI 数据转换成可复查的 GIS 地图，并进一步生成风格化的城市导览海报。",
+      facts:[["角色","产品 + Skill"],["形式","Agent Skill"],["年份","2026"],["重点","城市地图生成"]],
+      problem:"制作一张城市导览地图，通常要反复处理地点检索、坐标系转换、地图数据下载、道路与建筑渲染，以及视觉风格统一。",
+      system:"Map Creator 把地点解析、GCJ-02 到 WGS84 的坐标对齐、OpenStreetMap GIS 渲染和可选的 GPT Image 风格化组织成一条 Agent 工具链，并保留 POI JSON 供人工复查。",
+      next:"继续验证不同城市和地点类型下的解析准确性、OSM 数据请求的稳定性，以及 GIS 草稿到风格化海报之间的可控程度。",
+      en:{kicker:"City map generation for agents",status:"Open source · MIT",summary:"Turn cities, place lists, or POI data into reviewable GIS maps, then optionally generate stylized city guide posters.",facts:[["Role","Product + Skill"],["Format","Agent Skill"],["Year","2026"],["Focus","City map generation"]],problem:"Making a city guide map means repeatedly handling place lookup, coordinate conversion, map data, road and building rendering, and visual consistency.",system:"Map Creator organizes place resolution, GCJ-02 to WGS84 alignment, OpenStreetMap GIS rendering, and optional GPT Image stylization into an Agent toolchain, while keeping POI JSON available for human review.",next:"Keep testing resolution accuracy across cities and place types, the reliability of OSM requests, and how much control remains between the GIS draft and the stylized poster."},
+      visual:"map"
+    },
   };
 
   function visual(type,title){
@@ -126,6 +136,9 @@
     }
     if (type === "studio") {
       return '<div class="project-shot shot-studio"><div class="shot-window">'+top+'<div class="studio-layout"><aside class="studio-side"><b></b><i></i><i></i><i></i><i></i></aside><div class="studio-doc"><h3></h3><p></p><p></p><p></p><p></p></div><aside class="studio-tool"><i></i><i></i><i></i></aside></div></div></div>';
+    }
+    if (type === "map") {
+      return '<div class="project-shot shot-map"><img class="project-real-image" src="map-creator/changning-industrial-memory-map.jpg" alt="Map Creator 生成的长宁工业记忆打卡地图"></div>';
     }
     return '<div class="project-shot shot-urban"><div class="shot-window">'+top+'<div class="urban-layout"><div class="map-grid"><i></i><i></i><i></i><i></i></div><aside class="urban-panel"><b></b><i></i><i></i><i></i><i></i></aside></div></div></div>';
   }

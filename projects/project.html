@@ -75,7 +75,7 @@
 (function(){
   var PROJECTS = {
     "map-creator":{
-      title:"Map Creator", kicker:"面向 Agent 的城市地图生成", status:"开源 · MIT", progress:100,
+      title:"地图生成skill", titleEn:"Map Creator", kicker:"面向 Agent 的城市地图生成", status:"开源 · MIT", progress:100,
       summary:"把城市、地点清单或 POI 数据转换成可复查的 GIS 地图，并进一步生成风格化的城市导览海报。",
       facts:[["角色","产品 + Skill"],["形式","Agent Skill"],["年份","2026"],["重点","城市地图生成"]],
       problem:"制作一张城市导览地图，通常要反复处理地点检索、坐标系转换、地图数据下载、道路与建筑渲染，以及视觉风格统一。",
@@ -85,7 +85,7 @@
       visual:"map"
     },
     "exam-reverse-engineer":{
-      title:"Exam Reverse Engineer", kicker:"面向自命题专业课的真题分析 Skill", status:"开源 · GitHub", progress:100,
+      title:"真题分析skill", titleEn:"Exam Reverse Engineer", kicker:"面向自命题专业课的真题分析 Skill", status:"开源 · GitHub", progress:100,
       summary:"从历年真题中还原出题规律，输出分阶段报告与可执行的复习策略。",
       facts:[["角色","产品 + Skill"],["形式","Agent Skill"],["年份","2026"],["重点","真题研究"]],
       problem:"很多备考分析停留在“哪些知识点出现过”。但连续多年的自命题专业课真题，还包含题型结构、出题措辞、轮换周期和年度变量；如果只做频次统计，就会丢掉这些命题信号。",
@@ -96,7 +96,7 @@
       visual:"exam"
     },
     "cinema-stars-maps":{
-      title:"Cinema Stars Maps", kicker:"每个人的电影史 · 观影数据可视化", status:"已上线 · 在线体验", progress:100,
+      title:"豆瓣电影星图", titleEn:"Cinema Stars Maps", kicker:"每个人的电影史 · 观影数据可视化", status:"已上线 · 在线体验", progress:100,
       summary:"把豆瓣观影记录变成一片可探索、可分享的电影史星空。",
       facts:[["角色","产品 + 网站"],["形式","网站"],["年份","2026"],["重点","观影可视化"]],
       problem:"电影记录通常停留在一张列表里：用户能看到看过什么，却很难感受到自己的观影轨迹、年代和电影之间的关系。",
@@ -130,9 +130,10 @@
   document.body.setAttribute("data-project",slug);
   function renderProject(language){
     var copy = language === "en" && project.en ? project.en : project;
-    document.title = project.title+" — "+(language === "en" ? "Hatari's AI Workspace" : "Hatari 的 AI 工作台");
+    var projectTitle = language === "en" && project.titleEn ? project.titleEn : project.title;
+    document.title = projectTitle+" — "+(language === "en" ? "Hatari's AI Workspace" : "Hatari 的 AI 工作台");
     document.getElementById("project-kicker").textContent = copy.kicker;
-    document.getElementById("project-title").textContent = project.title;
+    document.getElementById("project-title").textContent = projectTitle;
     document.getElementById("project-summary").textContent = copy.summary;
     document.getElementById("project-status").textContent = copy.status;
     var projectLink = document.getElementById("project-link");

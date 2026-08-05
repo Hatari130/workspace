@@ -1632,7 +1632,8 @@ var projects = [
   {slug:"cinema-stars-maps",name:"豆瓣电影星图", nameEn:"Cinema Stars Maps", summary:"把豆瓣观影记录变成电影史星空", summaryEn:"Turn a film diary into a cinema star map", date:"已上线", dateEn:"Live", glyph:"map"},
   {slug:"map-creator",      name:"地图生成skill", nameEn:"Map Creator",       summary:"面向 Agent 的城市地图生成 Skill", summaryEn:"An Agent Skill for generating city maps", date:"开源", dateEn:"Open source", glyph:"map"},
   {slug:"exam-reverse-engineer", name:"真题分析skill", nameEn:"Exam Reverse Engineer", summary:"从历年真题还原出题规律与复习策略", summaryEn:"Recover exam patterns and study strategy from past papers", date:"开源", dateEn:"Open source", glyph:"note"},
-  {slug:"podcast-bridge",   name:"播客订阅skill",   nameEn:"podcast-bridge",   summary:"让 AI 研究全球播客的本地知识库",     summaryEn:"A local knowledge base for researching global podcasts with AI", date:"开源", dateEn:"Open source", glyph:"music"}
+  {slug:"podcast-bridge",   name:"播客订阅skill",   nameEn:"podcast-bridge",   summary:"让 AI 研究全球播客的本地知识库",     summaryEn:"A local knowledge base for researching global podcasts with AI", date:"开源", dateEn:"Open source", glyph:"music"},
+  {slug:"korean-subtitle-gen", name:"韩语字幕生成工具", nameEn:"Korean Subtitle Gen", summary:"视频或音频转录、翻译与双语字幕生成", summaryEn:"Transcribe, translate, and generate bilingual subtitles", date:"开源", dateEn:"Open source", glyph:"note"}
 ];
 var homeLanguage = window.HATARI_LANG === "en" ? "en" : "zh";
 
@@ -1661,7 +1662,8 @@ var featuredProjects = [
   {name:"Cinema Stars Maps", progress:100, glyph:"map"},
   {name:"Map Creator",       progress:100, glyph:"map"},
   {name:"Exam Reverse Engineer", progress:100, glyph:"note"},
-  {name:"podcast-bridge",    progress:100, glyph:"music"}
+  {name:"podcast-bridge",    progress:100, glyph:"music"},
+  {name:"Korean Subtitle Gen", progress:100, glyph:"note"}
 ];
 var dockApps = [
   {id:"finder",label:"项目文件",labelEn:"Project files"},{id:"music",label:"工作音乐",labelEn:"Work music"},{id:"chatgpt",label:"网站助手",labelEn:"Site helper"},
@@ -2512,7 +2514,7 @@ function getLocalAssistantReply(question){
       return "Hatari explores and builds AI products. The process starts from real problems, turns vague ideas into testable product directions, and brings them to life through interface design and code.";
     }
     if (/project|work|case|built/.test(q)) {
-      return "The current collection includes Cinema Stars Maps, Map Creator, Exam Reverse Engineer, and podcast-bridge. Open Project files to browse them and continue into a detail page.";
+      return "The current collection includes Cinema Stars Maps, Map Creator, Exam Reverse Engineer, podcast-bridge, and Korean Subtitle Gen. Open Project files to browse them and continue into a detail page.";
     }
     if (/skill|capabilit|technolog|focus|good at/.test(q)) {
       return "The focus is on agents, workflows, human–AI collaboration, and product engineering, spanning product analysis, interaction prototypes, frontend implementation, and applied AI.";
@@ -2532,7 +2534,7 @@ function getLocalAssistantReply(question){
     return "Hatari 是一名人工智能产品探索者和构建者，习惯从真实问题出发，把模糊想法整理成可验证的产品方案，再结合界面设计与代码完成实现。";
   }
   if (/项目|作品|案例|做过什么/.test(q)) {
-    return "目前展示了四个方向：热点猎手、智能体工作台、智能内容工坊和城市智能。你可以打开“项目作品”文件夹查看简介，并进入对应详情页。";
+    return "目前展示了五个真实项目：播客订阅 skill、地图生成 skill、豆瓣电影星图、真题分析 skill和韩语字幕生成工具。你可以打开“项目作品”文件夹查看简介，并进入对应详情页。";
   }
   if (/能力|技术|擅长|方向|会什么/.test(q)) {
     return "作者重点关注智能体、工作流、人机协作与产品工程，能力覆盖产品分析、交互原型、前端实现和人工智能能力落地。";

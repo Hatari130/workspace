@@ -106,6 +106,17 @@
       en:{kicker:"Every cinema · personal film history",status:"Live · try it online",summary:"Turn a personal film diary into an explorable and shareable cinema star map.",facts:[["Role","Product + Website"],["Format","Website"],["Year","2026"],["Focus","Film data visualization"]],problem:"Film records usually stay as a list: people can see what they watched, but not the relationships between their viewing history, eras, regions, and films.",system:"The backend reads a public Douban film diary or accepts a CSV fallback; a pipeline matches and places films by year, country, and editorial lists, then generates star-map JSON and an SVG poster. Ratings and constellations remain query results rather than stored data.",next:"Keep expanding the editorial library, improve Chinese-title and year matching, and move background jobs from the lightweight starting setup to a more durable queue and database for public deployment."},
       visual:"cinema"
     },
+    "korean-subtitle-gen":{
+      title:"韩语字幕生成工具", titleEn:"Korean Subtitle Gen", kicker:"本地多语言双语字幕工作台", status:"开源 · GitHub", progress:100,
+      summary:"把视频或音频自动转录、翻译成中文，并生成带词级时间轴的双语 SRT 字幕。",
+      facts:[["角色","产品 + 工具"],["形式","本地网站"],["年份","2026"],["重点","多语言字幕"]],
+      problem:"字幕制作往往要在下载素材、语音识别、翻译、断句和时间轴之间反复切换。对于韩语、日语或英语短视频，还需要让原文和中文译文保持准确对应。",
+      system:"Korean Subtitle Gen 用 Whisper 识别视频或音频，翻译为中文并导出双语 SRT；词级时间戳用于保持字幕对齐，AI 断句用于把过长的识别结果重新整理成更适合短视频阅读的节奏。项目还提供 SRT 合并、JSON 时间轴和口播音频生成能力。",
+      next:"继续改善多语言专有名词的识别与翻译质量，降低本地模型首次下载的门槛，并把字幕预览、断句和导出流程做得更连续。",
+      repo:"https://github.com/Hatari130/korean-subtitle-gen",
+      en:{kicker:"A local bilingual subtitle workspace",status:"Open source · GitHub",summary:"Transcribe and translate video or audio into bilingual SRT subtitles with word-level timing.",facts:[["Role","Product + Tool"],["Format","Local web app"],["Year","2026"],["Focus","Multilingual subtitles"]],problem:"Subtitle production often means switching between downloading media, speech recognition, translation, line breaking, and timeline editing. For Korean, Japanese, or English short videos, the original and Chinese translation also need to stay aligned.",system:"Korean Subtitle Gen uses Whisper to recognize video or audio, translates it into Chinese, and exports bilingual SRT. Word-level timestamps preserve alignment, while AI line breaking reshapes long recognition results into a rhythm that is easier to read in short videos. It also includes SRT merging, JSON timelines, and voiceover generation.",next:"Keep improving recognition and translation for multilingual proper nouns, reduce the friction of downloading local models for the first run, and make preview, line breaking, and export feel like one continuous workflow."},
+      visual:"subtitle"
+    },
   };
 
   function visual(type){
@@ -117,6 +128,9 @@
     }
     if (type === "exam") {
       return '<div class="project-shot shot-exam"><div class="shot-window"><div class="mock-topbar"><i></i><i></i><i></i><b>exam-reverse-engineer</b></div><div class="exam-mock"><div class="exam-mock-head"><span>PAST PAPERS</span><b>2020—2025</b></div><div class="exam-mock-matrix" aria-hidden="true"><i></i><i class="is-on"></i><i></i><i class="is-hot"></i><i></i><i class="is-on"></i><i class="is-on"></i><i></i><i></i><i></i><i class="is-hot"></i><i></i><i></i><i class="is-hot"></i><i class="is-on"></i><i></i><i></i><i class="is-on"></i></div><div class="exam-mock-flow"><span><b>01</b><em>摄入</em></span><i></i><span><b>02</b><em>结构</em></span><i></i><span><b>03</b><em>画像</em></span><i></i><span><b>04</b><em>策略</em></span></div></div></div></div>';
+    }
+    if (type === "subtitle") {
+      return '<div class="project-shot shot-subtitle"><div class="shot-window"><div class="mock-topbar"><i></i><i></i><i></i><b>korean-subtitle-gen</b></div><div class="subtitle-mock"><div class="subtitle-mock-toolbar"><b>SUBTITLE STUDIO</b><span>KO&nbsp; / &nbsp;ZH</span></div><div class="subtitle-mock-video"><i class="subtitle-mock-play"></i><span></span><b>00:02 / 00:18</b></div><div class="subtitle-mock-lines"><span><i></i><b>요즘 상하이 여행</b><em>为什么最近这么多人去上海旅游？</em></span><span><i></i><b>새로운 영상을 준비해요</b><em>正在准备一段新视频。</em></span></div><div class="subtitle-mock-timeline"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>';
     }
     return '<div class="project-shot shot-map"><img class="project-real-image" src="map-creator/changning-industrial-memory-map.jpg" alt="Map Creator 生成的长宁工业记忆打卡地图"></div>';
   }

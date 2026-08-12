@@ -334,9 +334,10 @@ html.dark .project-shot{outline-color:oklch(1 0 0 / .12)}
 .detail-link--github{color:var(--paper);background:var(--ink);box-shadow:0 6px 16px color-mix(in oklab,var(--ink) 18%,transparent)}
 .detail-link--github:hover{box-shadow:0 9px 20px color-mix(in oklab,var(--ink) 24%,transparent)}
 .detail-link--github svg{fill:currentColor;stroke:none}
-.detail-link--xiaohongshu{color:oklch(.48 .2 20);background:oklch(.97 .025 20);box-shadow:inset 0 0 0 1px oklch(.82 .075 20),0 5px 14px oklch(.48 .2 20/.08)}
-.detail-link--xiaohongshu:hover{background:oklch(.95 .04 20);box-shadow:inset 0 0 0 1px oklch(.72 .11 20),0 8px 18px oklch(.48 .2 20/.12)}
-html.dark .detail-link--xiaohongshu{color:oklch(.78 .15 20);background:oklch(.25 .045 20);box-shadow:inset 0 0 0 1px oklch(.42 .075 20),0 5px 14px rgba(0,0,0,.14)}
+.detail-link--xiaohongshu{color:#fff;background:#ff2442;box-shadow:0 6px 16px rgba(255,36,66,.2)}
+.detail-link--xiaohongshu:hover{background:#eb1735;box-shadow:0 9px 20px rgba(255,36,66,.28)}
+.detail-link--xiaohongshu svg{fill:currentColor;stroke:none}
+html.dark .detail-link--xiaohongshu{color:#fff;background:#ff2442;box-shadow:0 6px 16px rgba(255,36,66,.24)}
 .detail-visual{overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 34px 80px -58px rgba(25,23,20,.55)}
 .detail-visual .project-shot{aspect-ratio:16/10;border-bottom:0}
 .detail-visual .shot-window{left:38px;right:38px;top:38px}

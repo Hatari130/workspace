@@ -312,11 +312,12 @@ html.dark .project-shot{outline-color:oklch(1 0 0 / .12)}
 
 /* Project detail */
 .detail-shell{width:min(100%,1240px);margin:0 auto;padding:44px 40px 128px}
-.detail-back{display:inline-flex;align-items:center;gap:8px;margin-bottom:35px;font-family:var(--ff-sans);font-size:.8rem;color:var(--ink-3);transition:color .25s}
+.detail-back{display:inline-flex;align-items:center;gap:8px;margin-bottom:35px;font-family:var(--ff-sans);font-size:.92rem;line-height:1.4;color:var(--ink-2);transition:color .25s}
 .detail-back:hover{color:var(--ink)}
 .detail-hero{display:grid;grid-template-columns:minmax(300px,.76fr) minmax(0,1.24fr);gap:62px;align-items:center;padding-bottom:52px;border-bottom:1px solid var(--line)}
 .detail-copy .eyebrow{margin-bottom:17px}
 .detail-copy h1{margin:0;font-family:var(--ff-display);font-size:5.2rem;font-weight:590;line-height:.93;letter-spacing:0}
+body[data-project="map-creator"] .detail-copy h1{font-size:clamp(3.75rem,4.25vw,4.25rem);white-space:nowrap}
 .detail-copy>p{margin:23px 0 0;max-width:46ch;font-size:1.06rem;line-height:1.82;color:var(--ink-2)}
 .detail-meta{display:flex;align-items:center;flex-wrap:wrap;gap:14px 20px;margin-top:28px}
 .detail-status{display:flex;align-items:center;gap:11px;font-family:var(--ff-mono);font-size:.9rem;font-weight:560;line-height:1.4;color:var(--ink-2);white-space:nowrap}
@@ -344,13 +345,13 @@ html.dark .detail-link--xiaohongshu{color:#fff;background:#ff2442;box-shadow:0 6
 .detail-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line)}
 .detail-fact{padding:24px 18px}
 .detail-fact+ .detail-fact{border-left:1px solid var(--line)}
-.detail-fact span{display:block;font-family:var(--ff-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-3)}
+.detail-fact span{display:block;font-family:var(--ff-mono);font-size:.78rem;line-height:1.4;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2)}
 .detail-fact b{display:block;margin-top:9px;font-size:.96rem;font-weight:570}
 .detail-sections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:52px}
 .detail-section{padding:0 30px}
 .detail-section:first-child{padding-left:0}.detail-section:last-child{padding-right:0}
 .detail-section+ .detail-section{border-left:1px solid var(--line)}
-.detail-section span{font-family:var(--ff-mono);font-size:.57rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3)}
+.detail-section span{font-family:var(--ff-mono);font-size:.75rem;line-height:1.4;text-transform:uppercase;letter-spacing:.11em;color:var(--ink-2)}
 .detail-section h2{margin:12px 0 0;font-size:1.05rem;font-weight:600}
 .detail-section p{margin:11px 0 0;font-size:.78rem;line-height:1.78;color:var(--ink-2)}
 .detail-progress{margin-top:45px;padding-top:20px;border-top:1px solid var(--line)}
@@ -414,6 +415,7 @@ html.dark .detail-link--xiaohongshu{color:#fff;background:#ff2442;box-shadow:0 6
   .thought-arrow{grid-column:3;grid-row:2}
   .detail-shell{padding:30px 20px 92px}
   .detail-copy h1{font-size:3.1rem}
+  body[data-project="map-creator"] .detail-copy h1{font-size:clamp(2.65rem,12vw,3.1rem)}
   .detail-copy>p{font-size:1rem}
   .detail-fact{padding:21px 14px}
   .detail-fact b{font-size:.9rem}

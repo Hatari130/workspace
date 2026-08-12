@@ -318,10 +318,25 @@ html.dark .project-shot{outline-color:oklch(1 0 0 / .12)}
 .detail-copy .eyebrow{margin-bottom:17px}
 .detail-copy h1{margin:0;font-family:var(--ff-display);font-size:5.2rem;font-weight:590;line-height:.93;letter-spacing:0}
 .detail-copy>p{margin:23px 0 0;max-width:46ch;font-size:1.06rem;line-height:1.82;color:var(--ink-2)}
-.detail-status{display:flex;align-items:center;gap:10px;margin-top:28px;font-family:var(--ff-mono);font-size:.72rem;color:var(--ink-3)}
-.detail-status i{width:7px;height:7px;border-radius:99px;background:#79a582;box-shadow:0 0 0 5px color-mix(in oklab,#79a582 15%,transparent)}
-.detail-link{margin-left:12px;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
-.detail-link:hover{color:var(--ink);border-color:var(--ink-2)}
+.detail-meta{display:flex;align-items:center;flex-wrap:wrap;gap:14px 20px;margin-top:28px}
+.detail-status{display:flex;align-items:center;gap:11px;font-family:var(--ff-mono);font-size:.9rem;font-weight:560;line-height:1.4;color:var(--ink-2);white-space:nowrap}
+.detail-status i{width:8px;height:8px;border-radius:99px;background:#79a582;box-shadow:0 0 0 5px color-mix(in oklab,#79a582 15%,transparent)}
+.detail-links{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.detail-link{
+  min-height:40px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 14px;border-radius:99px;
+  font-family:var(--ff-sans);font-size:.82rem;font-weight:650;line-height:1;letter-spacing:.01em;white-space:nowrap;
+  color:var(--ink);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line),0 5px 14px color-mix(in oklab,var(--ink) 7%,transparent);
+  -webkit-tap-highlight-color:transparent;transition:color .2s,background-color .2s,box-shadow .2s,translate .16s,scale .16s;
+}
+.detail-link svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.detail-link:hover{translate:0 -1px;box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--ink) 24%,var(--line)),0 8px 18px color-mix(in oklab,var(--ink) 10%,transparent)}
+.detail-link:active{translate:0 0;scale:.96}
+.detail-link--github{color:var(--paper);background:var(--ink);box-shadow:0 6px 16px color-mix(in oklab,var(--ink) 18%,transparent)}
+.detail-link--github:hover{box-shadow:0 9px 20px color-mix(in oklab,var(--ink) 24%,transparent)}
+.detail-link--github svg{fill:currentColor;stroke:none}
+.detail-link--xiaohongshu{color:oklch(.48 .2 20);background:oklch(.97 .025 20);box-shadow:inset 0 0 0 1px oklch(.82 .075 20),0 5px 14px oklch(.48 .2 20/.08)}
+.detail-link--xiaohongshu:hover{background:oklch(.95 .04 20);box-shadow:inset 0 0 0 1px oklch(.72 .11 20),0 8px 18px oklch(.48 .2 20/.12)}
+html.dark .detail-link--xiaohongshu{color:oklch(.78 .15 20);background:oklch(.25 .045 20);box-shadow:inset 0 0 0 1px oklch(.42 .075 20),0 5px 14px rgba(0,0,0,.14)}
 .detail-visual{overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 34px 80px -58px rgba(25,23,20,.55)}
 .detail-visual .project-shot{aspect-ratio:16/10;border-bottom:0}
 .detail-visual .shot-window{left:38px;right:38px;top:38px}

@@ -41,7 +41,10 @@
         <p class="eyebrow" id="project-kicker">AI 产品</p>
         <h1 id="project-title">正在加载项目……</h1>
         <p id="project-summary"></p>
-        <div class="detail-status"><i aria-hidden="true"></i><span id="project-status"></span><a id="project-link" class="detail-link" target="_blank" rel="noreferrer" hidden></a></div>
+        <div class="detail-meta">
+          <div class="detail-status"><i aria-hidden="true"></i><span id="project-status"></span></div>
+          <nav class="detail-links" id="project-links" aria-label="项目外部链接" hidden></nav>
+        </div>
       </div>
       <div class="detail-visual" id="project-visual" aria-label="项目界面概念预览"></div>
     </section>
@@ -81,6 +84,10 @@
       problem:"制作一张城市导览地图，通常要反复处理地点检索、坐标系转换、地图数据下载、道路与建筑渲染，以及视觉风格统一。",
       system:"Map Creator 把地点解析、GCJ-02 到 WGS84 的坐标对齐、OpenStreetMap GIS 渲染和可选的 GPT Image 风格化组织成一条 Agent 工具链，并保留 POI JSON 供人工复查。",
       next:"继续验证不同城市和地点类型下的解析准确性、OSM 数据请求的稳定性，以及 GIS 草稿到风格化海报之间的可控程度。",
+      links:[
+        {kind:"github",href:"https://github.com/Hatari130/map-creator",label:"GitHub 源码",labelEn:"GitHub repository"},
+        {kind:"xiaohongshu",href:"https://www.xiaohongshu.com/discovery/item/6a3aad58000000002102284a?source=webshare&xhsshare=pc_web&xsec_token=ABYyDCGwkm1nMj6CseLjTFmEphkA9ga24MLcTWfryYEmA=&xsec_source=pc_share",label:"小红书介绍",labelEn:"Xiaohongshu post"}
+      ],
       en:{kicker:"City map generation for agents",status:"Open source · MIT",summary:"Turn cities, place lists, or POI data into reviewable GIS maps, then optionally generate stylized city guide posters.",facts:[["Role","Product + Skill"],["Format","Agent Skill"],["Year","2026"],["Focus","City map generation"]],problem:"Making a city guide map means repeatedly handling place lookup, coordinate conversion, map data, road and building rendering, and visual consistency.",system:"Map Creator organizes place resolution, GCJ-02 to WGS84 alignment, OpenStreetMap GIS rendering, and optional GPT Image stylization into an Agent toolchain, while keeping POI JSON available for human review.",next:"Keep testing resolution accuracy across cities and place types, the reliability of OSM requests, and how much control remains between the GIS draft and the stylized poster."},
       visual:"map"
     },
@@ -142,6 +149,39 @@
   }
   var project = PROJECTS[slug] || PROJECTS["map-creator"];
   document.body.setAttribute("data-project",slug);
+  function linkIcon(kind){
+    if (kind === "github") {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.8c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.4-1.1.7-1.4-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.2-.4-1.2.1-2.6 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.5 4.9.5.4.8 1.1.8 2.2v2.7c0 .3.2.6.8.5A9.8 9.8 0 0 0 12 2.2Z"/></svg>';
+    }
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+  }
+  function renderProjectLinks(language){
+    var links = project.links || [];
+    if (!links.length && (project.website || project.repo)) {
+      links = [{
+        kind:project.website ? "website" : "github",
+        href:project.website || project.repo,
+        label:project.website ? "在线体验" : "GitHub 源码",
+        labelEn:project.website ? "Live website" : "GitHub repository"
+      }];
+    }
+    var linkGroup = document.getElementById("project-links");
+    linkGroup.replaceChildren();
+    linkGroup.hidden = links.length === 0;
+    linkGroup.setAttribute("aria-label",language === "en" ? "Project links" : "项目外部链接");
+    links.forEach(function(link){
+      var label = language === "en" ? link.labelEn : link.label;
+      var anchor = document.createElement("a");
+      anchor.className = "detail-link detail-link--"+link.kind;
+      anchor.href = link.href;
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
+      anchor.setAttribute("aria-label",label+(language === "en" ? " (opens in a new tab)" : "（在新标签页打开）"));
+      anchor.innerHTML = linkIcon(link.kind)+"<span></span>";
+      anchor.querySelector("span").textContent = label;
+      linkGroup.appendChild(anchor);
+    });
+  }
   function renderProject(language){
     var copy = language === "en" && project.en ? project.en : project;
     var projectTitle = language === "en" && project.titleEn ? project.titleEn : project.title;
@@ -150,18 +190,7 @@
     document.getElementById("project-title").textContent = projectTitle;
     document.getElementById("project-summary").textContent = copy.summary;
     document.getElementById("project-status").textContent = copy.status;
-    var projectLink = document.getElementById("project-link");
-    if (project.website || project.repo) {
-      projectLink.href = project.website || project.repo;
-      projectLink.textContent = project.website
-        ? (language === "en" ? "Open website ↗" : "打开网站 ↗")
-        : (language === "en" ? "View repository ↗" : "查看 GitHub 仓库 ↗");
-      projectLink.hidden = false;
-    } else {
-      projectLink.hidden = true;
-      projectLink.removeAttribute("href");
-      projectLink.textContent = "";
-    }
+    renderProjectLinks(language);
     document.getElementById("project-visual").innerHTML = visual(project.visual);
     document.getElementById("project-problem").textContent = copy.problem;
     document.getElementById("project-system").textContent = copy.system;

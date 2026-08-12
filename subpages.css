@@ -317,7 +317,11 @@ html.dark .project-shot{outline-color:oklch(1 0 0 / .12)}
 .detail-hero{display:grid;grid-template-columns:minmax(300px,.76fr) minmax(0,1.24fr);gap:62px;align-items:center;padding-bottom:52px;border-bottom:1px solid var(--line)}
 .detail-copy .eyebrow{margin-bottom:17px}
 .detail-copy h1{margin:0;font-family:var(--ff-display);font-size:5.2rem;font-weight:590;line-height:.93;letter-spacing:0}
-body[data-project="map-creator"] .detail-copy h1{font-size:clamp(3.75rem,4.25vw,4.25rem);white-space:nowrap}
+body[data-project="map-creator"] .detail-copy h1,
+body[data-project="exam-reverse-engineer"] .detail-copy h1,
+body[data-project="cinema-stars-maps"] .detail-copy h1{font-size:clamp(3.75rem,4.25vw,4.25rem)}
+body[data-project="korean-subtitle-gen"] .detail-copy h1{font-size:clamp(3.15rem,3.65vw,3.65rem)}
+html[data-lang="zh"] body[data-project] .detail-copy h1{white-space:nowrap}
 .detail-copy>p{margin:23px 0 0;max-width:46ch;font-size:1.06rem;line-height:1.82;color:var(--ink-2)}
 .detail-meta{display:flex;align-items:center;flex-wrap:wrap;gap:14px 20px;margin-top:28px}
 .detail-status{display:flex;align-items:center;gap:11px;font-family:var(--ff-mono);font-size:.9rem;font-weight:560;line-height:1.4;color:var(--ink-2);white-space:nowrap}
@@ -415,7 +419,10 @@ html.dark .detail-link--xiaohongshu{color:#fff;background:#ff2442;box-shadow:0 6
   .thought-arrow{grid-column:3;grid-row:2}
   .detail-shell{padding:30px 20px 92px}
   .detail-copy h1{font-size:3.1rem}
-  body[data-project="map-creator"] .detail-copy h1{font-size:clamp(2.65rem,12vw,3.1rem)}
+  body[data-project="map-creator"] .detail-copy h1,
+  body[data-project="exam-reverse-engineer"] .detail-copy h1,
+  body[data-project="cinema-stars-maps"] .detail-copy h1{font-size:clamp(2.55rem,11.5vw,3.1rem)}
+  body[data-project="korean-subtitle-gen"] .detail-copy h1{font-size:clamp(2rem,9.7vw,2.65rem)}
   .detail-copy>p{font-size:1rem}
   .detail-fact{padding:21px 14px}
   .detail-fact b{font-size:.9rem}

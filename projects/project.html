@@ -109,7 +109,10 @@
       problem:"电影记录通常停留在一张列表里：用户能看到看过什么，却很难感受到自己的观影轨迹、年代和电影之间的关系。",
       system:"后端抓取豆瓣公开观影页，或接收 CSV 备用导入；pipeline 按年份、国别与编辑库完成匹配和分区，再生成星空 JSON 与 SVG 海报。星等和星座是查询结果，不额外落库。",
       next:"继续补全编辑库，改善中文片名与年份的匹配，并在公开部署时把后台任务从轻量起步方案迁移到更稳定的队列与数据库。",
-      website:"https://cinema-stars-maps.onrender.com/",
+      links:[
+        {kind:"website",href:"https://cinema-stars-maps.onrender.com/",label:"在线体验",labelEn:"Live website"},
+        {kind:"xiaohongshu",href:"https://www.xiaohongshu.com/discovery/item/6a47d4d50000000007025bc2?source=webshare&xhsshare=pc_web&xsec_token=ABTBGBeoWjDeKBzUASzHJNEpa7URz_uD3eFtnNvTEGQCk=&xsec_source=pc_share",label:"小红书介绍",labelEn:"Xiaohongshu post"}
+      ],
       en:{kicker:"Every cinema · personal film history",status:"Live · try it online",summary:"Turn a personal film diary into an explorable and shareable cinema star map.",facts:[["Role","Product + Website"],["Format","Website"],["Year","2026"],["Focus","Film data visualization"]],problem:"Film records usually stay as a list: people can see what they watched, but not the relationships between their viewing history, eras, regions, and films.",system:"The backend reads a public Douban film diary or accepts a CSV fallback; a pipeline matches and places films by year, country, and editorial lists, then generates star-map JSON and an SVG poster. Ratings and constellations remain query results rather than stored data.",next:"Keep expanding the editorial library, improve Chinese-title and year matching, and move background jobs from the lightweight starting setup to a more durable queue and database for public deployment."},
       visual:"cinema"
     },
